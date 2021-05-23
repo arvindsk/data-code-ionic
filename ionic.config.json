@@ -1,0 +1,7 @@
+{
+  "name": "data-code",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

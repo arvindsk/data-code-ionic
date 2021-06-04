@@ -11,9 +11,16 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "keywords": [
+    "angular",
+    "surveyjs"
+  ],
   "private": true,
   "dependencies": {
+    "@angular/animations": "~11.2.0",
+    "@angular/cdk": "^12.0.1",
     "@angular/common": "~11.2.0",
+    "@angular/compiler": "~11.2.0",
     "@angular/core": "~11.2.0",
     "@angular/forms": "~11.2.0",
     "@angular/platform-browser": "~11.2.0",
@@ -29,20 +36,23 @@
     "@capacitor/core": "3.0.0",
     "@capacitor/haptics": "1.0.0",
     "@capacitor/keyboard": "1.0.0",
-    "@ionic/angular": "^5.5.2",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.0.0",
-    "zone.js": "~0.10.2",
-    "@angular/animations": "~11.2.0",
-    "@angular/cdk": "^12.0.1",
-    "@angular/compiler": "~11.2.0",
     "@fullcalendar/core": "^5.7.0",
+    "@ionic/angular": "^5.5.2",
     "bootstrap": "^5.0.1",
     "chart.js": "^3.2.1",
+    "inputmask": "3.3.10",
+    "jquery": "3.5.1",
     "primeicons": "^4.1.0",
     "primeng": "^9.0.5",
     "ng-inline-svg": "9.1.0",
-    "quill": "^1.3.7"
+    "quill": "^1.3.7",
+    "rxjs": "~6.6.0",
+    "survey-angular": "^1.8.49",
+    "survey-creator": "^1.8.49",
+    "survey-pdf": "^1.8.49",
+    "surveyjs-widgets": "^1.8.49",
+    "tslib": "^2.0.0",
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.4",

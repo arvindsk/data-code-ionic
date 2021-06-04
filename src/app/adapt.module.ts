@@ -7,11 +7,16 @@ import {AdaptRouting} from "./adapt.routing";
 import { AdaptSummaryComponent } from './adapt-summary/adapt-summary.component';
 //import { AdaptCollectdataComponent } from './adapt-collectdata/adapt-collectdata.component';
 //import { AdaptFooterComponent } from './adapt-footer/adapt-footer.component';
-import { ButtonModule } from 'primeng/button';
-import {AccordionModule, TabViewModule} from "primeng";
+import {AccordionModule, PanelModule, TabViewModule} from "primeng";
 import { HttpClientModule } from '@angular/common/http';
 import {TableModule} from "primeng";
 import {ToastModule} from "primeng";
+import {IonicModule} from "@ionic/angular";
+import {HomePage} from "./home/home.page";
+import {ButtonModule} from "./shared/button/button.module";
+import {LoginComponent} from "./login/login.component";
+import {InputModule} from "./shared/input/input.module";
+import {AdaptCollectDataComponent} from "./adapt-collect-data/adapt-collect-data.component";
 
 
 
@@ -27,7 +32,10 @@ import {ToastModule} from "primeng";
       TableModule,
       ToastModule,
       AccordionModule,
-      TabViewModule
+      TabViewModule,
+      IonicModule,
+      InputModule,
+      PanelModule
 
 
     ],
@@ -35,8 +43,10 @@ import {ToastModule} from "primeng";
   declarations:
     [
   //  AdaptLoginComponent,
-    //AdaptNavbarComponent,
+    AdaptCollectDataComponent,
     AdaptSummaryComponent,
+      HomePage,
+      LoginComponent,
     //AdaptCollectdataComponent,
     //AdaptFooterComponent
     ],

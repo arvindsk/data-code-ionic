@@ -1,38 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true" class="header">
+  <ion-toolbar class="header">
+  <ion-toolbar class="toolbar1">
     <ion-title>
-      Login
+      <h1><b>ADAPT</b></h1>
     </ion-title>
   </ion-toolbar>
+  <ion-toolbar class="toolbar2">
+    <ion-title>
+      <div id="textbox">
+      <p class="alignleft">
+        <app-button [visualState]="'secondary-outline'" (click)="summary()">Summary </app-button>&nbsp;
+        <app-button [visualState]="'secondary-outline'" (click)="collect()">Collect Data</app-button>
+      </p>
+      <p class="alignright">
+           Welcome <span>{{userId}}</span>
+      </p>
+      </div>
+        <div style="clear: both;"></div>
+    </ion-title>
+  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div class="card">
-    <h4 class="card-header">Login</h4>
-    <div class="card-body">
-      <div class="form-group">
-        <label >Username</label>
-        <input type="text"  class="form-control"  />
-
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password"  class="form-control"  />
-
-      </div>
-      <div class="form-group">
-        <button  class="btn btn-primary">
-
-          Login
-        </button>
-
-      </div>
+<ion-content>
+  <div>
+    <div *ngIf="isWelcome" id="welcome" class="aligncenter">
+      Welcome To Adapt
     </div>
+
+    <div *ngIf="isSummary" id="summary"><app-adapt-summary></app-adapt-summary></div>
+    <div *ngIf="isCollectData" id="collect-data"><app-adapt-collect-data></app-adapt-collect-data></div>
   </div>
+
 </ion-content>

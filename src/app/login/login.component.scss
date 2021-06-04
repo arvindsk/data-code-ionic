@@ -25,6 +25,7 @@
   text-decoration: none;
 }
 
+
 .alignleft {
   float: left;
 }
@@ -37,6 +38,18 @@
   font-size: 3em;
   padding-top: 25px;
   padding-bottom: 20px;
+}
+
+.divcenter {
+  border-style: solid;
+  border-width: thin;
+  text-align:center;
+  margin-left: 30%;
+  margin-right: 30%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .header {

@@ -1,0 +1,211 @@
+@import '../resources/colors';
+
+@mixin input-background-color($useWhite) {
+    @if $useWhite {
+        background-color: $quaternary-color;
+    } @else {
+        background-color: $userinputbgd;
+        &:focus {
+            background-color: $purewhite;
+        }
+    }
+}
+
+.ui-inputgroup {
+    height: inherit;
+    width: 100%;
+    flex-direction: column;
+    display: block; //required for IE
+    margin-bottom: 25px;
+
+    &__validation {
+        .invalid {
+            color: $medred;
+            font-size: 12px;
+            line-height: 14px;
+            padding-top: 3px;
+            font-weight: 500;
+        }
+    }
+}
+
+.ui-float-label {
+    width: 100%;
+    height: inherit;
+    margin: 0;
+
+    input {
+        border: none; /* overriding library style */
+        border-bottom: 1px solid $medium-gray;
+        @include input-background-color(false);
+        display: block;
+        width: 100%;
+        height: inherit;
+        outline: 0 solid;
+        padding: 11px 15px 12px;
+        font-weight: 500;
+        line-height: normal;
+
+        &.clear {
+            border-right: none;
+            border-left: 1px solid $medium-gray;
+        }
+
+        &.invalid {
+            border-color: $userinputstroke_error !important;
+            background-color: $offwhite;
+        }
+
+        &:focus {
+            border-color: $grayblue !important;
+        }
+
+        &:hover {
+            border-color: $faintgrayblue !important;
+        }
+    }
+
+    .input-label {
+        line-height: 19px;
+        height: inherit;
+    }
+
+    .character-count {
+        left: auto;
+        right: 20px;
+        top: 50%;
+        font-size: 12px;
+        font-weight: 600;
+        color: $charactercounter;
+    }
+}
+
+span {
+    border: none; /* overriding library style */
+    border-bottom: 1px solid $medium-gray;
+    @include input-background-color(false);
+    display: flex !important;
+    align-items: center;
+
+    fa-icon {
+        cursor: pointer;
+        display: block; /* IE11 nonsense */
+    }
+}
+
+.ui-float-label label fa-icon {
+    margin-right: 15px;
+}
+
+label {
+    text-transform: none;
+}
+
+:host(.white) {
+    input,
+    span {
+        @include input-background-color(true);
+    }
+
+    .ui-inputgroup {
+        border: 1px solid rgba(0, 0, 0, 0.5);
+    }
+}
+
+:host(.inverse) {
+    color: $inverse-color;
+
+    input {
+        border: none;
+        border-bottom: 1px solid $inverse-color;
+        background-color: transparent;
+        color: $inverse-color;
+        display: block;
+        width: 100%;
+
+        &:focus + .input-label {
+            color: $input-label-blue;
+        }
+
+        &.clear {
+            border-left: none;
+        }
+    }
+
+    .input-label {
+        color: $quaternary-color;
+        text-transform: capitalize;
+    }
+
+    span {
+        border: none;
+        border-bottom: 1px solid $inverse-color;
+        background-color: transparent;
+        color: $inverse-color;
+        display: flex;
+        align-items: center;
+
+        fa-icon {
+            cursor: pointer;
+            display: block; /* IE11 nonsense */
+        }
+    }
+}
+
+.required {
+    color: $primary-color;
+}
+
+:host(.no-rounding) input {
+    border-radius: 0;
+}
+
+:host-context(.invalid) input {
+    border: 1px solid $primary-color !important;
+}
+
+/* rtl lang support */
+:host-context(body[dir='rtl']) {
+    label {
+        right: 0;
+    }
+
+    .ui-inputgroup {
+        .ui-float-label,
+        .ui-inputgroup-addon {
+            border: none !important;
+        }
+    }
+
+    .ui-float-label label fa-icon {
+        margin-right: 0;
+        margin-left: 15px;
+    }
+
+    .character-count {
+        left: 20px;
+        right: auto;
+    }
+}
+
+/* placeholder styling */
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    font-size: 14px;
+    font-weight: 500;
+}
+::-moz-placeholder {
+    /* Firefox 19+ */
+    font-size: 14px;
+    font-weight: 500;
+}
+:-ms-input-placeholder {
+    /* IE 10+ */
+    font-size: 14px;
+    font-weight: 500;
+}
+:-moz-placeholder {
+    /* Firefox 18- */
+    font-size: 14px;
+    font-weight: 500;
+}

@@ -1,0 +1,13 @@
+<button
+    #inputButton
+    [type]="type"
+    class="{{ visualState }} {{ alternateStyle }} {{ variationStyle }}"
+    [attr.disabled]="disabled ? '' : null"
+    [title]="disabled ? disabledTooltip : tooltip"
+>
+    <ng-content></ng-content>
+    <svg height="14" width="10" id="arrow" *ngIf="showArrow">
+        <line x1="2" y1="2" x2="7" y2="7" />
+        <line x1="7" y1="7" x2="2" y2="12" />
+    </svg>
+</button>

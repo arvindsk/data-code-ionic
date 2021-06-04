@@ -1,0 +1,30 @@
+<ion-header [translucent]="true" class="header">
+  <ion-toolbar class="header">
+    <ion-toolbar class="toolbar1">
+      <ion-title>
+        <h1><b>ADAPT</b></h1>
+      </ion-title>
+    </ion-toolbar>
+    <ion-toolbar class="toolbar2">
+      <ion-title>
+
+      </ion-title>
+    </ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="aligncenter">
+     Welcome To Adapt
+  </div>
+  <div class="aligncenter">{{errorMessage}}</div>
+  <div class="divcenter">
+    <div><app-input type="text" id="userName" name="username" autofocus="true" placeholder="email*"></app-input></div>
+    <div><app-input type="password" id="password" name="password" hideInput="true" placeholder="password*"></app-input></div>
+    <div><app-button [visualState]="'primary-blue-colors'" (click)="login()">Login</app-button></div>
+
+  </div>
+
+
+</ion-content>

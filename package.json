@@ -19,6 +19,12 @@
     "@angular/platform-browser": "~11.2.0",
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
+    "@fortawesome/angular-fontawesome": "0.5.0",
+    "@fortawesome/fontawesome-common-types": "0.2.26",
+    "@fortawesome/fontawesome-svg-core": "1.2.26",
+    "@fortawesome/free-brands-svg-icons": "5.12.0",
+    "@fortawesome/free-regular-svg-icons": "5.12.0",
+    "@fortawesome/free-solid-svg-icons": "5.12.0",
     "@capacitor/app": "1.0.0",
     "@capacitor/core": "3.0.0",
     "@capacitor/haptics": "1.0.0",
@@ -35,6 +41,7 @@
     "chart.js": "^3.2.1",
     "primeicons": "^4.1.0",
     "primeng": "^9.0.5",
+    "ng-inline-svg": "9.1.0",
     "quill": "^1.3.7"
   },
   "devDependencies": {

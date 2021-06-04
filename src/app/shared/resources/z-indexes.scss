@@ -1,0 +1,37 @@
+/* App Z-indexes */
+$base-z-index: 1; // adding a "1" to z-index solves most stacking issues
+
+$help-overlay-base: 9001;
+$help-overlay-visible: 9001;
+$help-overlay-content: 9001;
+$tab-nav-link: 1000;
+$sidebar: 8000;
+$popover: 8500;
+$header-menu: 9000;
+$header-menu-before: 9001;
+
+$footer-logo-container: $base-z-index;
+$table-content: $base-z-index;
+$hero-content: $base-z-index;
+
+$f-tag-list: $base-z-index;
+
+$report-result-help-header: $base-z-index;
+$report-result-help-icon: 0;
+
+$track-help-header: $base-z-index;
+$track-help-search-icon: 0;
+
+$notifications: 10000;
+$dropdowns: 10500;
+
+$org-picker-container: 1000;
+$ui-dialog:9000;
+
+$events: 1000;
+
+$ui-dropdown-panel: 100;
+
+$ui-datepicker: 9000;
+
+$tooltip-z-index: 9003;

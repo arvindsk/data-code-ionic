@@ -1,0 +1,278 @@
+/* You can add global styles to this file, and also import other style files */
+/* https://slalom.invisionapp.com/d/main#/console/13809976/289933256/preview */
+@import '../../../node_modules/primeicons/primeicons.css';
+@import 'colors';
+@import 'z-indexes';
+
+@font-face {
+    font-family: Montserrat;
+    font-weight: 300;
+    src: url('../../component-test-app/src/assets/fonts/Montserrat-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../component-test-app/src/assets/fonts/Montserrat-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Montserrat;
+    font-weight: 500;
+    src: url('../../component-test-app/src/assets/fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Montserrat;
+    font-weight: 600;
+    src: url('../../component-test-app/src/assets/fonts/Montserrat-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Montserrat;
+    font-weight: 700;
+    src: url('../../component-test-app/src/assets/fonts/Montserrat-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: PrimeIcons;
+    src: url('../../component-test-app/src/assets/fonts/primeicons.ttf') format('truetype');
+}
+@font-face {
+    font-family: PrimeIcons;
+    src: url('../../component-test-app/src/assets/fonts/primeicons.woff') format('truetype');
+}
+
+@font-face {
+    font-family: PrimeIcons;
+    src: url('../../component-test-app/src/assets/fonts/primeicons.ttf') format('truetype');
+}
+@font-face {
+    font-family: PrimeIcons;
+    src: url('../../component-test-app/src/assets/fonts/primeicons.woff') format('truetype');
+}
+
+html,
+body {
+    margin: 0;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    color: $tertiary-color;
+    background-color: $white;
+    line-height: 28px;
+    min-height: 500px;
+    width: 100%;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
+    color: $medium-dark-gray-text;
+}
+
+h1,
+.h1 {
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 44px;
+}
+
+h2,
+.h2 {
+    font-size: 24px;
+    font-weight: 500; /* semi-bold */
+    line-height: 36px;
+}
+
+h3,
+.h3 {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+}
+
+h4,
+.h4 {
+    font-size: 14px;
+    font-weight: 600; /* semi-bold */
+    line-height: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $deepnavy;
+}
+
+header,
+.header {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 24px;
+}
+
+p,
+.p {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+}
+
+label {
+    font-size: 14px;
+    line-height: 14px;
+    text-transform: uppercase;
+}
+
+small,
+.small {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    color: $lightgray;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.icon-description {
+    color: $deepnavy;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0;
+}
+
+a {
+    text-decoration: none;
+    color: $anchor-color;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: inherit;
+        color: $anchor-hover-color;
+    }
+}
+
+.text {
+    &--fade {
+        opacity: 0.8;
+    }
+}
+
+input {
+    /* this is required to keep IE11 + Edge from displaying
+       Microsoft's "clear" pseudo element on inputs - because
+       it does not actually clear Angular form fields correctly */
+    &::-ms-clear {
+        display: none;
+    }
+}
+
+/* fix the layout with bootstrap on a rtl language */
+@media (min-width: 768px) {
+    body[dir='rtl'] {
+        .offset-md-1 {
+            margin-right: 8.333333%;
+        }
+    }
+}
+
+app-root {
+    overflow: hidden;
+    width: 100%;
+    float: left;
+}
+
+/* rtl lang support */
+body[dir='rtl'] {
+    text-align: right;
+}
+
+/* override bootrap's container padding for 100% width */
+.container-fluid {
+    padding-right: 2%;
+    padding-left: 2%;
+}
+
+// Mimics style of the p-table "No records found" area
+.no-records-found {
+    font-weight: 500;
+    padding: 1em 1em;
+    background: $no-results-wrapper;
+    border-bottom: 1px solid $border-light-gray;
+    border-top: 1px solid $border-light-gray;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+/* Common helpful classes */
+.underline {
+    text-decoration: underline;
+}
+
+/* override ui-dialog styles */
+.ui-dialog-mask {
+    background-color: gray;
+    opacity: 0.75;
+}
+
+.ui-dialog .ui-dialog-titlebar-icon span {
+    font-size: 1.7em !important;
+    color: $weighted-color;
+}
+
+.ui-dialog {
+    background-color: $white;
+    z-index: $ui-dialog !important;
+}
+
+/* global style for a scrollbar area */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 14px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background-color: $icon-emphasis;
+    height: auto;
+}
+
+/****************************
+ * V2 Common Styles
+ ****************************/
+
+h2.v2 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 30px;
+}
+
+p.v2 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+a.v2 {
+    text-decoration: none;
+    color: $linkblue;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: inherit;
+        color: $deepnavy;
+    }
+}
+
+.error-messaging {
+    // V2 Style Guide
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: $warningred;
+    margin-top: 5px;
+}

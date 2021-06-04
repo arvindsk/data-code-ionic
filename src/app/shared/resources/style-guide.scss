@@ -1,0 +1,88 @@
+/**
+ ** STYLE GUIDE
+ ** For styles that overlap many different
+ ** common components and/or pages.
+ */
+
+@import 'colors';
+
+$header-height-auth: 60px;
+
+/* UI Elements */
+.user-inputs {
+    background-color: $input-box-inactive;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 12px;
+    letter-spacing: 0;
+    width: 100%;
+    color: $darkgray;
+
+    &.ui-inputwrapper-focus {
+        background-color: $purewhite;
+        border-color: $grayblue;
+    }
+
+    &--label {
+        color: $darkgray;
+        margin-bottom: 6px;
+        font-weight: 500;
+
+        .required {
+            margin-left: 3px;
+            font-weight: 300;
+        }
+    }
+
+    &--error {
+        margin-top: 3px;
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: 600;
+        color: $medred;
+    }
+
+    input {
+        &::placeholder {
+            color: $faintgrayblue;
+        }
+
+        &.ui-inputtext {
+            border: 1px solid $border-light-gray;
+            height: 45px;
+            width: inherit;
+            background-color: inherit;
+
+            &:hover {
+                border-color: $faintgrayblue;
+            }
+
+            &:focus {
+                background-color: $purewhite;
+                border-color: $grayblue;
+            }
+        }
+
+        &.invalid {
+            background-color: $offwhite;
+            border-color: $userinputstroke_error;
+        }
+    }
+
+    &--read-only input {
+        &.ui-inputtext {
+            border: 1px solid $userinputstroke_default;
+            background-color: $purewhite;
+            cursor: default;
+
+            &:hover {
+                border-color: $userinputstroke_default;
+            }
+
+            &:focus {
+                background-color: $purewhite;
+                border-color: $userinputstroke_default;
+            }
+        }
+    }
+}

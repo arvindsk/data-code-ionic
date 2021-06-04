@@ -1,0 +1,15 @@
+@import '../resources/z-indexes';
+
+:host {
+    z-index: $sidebar;
+}
+
+// Style the primeng flyout
+/* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+:host ::ng-deep {
+    .flyout-large {
+        .ui-sidebar {
+            width: 42em; /* overrides primeng's media queries */
+        }
+    }
+}

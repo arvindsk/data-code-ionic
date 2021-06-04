@@ -1,0 +1,60 @@
+<div class="ui-inputgroup" [class.form-group]="isFormInput">
+    <div class="ui-inputgroup__field">
+        <div *ngIf="!v2Styles" class="ui-float-label" [class.float-margin]="inputLabel">
+            <input
+                #inputElement
+                type="{{ hideInput ? 'password' : 'text' }}"
+                pInputText
+                [(ngModel)]="inputText"
+                [placeholder]="placeholder"
+                [readonly]="readOnly"
+                [autocomplete]="autocomplete"
+                [name]="name"
+                [class.clear]="showClear"
+                [class.invalid]="control?.errors && control?.touched"
+                (blur)="onTouched($event)"
+                [maxLength]="maxLength"
+                [autofocus]="autofocus"
+            />
+            <label *ngIf="inputLabel" class="input-label">
+                <fa-icon [icon]="[labelIconPrefix, labelIcon]" *ngIf="labelIcon !== ''"></fa-icon>
+                {{ inputLabel }}<i *ngIf="isRequiredLabelSuffix" class="required">*</i>
+            </label>
+            <label *ngIf="characterCount" class="character-count">{{ inputElement.value | countdown: maxLength }}</label>
+        </div>
+        <div *ngIf="v2Styles" class="d-flex flex-column">
+            <div *ngIf="inputLabel" class="user-inputs--label">{{ inputLabel }}<i *ngIf="isRequiredLabelSuffix" class="required">*</i></div>
+            <div class="user-inputs" [ngClass]="{ 'user-inputs--read-only': readOnly }">
+                <input
+                    #inputElementV2
+                    type="text"
+                    pInputText
+                    [(ngModel)]="inputText"
+                    [placeholder]="placeholder"
+                    [readonly]="readOnly"
+                    [autocomplete]="autocomplete"
+                    [name]="name"
+                    [class.clear]="showClear"
+                    [class.invalid]="control?.errors && control?.touched"
+                    (blur)="onTouched($event)"
+                    [maxLength]="maxLength"
+                    [autofocus]="autofocus"
+                />
+            </div>
+        </div>
+        <span *ngIf="showClear" class="ui-inputgroup-addon" id="clearInput">
+            <fa-icon icon="times" (click)="onClear()" [hidden]="!inputText"></fa-icon>
+        </span>
+    </div>
+    <div class="ui-inputgroup__validation">
+        <div class="invalid" *ngIf="control?.errors?.required && control?.touched">{{ validationMsgs?.required }}</div>
+        <div class="invalid" *ngIf="control?.errors?.pattern && control?.touched">{{ validationMsgs?.pattern }}</div>
+        <div class="invalid" *ngIf="control?.errors?.email && control?.touched">{{ validationMsgs?.email }}</div>
+        <div class="invalid" *ngIf="control?.errors?.noMatch && control?.touched">{{ validationMsgs?.noMatch }}</div>
+        <div class="invalid" *ngIf="control?.errors?.passwordPolicy && control?.touched">{{ validationMsgs?.passwordPolicy }}</div>
+        <div class="invalid" *ngIf="control?.errors?.passwordDictionary && control?.touched">{{ validationMsgs?.passwordDictionary }}</div>
+        <div class="invalid" *ngIf="control?.errors?.passwordHistory && control?.touched">{{ validationMsgs?.passwordHistory }}</div>
+        <div class="invalid" *ngIf="control?.errors?.passwordPersonalInfo && control?.touched">{{ validationMsgs?.passwordPersonalInfo }}</div>
+        <div class="invalid" *ngIf="control?.errors?.emptyInput && control?.touched">{{ validationMsgs?.emptyInput }}</div>
+    </div>
+</div>

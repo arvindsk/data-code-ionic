@@ -1,0 +1,36 @@
+@import 'colors';
+
+.gm-style {
+    div[title='Current Location'] {
+        pointer-events: none !important; // necessary to allow overlay of svg items across google Markers
+    }
+
+    a[title*='Google Maps'] {
+        display: none !important;
+    }
+
+    .gm-style-iw + div {
+        display: none;
+    }
+
+    .gm-style-cc {
+        display: none;
+    }
+
+    /* marker popup window */
+    .popup-content {
+        color: $charcoal-gray;
+
+        &__title {
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 18px;
+            text-transform: uppercase;
+        }
+
+        &__content {
+            font-size: 14px;
+            line-height: 24px;
+        }
+    }
+}

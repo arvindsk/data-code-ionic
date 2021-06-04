@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Collect Data</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <p-toast [style]="{marginTop: '80px'}"></p-toast>
+  <p>Summary</p>
+  <p-accordion [multiple]="true" [activeIndex]="activeIndex" (onOpen)="onTabOpen($event)" (onClose)="onTabClose($event)">
+    <p-accordionTab header="Base Line"  >
+      <p-table [columns]="columnHeader" [value]="tableValues">
+    <ng-template pTemplate="header"  let-columns>
+      <tr>
+        <th *ngFor="let cols of columns">{{cols.header}}</th>
+      </tr>
+    </ng-template>
+      <ng-template pTemplate="body" let-data let-columns="columns">
+        <tr>
+          <td >
+              {{data.header}}
+          </td>
+          <td> {{data.value}}</td>
+        </tr>
+      </ng-template>
+      </p-table>
+    </p-accordionTab>
+
+  </p-accordion>
+</ion-content>

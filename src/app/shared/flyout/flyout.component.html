@@ -1,0 +1,9 @@
+<p-sidebar
+    styleClass="ui-sidebar-md"
+    blockScroll="true"
+    [ngClass]="{'flyout-large' : isTablet}"
+    [visible]="show"
+    [position]="position"
+    (onHide)="hideFlyout.emit(true)">
+    <ng-content></ng-content>
+</p-sidebar>

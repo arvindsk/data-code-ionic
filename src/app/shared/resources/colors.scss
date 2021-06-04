@@ -1,0 +1,182 @@
+/* STYLE GUIDE */
+$brandred: #EB0028;
+$medred: #B0001E;
+$darkred: #740013;
+
+$brandblack: #000000;
+$darkgray: #242424;
+$gray: #484848;
+$lightgray: #8F8F8F;
+$disabledgray: #E6E6E6;
+$bgdgray: #EEEEEE;
+$temp-gray: #DBDBDB; // TODO: REMOVE THIS AND UTILIZE ACTUAL COLORS FROM STYLE GUIDE!!
+$subtlegray: #D2D2D2;
+$offwhite: #F7F7F7;
+$purewhite: #FFFFFF;
+
+$darknavy: #1D2831;
+$deepnavy: #283641;
+$navy: #3C5365;
+$linkblue: #51718A;
+$grayblue: #697884;
+$faintgrayblue: #B4BCC1;
+
+$warningyellow: #FFCE00;
+$warningred: #B0001E;
+$successgreen: #77AC00;
+
+$userinputbgd: #FAFAFA;
+$userinputstroke_default: #E3E3E3;
+$userinputstroke_error: #F47F92;
+
+$charactercounter: #B2B2B2;
+
+/* Other Colors */
+$mediumnavy: #47667f;
+$error-red: #FF0000;
+
+
+/* App colors */
+$white: $purewhite;
+$black: $brandblack;
+$off-blue: #336699;
+$app-blue: #2d5b8e;
+
+$primary-color: #EB0028;
+$secondary-color: #3B3B3B;
+$tertiary-color: #000000;
+$quaternary-color: $white;
+$content-background: $white;
+$header-color-authenticated: #000;
+
+$less-black: #283641;
+
+$almost-white: #FDFDFD;
+$whitish-gray: #9E9E9E;
+$less-light-gray: #D1D1D1;
+$light-gray: #F6F6F6;
+$alternate-light-gray: #F3F3F3;
+$sorta-light-gray: #C3C3C3;
+$medium-gray: #E3E3E3;
+$medium-dark-gray: #898989;
+$dark-gray: #979797;
+$darker-gray: #9B9B9B;
+$darkerest-gray: #6c6c6c;
+$darkest-gray: #555555;
+$alternate-darkest-gray: #4A4A4A;
+$even-darkest-gray: #3C3C3C;
+$charcoal-gray: #2C2C2C;
+$blueish-gray: #697884;
+$submenu-default: #6A6A6A;
+$submenu-active: $black;
+$navytint:#007ad9;
+$faintblue: #E1E8F0;
+
+$weighted-color: #595A5B;
+$table-border-color: #4A4A4A;
+$table-evenrow-color:#E2E7EC;
+$table-oddrow-color:#EDF0F3;
+$tooltip-border-color: #1B3C5D;
+
+/* Button / Icon / Dropdown Menu colors */
+$icon-color: $whitish-gray;
+$inverse-color: $purewhite;
+$inverse-icon-color: #414141;
+$icon-emphasis: #D9D9D9;
+$brand-red: #D0021B;
+$medred: #B0001E;
+$dropdown-background: #F5F5FA;
+$dropdown-icon-color: $app-blue;
+$dropdown-simple-text-color: #4A4A4A;
+$dropdown-selected-background: #F1F0F0;
+
+/* Text Colors */
+$text-light: $quaternary-color;
+$text-medium: #787878;
+$text-dark: $weighted-color;
+$action-font-color: $weighted-color;
+$medium-dark-gray-text: #444444;
+$detail-emphasis-text: #000;
+$user-inputs-disabled: #C5C5C5;
+
+$error-message-font-color: $primary-color;
+$anchor-hover-color: $dark-gray;
+$anchor-color: $disabledgray;
+$anchor-color-reference: #336699;
+
+/* Table */
+$dark-row-color: #F3F5F7;
+$table-header-color: #99B3CC;
+$expanded-row-border-emphasis: rgba(74,74,74,0.71);
+$no-results-wrapper: #F2F2F2;
+$table-outline-color: rgb(150,173,198);
+$paginator-page-hover: rgba(51, 102, 153, 0.5);
+$sort-icon-hover: #C3C3C3;
+
+/* Misc */
+$divider-color: $medium-gray;
+$disabled-color: $medium-gray;
+$disabled-color-dark: $whitish-gray;
+$breadcrumb-color: #5A5B5C;
+$not-found-text-color: #737373;
+
+$emphasis: #9E001B;
+$border-gray: $dark-gray;
+$border-light-gray: #E3E3E3;
+$progress-spinner-wrapper: #F2F2F2;
+
+$italics-blue: #336699;
+$input-label-blue: #4A90E2;
+$input-box-inactive: #FAFAFA;
+$odd-row-color: #F2F2F2;
+
+$selected-column-border: rgba(0,0,0,0.2);
+$content-container-box-shadow: rgba(81, 113, 118, 0.08);
+$tab-box-shadow: rgba(89,90,91,0.09);
+$header-menu-box-shadow: rgba(0,0,0,0.75);
+$checkbox-border-color: rgba(0, 0, 0, 0.5);
+$tile-box-shadow: rgba(53,71,123,0.05);
+$flyout-shadow: rgba(81,113,138,0.08);
+
+$widget-charcoal-gray: #3C3C3D;
+$scrollbar-thumb-grey: #D8D8D8;
+
+$twitter-blue: #1DA1F2;
+
+$sea-blue: #35477b;
+
+$green-complete: #7ED321;
+$red-failed: red;
+
+$sun-orange: #fea60d;
+
+/* timeline */
+$timeline-blue-theme-point-active: $navy;
+$timeline-blue-theme-point-border-active: $disabledgray;
+$timeline-blue-theme-point-inactive: $purewhite;
+$timeline-blue-theme-point-border-inactive: $navy;
+$timeline-blue-theme-edge-active: $navy;
+$timeline-blue-theme-edge-inactive: $disabledgray;
+$timeline-blue-theme-header-text-active: $brandblack;
+$timeline-blue-theme-subheader-text-active: $brandblack;
+$timeline-blue-theme-header-text-inactive: $lightgray;
+$timeline-blue-theme-subheader-text-inactive: $lightgray;
+
+$timeline-black-theme-point-active: $brandblack;
+$timeline-black-theme-point-border-active: $purewhite;
+$timeline-black-theme-point-inactive: $purewhite;
+$timeline-black-theme-point-border-inactive: $disabledgray;
+$timeline-black-theme-point-inprogress: $purewhite;
+$timeline-black-theme-point-border-inprogress: $disabledgray;
+$timeline-black-theme-edge-active: $brandblack;
+$timeline-black-theme-edge-inactive: $disabledgray;
+$timeline-black-theme-header-text-active: #6c6c6c;
+$timeline-black-theme-subheader-text-active: #252D30;
+$timeline-black-theme-header-text-inactive: #6c6c6c;
+$timeline-black-theme-subheader-text-inactive: #252D30;
+
+/* Style guide colors */
+$userinputstroke_default: #E3E3E3;
+$userinputbgd: #FAFAFA;
+$userinputstroke_error: #F47F92;
+$lightgrayblue: #89939A;

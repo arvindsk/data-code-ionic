@@ -17,6 +17,7 @@ import {ButtonModule} from "./shared/button/button.module";
 import {LoginComponent} from "./login/login.component";
 import {InputModule} from "./shared/input/input.module";
 import {AdaptCollectDataComponent} from "./adapt-collect-data/adapt-collect-data.component";
+import {AdaptParticipantSummaryComponent} from "./adapt-participant-summary/adapt-participant-summary.component";
 
 
 
@@ -45,6 +46,8 @@ import {AdaptCollectDataComponent} from "./adapt-collect-data/adapt-collect-data
   //  AdaptLoginComponent,
     AdaptCollectDataComponent,
     AdaptSummaryComponent,
+      AdaptParticipantSummaryComponent,
+      AdaptCollectDataComponent,
       HomePage,
       LoginComponent,
     //AdaptCollectdataComponent,

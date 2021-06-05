@@ -1,13 +1,10 @@
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Summary</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+  <p-toast [style]="{marginTop: '50px'}"></p-toast>
   <p>Summary</p>
-  <p-accordion [multiple]="true" [activeIndex]="activeIndex" (onOpen)="onTabOpen($event)" (onClose)="onTabClose($event)">
-    <p-accordionTab header="Base Line"  >
+  <p-accordion [multiple]="true" >
+
+    <p-accordionTab header="Base Line"  [selected]="true">
       <p-table [columns]="columnHeader" [value]="tableValues">
     <ng-template pTemplate="header"  let-columns>
       <tr>
@@ -24,8 +21,8 @@
       </ng-template>
       </p-table>
     </p-accordionTab>
-    <div>
-    <p-accordionTab header="First Year" [style]="{paddingTop:'25px'}">
+
+    <p-accordionTab header="First Year" [selected]="true">
       <p-table [columns]="columnHeader" [value]="tableValues">
         <ng-template pTemplate="header"  let-columns>
           <tr>
@@ -42,9 +39,8 @@
         </ng-template>
       </p-table>
     </p-accordionTab>
-    </div>
-    <div>
-      <p-accordionTab header="Third Year" [selected]="false">
+
+      <p-accordionTab header="Third Year" [selected]="true">
       <p-table [columns]="columnHeader" [value]="tableValues">
         <ng-template pTemplate="header"  let-columns>
           <tr>
@@ -61,6 +57,6 @@
         </ng-template>
       </p-table>
     </p-accordionTab>
-    </div>
+
   </p-accordion>
 </ion-content>

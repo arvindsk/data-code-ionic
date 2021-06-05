@@ -7,6 +7,7 @@ import * as widgets from 'surveyjs-widgets';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'survey-angular/survey.css';
+import {ActivatedRoute, Router} from "@angular/router";
 
 widgets.bootstrapslider(Survey);
 widgets.prettycheckbox(Survey);
@@ -37,9 +38,10 @@ export class QuestionComponent implements OnInit {
   json: any;
 
   storageName = 'survey_patient_history';
+  userId = "Test";
 
-
-  constructor() {
+  constructor(private route: ActivatedRoute,
+              private router: Router) {
     this.json = json;
   }
 
@@ -75,5 +77,13 @@ export class QuestionComponent implements OnInit {
     data.pageNo = question.currentPageNo;
     window.localStorage.setItem(this.storageName, JSON.stringify(data));
 
+  }
+
+  public summary(): void {
+    void this.router.navigate(['home']);
+  }
+
+  public collect(): void {
+    void this.router.navigate(['home']);
   }
 }

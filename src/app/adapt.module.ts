@@ -1,24 +1,19 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { CommonModule } from '@angular/common'
-//import {AdaptLoginComponent} from "./adapt-login/adapt-login.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AdaptRouting} from "./adapt.routing";
-//import { AdaptNavbarComponent } from './adapt-navbar/adapt-navbar.component';
-import { AdaptSummaryComponent } from './adapt-summary/adapt-summary.component';
-//import { AdaptCollectdataComponent } from './adapt-collectdata/adapt-collectdata.component';
-//import { AdaptFooterComponent } from './adapt-footer/adapt-footer.component';
-import {AccordionModule, PanelModule, TabViewModule} from "primeng";
-import { HttpClientModule } from '@angular/common/http';
-import {TableModule} from "primeng";
+import {AccordionModule, PanelModule, TableModule, TabViewModule} from "primeng";
+import {HttpClientModule} from '@angular/common/http';
 import {ToastModule} from "primeng";
 import {IonicModule} from "@ionic/angular";
 import {HomePage} from "./home/home.page";
 import {ButtonModule} from "./shared/button/button.module";
 import {LoginComponent} from "./login/login.component";
 import {InputModule} from "./shared/input/input.module";
-import {AdaptCollectDataComponent} from "./adapt-collect-data/adapt-collect-data.component";
-import {AdaptParticipantSummaryComponent} from "./adapt-participant-summary/adapt-participant-summary.component";
-
+import {CollectDataComponent} from "./collect-data/collect-data.component";
+import {ParticipantSummaryComponent} from "./participant-summary/participant-summary.component";
+import {SummaryModule} from "./summary/summary.module";
+import {HeaderModule} from "./shared/header/header.module";
 
 
 @NgModule({
@@ -30,28 +25,23 @@ import {AdaptParticipantSummaryComponent} from "./adapt-participant-summary/adap
       AdaptRouting,
       ButtonModule,
       HttpClientModule,
-      TableModule,
       ToastModule,
       AccordionModule,
       TabViewModule,
       IonicModule,
       InputModule,
-      PanelModule
+      PanelModule,
+      TableModule,
+      HeaderModule,
 
 
     ],
 
   declarations:
     [
-  //  AdaptLoginComponent,
-    AdaptCollectDataComponent,
-    AdaptSummaryComponent,
-      AdaptParticipantSummaryComponent,
-      AdaptCollectDataComponent,
+      CollectDataComponent,
       HomePage,
       LoginComponent,
-    //AdaptCollectdataComponent,
-    //AdaptFooterComponent
     ],
 
   exports:

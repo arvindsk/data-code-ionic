@@ -1,22 +1,25 @@
 import {RouterModule, Routes} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
-//import {AdaptLoginComponent} from "./adapt-login/adapt-login.component";
-//import {AdaptNavbarComponent} from "./adapt-navbar/adapt-navbar.component";
-import {AdaptSummaryComponent} from './adapt-summary/adapt-summary.component';
+import {SummaryComponent} from './summary/summary.component';
 import {HomePage} from './home/home.page';
 import {LoginComponent} from './login/login.component';
-import {AdaptParticipantSummaryComponent} from "./adapt-participant-summary/adapt-participant-summary.component";
-import {AdaptCollectDataComponent} from "./adapt-collect-data/adapt-collect-data.component";
+import {CollectDataComponent} from "./collect-data/collect-data.component";
 
 export const routes: Routes = [
   //{ path: '', component: AdaptLoginComponent },
-  {path: 'home', component: HomePage},
-  {path: 'participant', component: AdaptParticipantSummaryComponent},
-  {path: 'summary', component: AdaptSummaryComponent},
-  {path: 'collectdata', component: AdaptCollectDataComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'adapt/home', component: HomePage},
+  {path: 'adapt/participant',
+    loadChildren: () => import('./participant-summary/participant-summary.module').then(m => m.ParticipantSummaryModule)
+  },
+  {path: 'adapt/collect-data', component: CollectDataComponent},
+  {path: 'adapt/summary',
+    loadChildren: () => import('./summary/summary.module').then(m => m.SummaryModule)
+  },
+  {path: 'adapt/collectdata', component: CollectDataComponent},
+  {path: 'adapt/login', component: LoginComponent},
+
   {
-    path: 'questionnaire',
+    path: 'adapt/questionnaire',
     loadChildren: () => import('./questionnaire/questionnaire.module').then(m => m.QuestionnaireModule)
   }
 ];

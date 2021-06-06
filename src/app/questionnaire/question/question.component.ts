@@ -80,10 +80,10 @@ export class QuestionComponent implements OnInit {
   }
 
   public summary(): void {
-    void this.router.navigate(['home']);
+    void this.router.navigate(['adapt/home']);
   }
 
   public collect(): void {
-    void this.router.navigate(['home']);
+    void this.router.navigate(['adapt/home']);
   }
 }

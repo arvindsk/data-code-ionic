@@ -1,6 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-//import { HeaderColor } from '@ionic-native/header-color/ngx';
 
 @Component({
   selector: 'app-home',
@@ -26,18 +25,20 @@ export class HomePage implements OnInit{
     this.isCollectData = false;
   }
 
-  public summary(): void {
-    this.isWelcome = false;
-    this.isSummary = true;
-    this.isCollectData = false;
-    //void this.router.navigate(['adapt/summary']);
-  }
 
-  public collect(): void {
-    this.isWelcome = false;
-    this.isSummary = false;
-    this.isCollectData = true;
-    //void this.router.navigate(['adapt/collectdata']);
+    onSegmentChanged(ev: any) {
+      if(ev.detail.value == 'summary') {
+        void this.router.navigate(['adapt/summary']);
+        //this.isWelcome = false;
+        //this.isSummary = true;
+        //this.isCollectData = false;
+      }
+      if(ev.detail.value == 'collect-data'){
+        //this.isWelcome = false;
+        //this.isSummary = false;
+        //this.isCollectData = true;
+        void this.router.navigate(['adapt/collect-data']);
+      }
   }
 
   loggedInUser(): void {

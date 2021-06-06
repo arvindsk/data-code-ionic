@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {ButtonModule} from "./shared/button/button.module";
 import {InputModule} from "./shared/input/input.module";
+import {TableModule} from "primeng";
+import {HeaderModule} from "./shared/header/header.module";
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, AdaptModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule,
-    AccordionModule,IonicModule, ButtonModule, InputModule,],
+    AccordionModule,IonicModule, ButtonModule, InputModule, TableModule, HeaderModule,],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
   schemas: [ ]

@@ -1,26 +1,9 @@
 <ion-header [translucent]="true" class="header">
-  <ion-toolbar class="header">
-  <ion-toolbar class="toolbar1">
-    <ion-title>
-      <h1><b>ADAPT</b></h1>
-    </ion-title>
-  </ion-toolbar>
-  <ion-toolbar class="toolbar2">
-    <ion-title>
-      <div id="textbox">
-      <p class="alignleft">
-        <app-button [visualState]="'secondary-outline'" (click)="summary()">Summary </app-button>&nbsp;
-        <app-button [visualState]="'secondary-outline'" (click)="collect()">Collect Data</app-button>
-      </p>
-      <p class="alignright">
-           Welcome <span>{{userId}}</span>
-      </p>
-      </div>
-        <div style="clear: both;"></div>
-    </ion-title>
-  </ion-toolbar>
-    </ion-toolbar>
+  <app-header></app-header>
+
 </ion-header>
+
+
 
 <ion-content>
   <div>
@@ -28,8 +11,7 @@
       Welcome To Adapt
     </div>
 
-    <div *ngIf="isSummary" id="summary"><app-adapt-summary></app-adapt-summary></div>
-    <div *ngIf="isCollectData" id="collect-data"><app-adapt-collect-data></app-adapt-collect-data></div>
+
   </div>
 
 </ion-content>

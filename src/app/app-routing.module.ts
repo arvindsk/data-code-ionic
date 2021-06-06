@@ -11,6 +11,7 @@ const routes: Routes = [
     redirectTo: 'adapt/login',
     pathMatch: 'full'
   },
+
 ];
 
 @NgModule({

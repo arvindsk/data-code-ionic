@@ -4,6 +4,7 @@ import {QuestionnaireRoutingModule} from './questionnaire-routing.module';
 import {QuestionComponent} from './question/question.component';
 import {IonicModule} from '@ionic/angular';
 import {ButtonModule} from "../shared/button/button.module";
+import {HeaderModule} from "../shared/header/header.module";
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {ButtonModule} from "../shared/button/button.module";
     QuestionnaireRoutingModule,
     IonicModule,
     ButtonModule,
+    HeaderModule,
 
   ]
 })

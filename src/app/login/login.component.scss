@@ -25,17 +25,19 @@
   text-decoration: none;
 }
 
-
 .alignleft {
   float: left;
+  font-size: 1.5em;
+  padding-top: 15px;
 }
+
 .alignright {
   float: right;
 }
 
 .aligncenter {
   text-align:center;
-  font-size: 3em;
+  font-size: 2.5em;
   padding-top: 25px;
   padding-bottom: 20px;
 }
@@ -63,4 +65,5 @@
 .toolbar2 {
   --background: #35E8FB;
   margin-top: 2px;
+  padding-top: 20px;
 }

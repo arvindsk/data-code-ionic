@@ -34,6 +34,7 @@
             "styles": ["src/theme/variables.scss",
               "src/global.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/primeng/resources/primeng.min.css",
               "node_modules/survey-angular/survey.css",
               "node_modules/survey-creator/survey-creator.css",
               "node_modules/jquery-ui/themes/base/theme.css",

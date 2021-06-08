@@ -1,13 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import 'inputmask/dist/inputmask/phone-codes/phone';
-import json from '../../../assets/vascular.json';
+import json from '../../../assets/vascular_v_1.json';
+import {init as initCustomWidget} from './customwidget';
 
 import * as Survey from 'survey-angular';
 import * as widgets from 'surveyjs-widgets';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'survey-angular/survey.css';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 widgets.bootstrapslider(Survey);
 widgets.prettycheckbox(Survey);
@@ -23,7 +25,11 @@ widgets.ckeditor(Survey);
 widgets.autocomplete(Survey);
 widgets.bootstrapslider(Survey);
 widgets.prettycheckbox(Survey);
-Survey.StylesManager.applyTheme('bootstrap');
+initCustomWidget(Survey);
+
+Survey.JsonObject.metaData.addProperty('questionbase', 'popupdescription:text');
+Survey.JsonObject.metaData.addProperty('page', 'popupdescription:text');
+Survey.StylesManager.applyTheme('default');
 
 
 @Component({
@@ -32,51 +38,118 @@ Survey.StylesManager.applyTheme('bootstrap');
   styleUrls: ['./question.component.scss'],
 })
 export class QuestionComponent implements OnInit {
+  @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
   @Output() submitSurvey = new EventEmitter<any>();
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input()
   result: any;
   json: any;
+  survey;
 
   storageName = 'survey_patient_history';
-  userId = "Test";
+  userId = 'Test';
+  openDesc;
+  closeResult = '';
+
 
   constructor(private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private modal: NgbModal) {
     this.json = json;
   }
 
   ngOnInit() {
     widgets.inputmask(Survey);
+    this.survey = new Survey.Model(this.json);
 
-    const survey = new Survey.Model(this.json);
-    survey.sendResultOnPageNext = true;
-    survey.onPartialSend.add((result, options) => {
-      console.log('next button click triggered' + result);
+    this.survey.onAfterRenderQuestion.add((survey, options) => {
+      if (!options.question.popupdescription) {
+        return;
+      }
+      this.openDesc = options.question.popupdescription;
+      // Add a button;
+      const btn = document.createElement('button');
+      btn.className = 'btn btn-info btn-xs';
+      btn.innerHTML = 'More Info';
+      const self = this;
+      btn.onmouseover = () => {
+        // attr.innerHTML = options.question.popupdescription;
+        console.log(options.question.popupdescription);
+        // self.modal.open(this.modalContent, {size: 'xl'});
+        this.modal.open(this.modalContent, {ariaLabelledBy: 'modal-basic-title', size: 'lg'})
+          .result
+          .then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+          }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          });
+        //alert(options.question.popupdescription);
+      };
+
+/*      btn.onmou = () => {
+       // this.modal.dismissAll();
+      };*/
+      const header = options.htmlElement.querySelector('h5');
+      header.appendChild(btn);
+    });
+
+    this.survey.sendResultOnPageNext = true;
+    this.survey.onPartialSend.add((result, options) => {
+      console.log('next button click triggered' + JSON.stringify(result.data));
       this.submitSurvey.emit(result.data);
       this.result = result.data;
       this.saveSurveyData(result);
     });
-    survey.onComplete.add((onCompleteResult, options) => {
-      console.log('complete button click triggered' + onCompleteResult);
+    this.survey.onComplete.add((onCompleteResult, options) => {
+      console.log('complete button click triggered' + JSON.stringify(onCompleteResult));
       this.saveSurveyData(onCompleteResult);
     });
 
     const prevData = window.localStorage.getItem(this.storageName) || null;
     if (prevData) {
       const data = JSON.parse(prevData);
-      survey.data = data;
+      this.survey.data = data;
       if (data.pageNo) {
-        survey.currentPageNo = data.pageNo;
+        this.survey.currentPageNo = data.pageNo;
       }
     }
-    Survey.SurveyNG.render('surveyElement', {model: survey});
+   // this.setupPageSelector(this.survey);
+   // this.doOnCurrentPageChanged(this.survey);
+    Survey.SurveyNG.render('surveyElement', {model: this.survey});
   }
 
+  /*  showPopUp(){
+      this.modal.open(this.modalContent, { size: 'sm' });
+    }*/
   saveSurveyData(question: any) {
     const data = question.data;
     data.pageNo = question.currentPageNo;
     window.localStorage.setItem(this.storageName, JSON.stringify(data));
 
+  }
+
+  doOnCurrentPageChanged(survey) {
+    // @ts-ignore
+    document.getElementById('pageSelector').value = survey.currentPageNo;
+    document.getElementById('surveyPrev').style.display = !survey.isFirstPage ? 'inline' : 'none';
+    document.getElementById('surveyNext').style.display = !survey.isLastPage ? 'inline' : 'none';
+    document.getElementById('surveyComplete').style.display = survey.isLastPage ? 'inline' : 'none';
+    document.getElementById('surveyProgress').innerText = 'Page ' + (survey.currentPageNo + 1) + ' of ' + survey.visiblePageCount + '.';
+    if (document.getElementById('surveyPageNo')) { // @ts-ignore
+      document.getElementById('surveyPageNo').value = survey.currentPageNo;
+    }
+  }
+
+  setupPageSelector(survey) {
+    const selector = document.getElementById('pageSelector');
+    for (let i = 0; i < survey.visiblePages.length; i++) {
+      const option = document.createElement('option');
+      // @ts-ignore
+      option.value = i;
+      option.text = 'Page ' + (i + 1);
+      // @ts-ignore
+      selector.add(option);
+    }
   }
 
   public summary(): void {
@@ -85,5 +158,19 @@ export class QuestionComponent implements OnInit {
 
   public collect(): void {
     void this.router.navigate(['adapt/home']);
+  }
+
+  close() {
+    this.closeModal.emit(true);
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }

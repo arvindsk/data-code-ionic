@@ -5,6 +5,8 @@ import {QuestionComponent} from './question/question.component';
 import {IonicModule} from '@ionic/angular';
 import {ButtonModule} from "../shared/button/button.module";
 import {HeaderModule} from "../shared/header/header.module";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {TableModule} from "primeng";
 
 
 @NgModule({
@@ -16,6 +18,8 @@ import {HeaderModule} from "../shared/header/header.module";
     ButtonModule,
     HeaderModule,
 
+    NgbModule,
+    TableModule
   ]
 })
 export class QuestionnaireModule {

@@ -11,7 +11,7 @@
   <p>Collect Data</p>
 
       <p-table #dt [columns]="columnHeader" [value]="tableValues" [resizableColumns]="true"
-               sortMode="multiple" [responsive]="true" class="sort-table">
+               sortMode="multiple" [responsive]="true" class="table-primary">
     <ng-template pTemplate="header"  let-columns>
       <tr>
         <th *ngFor="let cols of columns">{{cols.header}}</th>

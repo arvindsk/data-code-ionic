@@ -3,8 +3,32 @@
 
 </ion-header>
 <ion-content>
-  <h2>HeaderPage will come here</h2>
+<!--  External navigation:
+  <span id="surveyProgress"></span>
+  <a id="surveyPrev" href="#" onclick="this.survey.prevPage();">Prev</a>
+  <a id="surveyNext" href="#" onclick="survey.nextPage();">Next</a>
+  <a id="surveyComplete" href="#"  onclick="survey.completeLastPage();">Complete</a>
+  <br />
+  Go to page directly without validation: <select id="pageSelector" onchange="survey.currentPageNo = this.value"></select>
+  <hr/>-->
   <div class="survey-container contentcontainer codecontainer">
   <div id="surveyElement"></div>
   </div>
 </ion-content>
+
+
+<ng-template #modalContent let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="modal-basic-title">More information</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+  </div>
+  <div class="modal-body">
+    <div [innerHTML]="openDesc"></div>
+  </div>
+</ng-template>
+
+
+

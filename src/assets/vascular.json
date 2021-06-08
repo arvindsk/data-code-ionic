@@ -51,15 +51,11 @@
           "name": "highbloodpressurePanel",
           "elements": [
             {
-              "type": "html",
-              "name": "highBlloodPressureDesc",
-              "html": "<p> below are some of the term(s) that may have been used by your doctor to describe elevated blood\npressure:</p>\n<table>\n<tr><td>Hypertension </td><td>Malignant Hypertension</td> <td> Elevated Blood Pressure</td> </tr>\n<tr><td>Diastolic Hypertension </td><td>Renal Hypertension</td> <td> Borderline Hypertension</td> </tr>\n<tr><td>Systolic Hypertension </td><td>Reno-vascular Hypertension</td> <td> Prehypertension</td> </tr> \n </table>\n"
-            },
-            {
               "type": "radiogroup",
               "name": "highBloodPressureQuestion1",
               "title": "High Blood Pressure Question title",
-              "titleLocation": "hidden",
+              "popupdescription": "<p>below are some of the term(s) that may have been used by your doctor to describe elevated blood pressure:</p><br>\n<table>\n  <tbody>\n  <tr><td style=\"padding: 10px !important;\">Hypertension </td><td style=\"padding: 10px !important;\">Malignant Hypertension</td> <td style=\"padding: 10px !important;\"> Elevated Blood Pressure</td> </tr>\n  <tr><td style=\"padding: 10px !important;\">Diastolic Hypertension </td><td style=\"padding: 10px !important;\">Renal Hypertension</td> <td style=\"padding: 10px !important;\"> Borderline Hypertension</td> </tr>\n  <tr><td style=\"padding: 10px !important;\">Systolic Hypertension </td><td style=\"padding: 10px !important;\">Reno-vascular Hypertension</td> <td style=\"padding: 10px !important;\"> Prehypertension</td> </tr>\n  </tbody>\n<table>",
+              "titleLocation": "top",
               "choices": [
                 "Yes",
                 "No",

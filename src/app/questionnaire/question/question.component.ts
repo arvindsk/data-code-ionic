@@ -76,7 +76,7 @@ export class QuestionComponent implements OnInit {
         // attr.innerHTML = options.question.popupdescription;
         console.log(options.question.popupdescription);
         // self.modal.open(this.modalContent, {size: 'xl'});
-        this.modal.open(this.modalContent, {ariaLabelledBy: 'modal-basic-title', size: 'lg'})
+        this.modal.open(this.modalContent, {ariaLabelledBy: 'modal-basic-title', size: 'sm',centered: true })
           .result
           .then((result) => {
             this.closeResult = `Closed with: ${result}`;

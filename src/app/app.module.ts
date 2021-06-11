@@ -12,13 +12,14 @@ import {ButtonModule} from "./shared/button/button.module";
 import {InputModule} from "./shared/input/input.module";
 import {TableModule} from "primeng";
 import {HeaderModule} from "./shared/header/header.module";
+import {FlyoutModule} from "./shared/flyout/flyout.module";
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, AdaptModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule,
-    AccordionModule,IonicModule, ButtonModule, InputModule, TableModule, HeaderModule,],
+    AccordionModule,IonicModule, ButtonModule, InputModule, TableModule, HeaderModule, FlyoutModule,],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
   schemas: [ ]

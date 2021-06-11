@@ -5,6 +5,27 @@
 
 <ion-content>
 
+  <div class="container-flyout col-md-2">
+    <div class="create-booking-widget">
+      <app-button id="search" [visualState]="'primary-navy-colors'" [showArrow]="false"
+                  (click)="flyout = true">
+        <span >Search</span>
+      </app-button>
+
+      <app-flyout [show]="flyout" [position]="'right'" (hideFlyout)="flyout = false">
+        <div class="grid">
+          <div class="divcenter">
+            <div>Participant Id<app-input type="text" id="participantId" name="participantId" autofocus="true" ></app-input></div>
+            <div>First name<app-input type="text" id="firstname" name="firstname" ></app-input></div>
+            <div>Last Name<app-input type="text" id="lastname" name="lastname" ></app-input></div>
+            <div>Date of Birth<app-input type="text" id="dob" name="dob" ></app-input></div>
+            <div></div>
+            <div class="alignleft"> <app-button id="cancel" [visualState]="'primary-navy-colors'" [showArrow]="false"
+                              (click)="flyout = false"><span>Cancel</span></app-button></div>
+            <div class="alignright"> <app-button id="participant" [visualState]="'primary-navy-colors'" [showArrow]="false"
+                              (click)="flyout = false;search()"><span>Search</span></app-button></div>
+          </div>
+        </div></app-flyout></div></div>
 
 <p-toast [style]="{marginTop: '50px'}"></p-toast>
 

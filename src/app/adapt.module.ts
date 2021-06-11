@@ -14,6 +14,7 @@ import {CollectDataComponent} from "./collect-data/collect-data.component";
 import {ParticipantSummaryComponent} from "./participant-summary/participant-summary.component";
 import {SummaryModule} from "./summary/summary.module";
 import {HeaderModule} from "./shared/header/header.module";
+import {FlyoutModule} from "./shared/flyout/flyout.module";
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {HeaderModule} from "./shared/header/header.module";
       PanelModule,
       TableModule,
       HeaderModule,
+      FlyoutModule,
 
 
     ],

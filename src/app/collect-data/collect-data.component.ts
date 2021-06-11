@@ -21,6 +21,7 @@ export class CollectDataComponent implements OnInit {
   public tableValues : any[];
   @ViewChild('dt') table: Table;
 
+  public flyout = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -49,6 +50,10 @@ export class CollectDataComponent implements OnInit {
 
   onTabClose(event: any): void {
     this.tabClosed.emit(event.index);
+  }
+
+  search(){
+
   }
 
 }

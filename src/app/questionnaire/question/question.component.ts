@@ -1,15 +1,18 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import 'inputmask/dist/inputmask/phone-codes/phone';
-import json from '../../../assets/vascular_v_1.json';
 import {init as initCustomWidget} from './customwidget';
 
 import * as Survey from 'survey-angular';
+import {SurveyModel} from 'survey-angular';
 import * as widgets from 'surveyjs-widgets';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'survey-angular/survey.css';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AdaptService} from "../../services/adapt.service";
+import {ParticipantStudy} from "../../model/ParticipantStudy";
+import {Observable} from "rxjs";
 
 widgets.bootstrapslider(Survey);
 widgets.prettycheckbox(Survey);
@@ -54,12 +57,24 @@ export class QuestionComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private modal: NgbModal) {
-    this.json = json;
+              private modal: NgbModal,
+              private adaptService: AdaptService) {
+    //this.json = json;
   }
 
   ngOnInit() {
     widgets.inputmask(Survey);
+
+    this.adaptService.getQuestionnaire('vascular').subscribe((data: any) => {
+        this.json = data;
+        this.loadQuestionnaire();
+      },
+      error => {
+        console.log('error occurred while loading questionnaire');
+      });
+  }
+
+  loadQuestionnaire() {
     this.survey = new Survey.Model(this.json);
 
     this.survey.onAfterRenderQuestion.add((survey, options) => {
@@ -71,24 +86,17 @@ export class QuestionComponent implements OnInit {
       const btn = document.createElement('button');
       btn.className = 'btn btn-info btn-xs';
       btn.innerHTML = 'More Info';
-      const self = this;
       btn.onmouseover = () => {
-        // attr.innerHTML = options.question.popupdescription;
         console.log(options.question.popupdescription);
-        // self.modal.open(this.modalContent, {size: 'xl'});
-        this.modal.open(this.modalContent, {ariaLabelledBy: 'modal-basic-title', size: 'sm',centered: true })
+        this.modal.open(this.modalContent, {ariaLabelledBy: 'modal-basic-title', size: 'sm', centered: true})
           .result
           .then((result) => {
             this.closeResult = `Closed with: ${result}`;
           }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
           });
-        //alert(options.question.popupdescription);
       };
 
-/*      btn.onmou = () => {
-       // this.modal.dismissAll();
-      };*/
       const header = options.htmlElement.querySelector('h5');
       header.appendChild(btn);
     });
@@ -105,26 +113,56 @@ export class QuestionComponent implements OnInit {
       this.saveSurveyData(onCompleteResult);
     });
 
-    const prevData = window.localStorage.getItem(this.storageName) || null;
-    if (prevData) {
-      const data = JSON.parse(prevData);
-      this.survey.data = data;
-      if (data.pageNo) {
-        this.survey.currentPageNo = data.pageNo;
+    this.loadPreviousData().subscribe((prevData: ParticipantStudy) => {
+      if (prevData !== null && prevData !== undefined) {
+        if(prevData.studyInformation){
+          const data = JSON.parse(prevData.studyInformation);
+          this.survey.data = data;
+          if (data.pageNo) {
+            this.survey.currentPageNo = data.pageNo;
+          }
+        }
+
       }
-    }
-   // this.setupPageSelector(this.survey);
-   // this.doOnCurrentPageChanged(this.survey);
-    Survey.SurveyNG.render('surveyElement', {model: this.survey});
+      Survey.SurveyNG.render('surveyElement', {model: this.survey});
+    });
+    /*    const prevData = window.localStorage.getItem(this.storageName) || null;
+        if (prevData) {
+          const data = JSON.parse(prevData);
+          this.survey.data = data;
+          if (data.pageNo) {
+            this.survey.currentPageNo = data.pageNo;
+          }
+        }*/
+    // this.setupPageSelector(this.survey);
+    // this.doOnCurrentPageChanged(this.survey);
+
   }
 
-  /*  showPopUp(){
-      this.modal.open(this.modalContent, { size: 'sm' });
-    }*/
-  saveSurveyData(question: any) {
-    const data = question.data;
-    data.pageNo = question.currentPageNo;
-    window.localStorage.setItem(this.storageName, JSON.stringify(data));
+  loadPreviousData(): Observable<ParticipantStudy> {
+    const participantStudy: ParticipantStudy = new ParticipantStudy();
+    participantStudy.studyId = 1001;
+    participantStudy.patientId = '12310';
+    return this.adaptService.getQuestionnaireAnswer(participantStudy);
+  }
+
+  saveSurveyData(result: SurveyModel) {
+    const data = result.data;
+    data.pageNo = result.currentPageNo;
+    const participantStudy: ParticipantStudy = new ParticipantStudy();
+    participantStudy.studyId = 1001;
+    participantStudy.studyInformation = JSON.stringify(data);
+    participantStudy.status = result.state;
+    participantStudy.patientId = '12310';
+    participantStudy.participantStudyId = 2;
+
+    this.adaptService.saveQuestionnaireAnswer(participantStudy).subscribe((resultData: string) => {
+      if (resultData === 'success') {
+        console.log('questionnaire saved successfully');
+      }
+    });
+
+    // window.localStorage.setItem(this.storageName, JSON.stringify(data));
 
   }
 

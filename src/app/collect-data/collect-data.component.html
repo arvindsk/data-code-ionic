@@ -40,13 +40,13 @@
     </ng-template>
       <ng-template pTemplate="body" let-data let-columns="columns">
         <tr>
-          <td> <a href="adapt/participant">{{data.value1}}</a></td>
-          <td> {{data.value2}}</td>
-          <td> {{data.value3}}</td>
-          <td> {{data.value4}}</td>
-          <td> {{data.value5}}</td>
-          <td> {{data.value6}}</td>
-          <td> {{data.value7}}</td>
+          <td> <a class="nav-link" [routerLink]="['/adapt/participant']" (click)="onTab(data)">{{data.participantId}}</a></td>
+          <td> {{data.firstName}}</td>
+          <td> {{data.lastName}}</td>
+          <td> {{data.dob}}</td>
+          <td> {{data.registeredDate}}</td>
+          <td> {{data.timeline}}</td>
+          <td> {{data.questionnaireCompleted}}</td>
         </tr>
       </ng-template>
       </p-table>

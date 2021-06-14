@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {ParticipantStudy} from "../model/ParticipantStudy";
+import {Participant} from "../model/Participant";
 
 @Injectable({
   providedIn: 'root'
@@ -47,4 +48,12 @@ export class AdaptService {
       httpOptions
     );
   }
+
+  public getParticipants(): Observable<Participant[]> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.httpClient.get<Participant[]>(this.baseUri + 'api/adapt/collect-data/get-all-participants', {headers});
+  }
+
 }

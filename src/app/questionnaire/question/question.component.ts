@@ -126,23 +126,12 @@ export class QuestionComponent implements OnInit {
       }
       Survey.SurveyNG.render('surveyElement', {model: this.survey});
     });
-    /*    const prevData = window.localStorage.getItem(this.storageName) || null;
-        if (prevData) {
-          const data = JSON.parse(prevData);
-          this.survey.data = data;
-          if (data.pageNo) {
-            this.survey.currentPageNo = data.pageNo;
-          }
-        }*/
-    // this.setupPageSelector(this.survey);
-    // this.doOnCurrentPageChanged(this.survey);
-
   }
 
   loadPreviousData(): Observable<ParticipantStudy> {
     const participantStudy: ParticipantStudy = new ParticipantStudy();
     participantStudy.studyId = 1001;
-    participantStudy.patientId = '12310';
+    participantStudy.participantId = 1000;
     return this.adaptService.getQuestionnaireAnswer(participantStudy);
   }
 
@@ -153,7 +142,7 @@ export class QuestionComponent implements OnInit {
     participantStudy.studyId = 1001;
     participantStudy.studyInformation = JSON.stringify(data);
     participantStudy.status = result.state;
-    participantStudy.patientId = '12310';
+    participantStudy.participantId = 1000;
     participantStudy.participantStudyId = 2;
 
     this.adaptService.saveQuestionnaireAnswer(participantStudy).subscribe((resultData: string) => {

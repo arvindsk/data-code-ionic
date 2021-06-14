@@ -3,7 +3,7 @@ export class ParticipantStudy {
   studyName: string;
   studyInformation: string;
   participantStudyId: number;
-  patientId: string;
+  participantId: number;
   status: string;
   studyId: number;
 }

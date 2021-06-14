@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation, Input, Injector, Outpu
 import {MessageService} from 'primeng/api';
 import {Table} from "primeng/table";
 import {ActivatedRoute, Router} from "@angular/router";
+import {DataStorageService} from "../../services/data-storage.service";
 
 
 
@@ -24,7 +25,8 @@ export class BaselineParticipantComponent implements OnInit {
   userId = "Test";
 
   constructor(  private route: ActivatedRoute,
-                private router: Router) { }
+                private router: Router,
+                private dataStorageService:DataStorageService) { }
 
   ngOnInit(): void {
 

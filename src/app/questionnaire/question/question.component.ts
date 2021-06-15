@@ -13,6 +13,7 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AdaptService} from "../../services/adapt.service";
 import {ParticipantStudy} from "../../model/ParticipantStudy";
 import {Observable} from "rxjs";
+import {DataStorageService} from "../../services/data-storage.service";
 
 widgets.bootstrapslider(Survey);
 widgets.prettycheckbox(Survey);
@@ -49,23 +50,28 @@ export class QuestionComponent implements OnInit {
   json: any;
   survey;
 
+
   storageName = 'survey_patient_history';
   userId = 'Test';
   openDesc;
   closeResult = '';
+  participantStudy: ParticipantStudy;
 
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private modal: NgbModal,
-              private adaptService: AdaptService) {
+              private adaptService: AdaptService,
+              private dataStorageService: DataStorageService) {
     //this.json = json;
   }
 
   ngOnInit() {
+    this.participantStudy=new ParticipantStudy();
     widgets.inputmask(Survey);
+    this.participantStudy = this.dataStorageService.storage.participantStudy;
 
-    this.adaptService.getQuestionnaire('vascular').subscribe((data: any) => {
+    this.adaptService.getQuestionnaire(this.participantStudy.studyName).subscribe((data: any) => {
         this.json = data;
         this.loadQuestionnaire();
       },
@@ -113,9 +119,9 @@ export class QuestionComponent implements OnInit {
       this.saveSurveyData(onCompleteResult);
     });
 
-    this.loadPreviousData().subscribe((prevData: ParticipantStudy) => {
+    this.loadPreviousData(this.participantStudy).subscribe((prevData: ParticipantStudy) => {
       if (prevData !== null && prevData !== undefined) {
-        if(prevData.studyInformation){
+        if (prevData.studyInformation) {
           const data = JSON.parse(prevData.studyInformation);
           this.survey.data = data;
           if (data.pageNo) {
@@ -128,24 +134,21 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  loadPreviousData(): Observable<ParticipantStudy> {
-    const participantStudy: ParticipantStudy = new ParticipantStudy();
-    participantStudy.studyId = 1001;
-    participantStudy.participantId = 1000;
-    return this.adaptService.getQuestionnaireAnswer(participantStudy);
+  loadPreviousData(participantStudyObj: ParticipantStudy): Observable<ParticipantStudy> {
+    /*    const participantStudy: ParticipantStudy = new ParticipantStudy();
+        participantStudy.studyId = 1001;
+        participantStudy.participantId = 1000;*/
+    return this.adaptService.getQuestionnaireAnswer(participantStudyObj);
   }
 
   saveSurveyData(result: SurveyModel) {
     const data = result.data;
     data.pageNo = result.currentPageNo;
-    const participantStudy: ParticipantStudy = new ParticipantStudy();
-    participantStudy.studyId = 1001;
-    participantStudy.studyInformation = JSON.stringify(data);
-    participantStudy.status = result.state;
-    participantStudy.participantId = 1000;
-    participantStudy.participantStudyId = 2;
 
-    this.adaptService.saveQuestionnaireAnswer(participantStudy).subscribe((resultData: string) => {
+    this.participantStudy.studyInformation = JSON.stringify(data);
+    this.participantStudy.status = result.state;
+
+    this.adaptService.saveQuestionnaireAnswer(this.participantStudy).subscribe((resultData: string) => {
       if (resultData === 'success') {
         console.log('questionnaire saved successfully');
       }

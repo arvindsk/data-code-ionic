@@ -1,5 +1,5 @@
 <ion-content>
-          <h1>Tony Stark</h1>
+          <h1>{{headerName}}</h1>
 
   <p-table [columns]="columnHeader" [value]="tableValues">
     <ng-template pTemplate="header"  let-columns>
@@ -9,12 +9,10 @@
     </ng-template>
     <ng-template pTemplate="body" let-data let-columns="columns">
       <tr>
-        <td >
-          {{data.header}}
-        </td>
-        <td> {{data.value}}</td>
-        <td> <a href="adapt/questionnaire">Begin</a></td>
-        <td> </td>
+        <td> {{data.studyName}}</td>
+        <td> {{data.status}}</td>
+        <td> <a class="nav-link" [routerLink]="['/adapt/questionnaire']" (click)="onTab(data)">Begin</a></td>
+        <td> {{data.completedDate | date}}</td>
       </tr>
     </ng-template>
   </p-table>

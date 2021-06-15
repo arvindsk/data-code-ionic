@@ -6,4 +6,5 @@ export class ParticipantStudy {
   participantId: number;
   status: string;
   studyId: number;
+  completedDate: Date;
 }

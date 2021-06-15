@@ -99,7 +99,7 @@ export class CollectDataComponent implements OnInit {
   public onTab(participantObj: any) {
     console.log(participantObj);
     this.dataStorageService.storage = {
-      participant: JSON.stringify(participantObj)
+      participant: participantObj
     };
     //this.router.navigate(['adapt/participant']);
   }

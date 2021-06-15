@@ -56,4 +56,13 @@ export class AdaptService {
     return this.httpClient.get<Participant[]>(this.baseUri + 'api/adapt/collect-data/get-all-participants', {headers});
   }
 
+  public loadParticipantStudyList(participant: Participant): Observable<ParticipantStudy[]> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.httpClient.post<ParticipantStudy[]>(this.baseUri + 'api/adapt/collect-data/get-participant-study-list',
+      participant,
+      {headers});
+  }
+
 }

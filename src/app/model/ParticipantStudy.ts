@@ -7,4 +7,5 @@ export class ParticipantStudy {
   status: string;
   studyId: number;
   completedDate: Date;
+  enabled: boolean;
 }

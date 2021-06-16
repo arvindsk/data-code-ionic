@@ -14,13 +14,15 @@ import {TableModule} from 'primeng';
 import {HeaderModule} from './shared/header/header.module';
 import {FlyoutModule} from './shared/flyout/flyout.module';
 import {HttpClientModule} from '@angular/common/http';
+import {MaterialModule} from './material-module';
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, AdaptModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule,
-    AccordionModule,IonicModule, ButtonModule, InputModule, TableModule, HeaderModule, FlyoutModule,HttpClientModule],
+    AccordionModule,IonicModule, ButtonModule, InputModule, TableModule, HeaderModule, FlyoutModule,HttpClientModule,
+    MaterialModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
   schemas: [ ]

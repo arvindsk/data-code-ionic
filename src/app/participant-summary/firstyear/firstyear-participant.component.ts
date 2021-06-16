@@ -16,7 +16,7 @@ import {ParticipantStudy} from "../../model/ParticipantStudy";
   providers:[MessageService],
 })
 export class FirstyearParticipantComponent implements OnInit {
-
+  displayedColumns: string[] = ['studyName', 'status','view', 'completedDate'];
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();

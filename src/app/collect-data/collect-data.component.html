@@ -29,9 +29,9 @@
 
 <p-toast [style]="{marginTop: '50px'}"></p-toast>
 
-  <p>List of Participant Summary</p>
+  <mat-card-title>List of Participant Summary</mat-card-title>
 
-      <p-table #dt [columns]="columnHeader" [value]="tableValues" [resizableColumns]="true"
+     <!-- <p-table #dt [columns]="columnHeader" [value]="tableValues" [resizableColumns]="true"
                sortMode="multiple" [responsive]="true" class="table-primary">
     <ng-template pTemplate="header"  let-columns>
       <tr>
@@ -49,5 +49,57 @@
           <td> {{data.questionnaireCompleted}}</td>
         </tr>
       </ng-template>
-      </p-table>
+      </p-table>-->
+  <div class="example-container">
+  <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="participantId">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Participant ID </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Participant ID:</span>
+        <a class="nav-link" [routerLink]="['/adapt/participant']" (click)="onTab(element)">{{element.participantId}}</a> </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> First Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">First Name:</span>
+        {{element.firstName}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Last Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Last Name:</span>{{element.lastName}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="dob">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> DOB </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">DOB:</span>{{element.dob}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="registeredDate">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Registered Date </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Registered Date:</span>{{element.registeredDate | date}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="timeline">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Timeline </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Timeline:</span>{{element.timeline}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="questionnaireCompleted">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Questionnaire Completed </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Questionnaire Completed:</span>{{element.questionnaireCompleted | date}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+  </div>
 </ion-content>

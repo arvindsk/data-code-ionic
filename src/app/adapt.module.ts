@@ -15,29 +15,30 @@ import {ParticipantSummaryComponent} from "./participant-summary/participant-sum
 import {SummaryModule} from "./summary/summary.module";
 import {HeaderModule} from "./shared/header/header.module";
 import {FlyoutModule} from "./shared/flyout/flyout.module";
+import {MaterialModule} from "./material-module";
 
 
 @NgModule({
-  imports:
-    [
-      CommonModule,
-      FormsModule,
-      ReactiveFormsModule,
-      AdaptRouting,
-      ButtonModule,
-      HttpClientModule,
-      ToastModule,
-      AccordionModule,
-      TabViewModule,
-      IonicModule,
-      InputModule,
-      PanelModule,
-      TableModule,
-      HeaderModule,
-      FlyoutModule,
+    imports:
+        [
+            CommonModule,
+            FormsModule,
+            ReactiveFormsModule,
+            AdaptRouting,
+            ButtonModule,
+            HttpClientModule,
+            ToastModule,
+            AccordionModule,
+            TabViewModule,
+            IonicModule,
+            InputModule,
+            PanelModule,
+            TableModule,
+            HeaderModule,
+            FlyoutModule,
+            MaterialModule
 
-
-    ],
+        ],
 
   declarations:
     [

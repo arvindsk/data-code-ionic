@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { BaselineParticipantRoutingModule } from './baseline-participant-routing.module';
 
 import { BaselineParticipantComponent } from './baseline-participant.component';
-import {TableModule} from "primeng";
+import {TableModule} from 'primeng';
+import {MaterialModule} from '../../material-module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {TableModule} from "primeng";
     IonicModule,
     BaselineParticipantRoutingModule,
     TableModule,
+    MaterialModule,
   ],
   declarations: [BaselineParticipantComponent]
 })

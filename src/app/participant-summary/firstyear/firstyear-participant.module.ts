@@ -8,6 +8,7 @@ import { FirstyearParticipantRoutingModule } from './firstyear-participant-routi
 
 import { FirstyearParticipantComponent } from './firstyear-participant.component';
 import {TableModule} from "primeng";
+import {MaterialModule} from "../../material-module";
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {TableModule} from "primeng";
     IonicModule,
     FirstyearParticipantRoutingModule,
     TableModule,
+    MaterialModule,
   ],
   declarations: [FirstyearParticipantComponent]
 })

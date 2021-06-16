@@ -1,10 +1,14 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation, Input, Injector, Output, EventEmitter} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MessageService} from 'primeng/api';
 import {Table} from "primeng/table";
 import {DataStorageService} from "../services/data-storage.service";
 import {Router} from "@angular/router";
 import {AdaptService} from "../services/adapt.service";
 import {Participant} from "../model/Participant";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatSort} from "@angular/material/sort";
+import {BreakpointObserver} from "@angular/cdk/layout";
 
 
 @Component({
@@ -13,7 +17,7 @@ import {Participant} from "../model/Participant";
   styleUrls: ['./collect-data.component.scss'],
   providers: [MessageService],
 })
-export class CollectDataComponent implements OnInit {
+export class CollectDataComponent implements OnInit, AfterViewInit {
 
 
   @Input() activeIndex: -1;
@@ -21,12 +25,31 @@ export class CollectDataComponent implements OnInit {
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
   public baseLine: any[];
   public columnHeader: any[];
-  public tableValues: any[];
+  public tableValues: Participant[];
+  dataSource = new MatTableDataSource<Participant>([]);
   @ViewChild('dt') table: Table;
-
+  displayedColumns: string[] = ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'questionnaireCompleted'];
   public flyout = false;
+  isMobile=false;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  constructor(private router: Router, private dataStorageService: DataStorageService,
+              private adaptService: AdaptService,private breakpointObserver: BreakpointObserver) {
+    breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+      if(result.matches ){
+        this.isMobile=true;
+      }
 
-  constructor(private router: Router, private dataStorageService: DataStorageService, private adaptService: AdaptService) {
+      this.displayedColumns = result.matches ?
+        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'questionnaireCompleted'] :
+        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'questionnaireCompleted'];
+    });
+  }
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnInit(): void {
@@ -80,6 +103,7 @@ export class CollectDataComponent implements OnInit {
     this.adaptService.getParticipants().subscribe((data: Participant[]) => {
       if (data) {
         this.tableValues = data;
+        this.dataSource.data = data;
       }
     });
   }

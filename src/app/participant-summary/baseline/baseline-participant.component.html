@@ -1,7 +1,7 @@
 <ion-content>
           <h1>{{headerName}}</h1>
 
-  <p-table [columns]="columnHeader" [value]="tableValues">
+<!--  <p-table [columns]="columnHeader" [value]="tableValues">
     <ng-template pTemplate="header"  let-columns>
       <tr>
         <th *ngFor="let cols of columns">{{cols.header}}</th>
@@ -15,6 +15,39 @@
         <td> {{data.completedDate | date}}</td>
       </tr>
     </ng-template>
-  </p-table>
+  </p-table> -->
+  <table mat-table [dataSource]="tableValues" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="studyName">
+      <th mat-header-cell *matHeaderCellDef> Questionnaire </th>
+      <td mat-cell *matCellDef="let element"> {{element.studyName}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef> View/Begin </th>
+      <td mat-cell *matCellDef="let element"><a class="nav-link" [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Begin</a> </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="completedDate">
+      <th mat-header-cell *matHeaderCellDef> Completed Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.completedDate | date}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
 
 </ion-content>

@@ -8,15 +8,17 @@ import { ThirdyearParticipantRoutingModule } from './thirdyear-participant-routi
 
 import { ThirdyearParticipantComponent } from './thirdyear-participant.component';
 import {TableModule} from "primeng";
+import {MaterialModule} from "../../material-module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ThirdyearParticipantRoutingModule,
-    TableModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ThirdyearParticipantRoutingModule,
+        TableModule,
+        MaterialModule,
+    ],
   declarations: [ThirdyearParticipantComponent]
 })
 export class ThirdyearParticipantModule {}

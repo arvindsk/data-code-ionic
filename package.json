@@ -23,6 +23,7 @@
     "@angular/compiler": "~11.2.0",
     "@angular/core": "~11.2.0",
     "@angular/forms": "~11.2.0",
+    "@angular/material": "^11.2.12",
     "@angular/platform-browser": "~11.2.0",
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
@@ -38,6 +39,7 @@
     "@fortawesome/free-solid-svg-icons": "5.12.0",
     "@fullcalendar/core": "^5.7.0",
     "@ionic/angular": "^5.6.8",
+    "@ng-bootstrap/ng-bootstrap": "^5.0.0",
     "bootstrap": "^5.0.1",
     "chart.js": "^3.2.1",
     "inputmask": "3.3.10",
@@ -53,8 +55,7 @@
     "survey-pdf": "^1.8.49",
     "surveyjs-widgets": "^1.8.49",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2",
-    "@ng-bootstrap/ng-bootstrap": "^5.0.0"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.4",

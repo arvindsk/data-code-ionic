@@ -16,12 +16,14 @@ import {ParticipantStudy} from "../../model/ParticipantStudy";
 })
 export class BaselineParticipantComponent implements OnInit {
 
+  displayedColumns: string[] = ['studyName', 'status','view', 'completedDate'];
+
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
   public baseLine: any[];
   public columnHeader: any[];
-  public tableValues: any[];
+  public tableValues: ParticipantStudy[];
   public participant: Participant;
   @ViewChild('dt') table: Table;
   userId = "Test";

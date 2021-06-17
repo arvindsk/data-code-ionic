@@ -15,6 +15,7 @@ import {BaselineSummaryRoutingModule} from "./baseline/baseline-summary-routing.
 import {FirstyearSummaryRoutingModule} from "./firstyear/firstyear-summary-routing.module";
 import {ThirdyearSummaryRoutingModule} from "./thirdyear/thirdyear-summary-routing.module";
 import {HeaderModule} from "../shared/header/header.module";
+import {MaterialModule} from "../material-module";
 
 @NgModule({
   "imports": [
@@ -30,6 +31,7 @@ import {HeaderModule} from "../shared/header/header.module";
     FirstyearSummaryRoutingModule,
     ThirdyearSummaryRoutingModule,
     HeaderModule,
+    MaterialModule,
   ],
   declarations: [SummaryComponent]
 })

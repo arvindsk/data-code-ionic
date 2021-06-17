@@ -8,6 +8,7 @@ import { BaselineSummaryRoutingModule } from './baseline-summary-routing.module'
 
 import { BaselineSummaryComponent } from './baseline-summary.component';
 import {TableModule} from "primeng";
+import {MaterialModule} from "../../material-module";
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {TableModule} from "primeng";
     IonicModule,
     BaselineSummaryRoutingModule,
     TableModule,
+    MaterialModule,
   ],
   declarations: [BaselineSummaryComponent]
 })

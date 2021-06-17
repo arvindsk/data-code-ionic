@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, Input, Injector, Output, EventEmitter } from '@angular/core';
 import {MessageService} from 'primeng/api';
 import {Table} from "primeng/table";
+import {MatTableDataSource} from "@angular/material/table";
+import {Participant} from "../model/Participant";
+import {Summary} from "../model/Summary";
+import {MatSort} from "@angular/material/sort";
+import {MatPaginator} from "@angular/material/paginator";
 
 
 
@@ -20,6 +25,7 @@ export class SummaryComponent implements OnInit {
   public columnHeader: any[];
   public tableValues : any[];
   @ViewChild('dt') table: Table;
+
 
   constructor() { }
 

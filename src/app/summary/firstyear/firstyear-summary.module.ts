@@ -8,6 +8,7 @@ import { FirstyearSummaryRoutingModule } from './firstyear-summary-routing.modul
 
 import { FirstyearSummaryComponent } from './firstyear-summary.component';
 import {TableModule} from "primeng";
+import {MaterialModule} from "../../material-module";
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {TableModule} from "primeng";
     IonicModule,
     FirstyearSummaryRoutingModule,
     TableModule,
+    MaterialModule,
   ],
   declarations: [FirstyearSummaryComponent]
 })

@@ -4,6 +4,8 @@ import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {ParticipantStudy} from "../model/ParticipantStudy";
 import {Participant} from "../model/Participant";
+import {Summary} from "../model/Summary";
+import {LoginRequest} from "../model/LoginRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +27,12 @@ export class AdaptService {
   }
 
 
-  saveQuestionnaireAnswer(participantStudy: ParticipantStudy): Observable<string> {
+  saveQuestionnaireAnswer(participantStudy: ParticipantStudy): Observable<boolean> {
     let headers = new HttpHeaders();
 
     headers = headers.append('Content-Type', 'application/json');
     const httpOptions = {headers};
-    return this.httpClient.post<string>(
+    return this.httpClient.post<boolean>(
       this.baseUri + 'api/adapt/questionnaire/saveQuestionnaireFilled',
       participantStudy,
       httpOptions
@@ -63,6 +65,22 @@ export class AdaptService {
     return this.httpClient.post<ParticipantStudy[]>(this.baseUri + 'api/adapt/collect-data/get-participant-study-list',
       participant,
       {headers});
+  }
+
+  public getSummary(): Observable<Summary> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.httpClient.get<Summary>(this.baseUri + 'api/adapt/summary/get-summary', {headers});
+  }
+
+  public login(loginRequest : LoginRequest): Observable<boolean> {
+    let headers = new HttpHeaders();
+
+    headers = headers.append('Content-Type', 'application/json');
+    const httpOptions = {headers};
+
+    return this.httpClient.post<boolean>(this.baseUri + 'api/adapt/login/loginuser', loginRequest, httpOptions);
   }
 
 }

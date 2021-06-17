@@ -148,8 +148,8 @@ export class QuestionComponent implements OnInit {
     this.participantStudy.studyInformation = JSON.stringify(data);
     this.participantStudy.status = result.state;
 
-    this.adaptService.saveQuestionnaireAnswer(this.participantStudy).subscribe((resultData: string) => {
-      if (resultData === 'success') {
+    this.adaptService.saveQuestionnaireAnswer(this.participantStudy).subscribe((resultData: boolean) => {
+      if (resultData) {
         console.log('questionnaire saved successfully');
       }
     });

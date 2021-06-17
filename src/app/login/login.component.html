@@ -21,13 +21,15 @@
   <div class="aligncenter">
      Welcome To ADAPT<sup>TM</sup>
   </div>
-  <div class="aligncenter">{{errorMessage}}</div>
-  <div class="divcenter">
-    <div><app-input type="text" id="userName" name="username" autofocus="true" placeholder="email*"></app-input></div>
-    <div><app-input type="password" id="password" name="password" hideInput="true" placeholder="password*"></app-input></div>
-    <div><app-button [visualState]="'primary-blue-colors'" (click)="login()">Login</app-button></div>
+  <div class="errorcenter">{{errorMessage}}</div>
+  <form id="signInForm" autocomplete="off" [formGroup]="signInForm" (ngSubmit)="login()">
+    <div class="divcenter">
+      <div><app-input formControlName="username" type="text" id="username" name="username" autofocus="true" placeholder="email*"></app-input></div>
+      <div><app-input formControlName="password" type="password" id="password" name="password" hideInput="true" placeholder="password*"></app-input></div>
+      <div><app-button [visualState]="'primary-blue-colors'" (click)="login()">Login</app-button></div>
 
-  </div>
+    </div>
+  </form>
 
 
 </ion-content>

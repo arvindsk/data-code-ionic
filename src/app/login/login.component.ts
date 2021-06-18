@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   public name: string;
   public signInForm: FormGroup;
+  site: string = "UC-Davis";
   @Output() errorMessage : any;
   constructor( private route: ActivatedRoute,
                private router: Router,
@@ -35,13 +36,14 @@ export class LoginComponent implements OnInit {
   }
 
   postData() {
-    this._emitSvc.emitThisData(this.name);
+    this._emitSvc.emitThisData("fname:"+this.name);
+    this._emitSvc.emitThisData("site:"+this.site);
   }
 
   login(): void {
     if(this.signInForm.value.username === '' || this.signInForm.value.password === ''){
       this.errorMessage = "Please enter username and password";
-    }else{const loginRequest: LoginRequest = new LoginRequest(this.signInForm.value.username, this.signInForm.value.password, "UC-Davis");
+    }else{const loginRequest: LoginRequest = new LoginRequest(this.signInForm.value.username, this.signInForm.value.password, this.site);
       this.adaptService.login(loginRequest).subscribe((data: LoginResponse) => {
         if (data.status === 'success') {
           this.name = data.name;

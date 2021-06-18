@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
   fname : string;
+  site : string;
   loggedIn : boolean;
   private sub;
   mainmenu: string;
@@ -33,7 +34,12 @@ export class HeaderComponent implements OnInit {
   }
 
   onEmittedEvent ( obj, data ) {
-    obj.fname = data;
+    if(data.includes("fname:")){
+      obj.fname = data.split(":", 2)[1];
+    }
+    if(data.includes("site:")){
+      obj.site = data.split(":", 2)[1];
+    }
     obj.loggedIn = true;
   }
 

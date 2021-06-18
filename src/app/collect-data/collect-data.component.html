@@ -2,12 +2,17 @@
 
 
   <div class="container-flyout col-md-2">
-
+    <span>
       <app-button id="search" [visualState]="'primary-navy-colors'" [showArrow]="false"
                   (click)="flyout = true">
         <span >Search</span>
       </app-button>
-
+    </span><span></span><span>
+      <app-button id="clear " [visualState]="'primary-navy-colors'" [showArrow]="false"
+                  (click)="loadParticipants()">
+        <span >Clear </span>
+      </app-button>
+    </span>
       <app-flyout [show]="flyout" [position]="'right'" (hideFlyout)="flyout = false">
         <div class="grid">
           <div class="divcenter">

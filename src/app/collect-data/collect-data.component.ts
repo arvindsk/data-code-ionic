@@ -123,42 +123,41 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
   }
 
   search() {
-    this.tableValues = this.tableValues.filter(this.filterObj);
+    this.tableValues = this.tableValues.filter(function filterObj(element, index, array) {
+      let flag: boolean ;
+      if(this.searchForm.value.participantId != ''){
+        if(element.participantId == this.searchForm.value.participantId) {
+          flag = true;
+        }else {
+          flag = false;
+        }
+      }
+      if(this.searchForm.value.firstname != ''){
+        if(element.firstName == this.searchForm.value.firstname){
+          flag = true;
+        }else {
+          flag = false;
+        }
+      }
+      if(this.searchForm.value.lastname != ''){
+        if(element.lastName == this.searchForm.value.lastname){
+          flag = true;
+        }else {
+          flag = false;
+        }
+      }
+      if(this.searchForm.value.dob != ''){
+        if(element.dob == this.searchForm.value.dob){
+          flag = true;
+        }else {
+          flag = false;
+        }
+      }
+      return flag;
+    }, this);
+    this.dataSource.data = this.tableValues;
   }
-
-  filterObj(element, index, array) {
-    let flag: boolean ;
-    if(this.searchForm.value.participantId != ''){
-      if(element.participantId == this.searchForm.value.participantId) {
-        flag = true;
-      }else {
-        flag = false;
-      }
-    }
-    if(this.searchForm.value.firstname != ''){
-      if(element.firstName == this.searchForm.value.firstname){
-        flag = true;
-      }else {
-        flag = false;
-      }
-    }
-    if(this.searchForm.value.lastname != ''){
-      if(element.lastName == this.searchForm.value.lastname){
-        flag = true;
-      }else {
-        flag = false;
-      }
-    }
-    if(this.searchForm.value.dob != ''){
-      if(element.dob == this.searchForm.value.dob){
-        flag = true;
-      }else {
-        flag = false;
-      }
-    }
-    return flag;
-  }
-
+  
   public onTab(participantObj: any) {
     this.dataStorageService.storage = {
       participant: participantObj

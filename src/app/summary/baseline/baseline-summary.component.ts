@@ -59,22 +59,16 @@ export class BaselineSummaryComponent implements OnInit {
       {field:'exercise', header:"Exercise", value:'12' },
     ]*/
     this.loadSummary();
-
   }
 
   loadSummary() {
     this.adaptService.getSummary().subscribe((data: Summary) => {
-      console.log(data);
       if (data) {
        this.headerCount=data.participantCount;
         this.tableValues = data.baselineStudySummary;
         this.dataSource.data = data.baselineStudySummary;
       }
     });
-  }
-
-  segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
   }
 
   onTabOpen(event: any): void {

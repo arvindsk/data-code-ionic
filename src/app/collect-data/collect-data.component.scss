@@ -1,27 +1,31 @@
 .container-flyout {
-  padding-left: 26px;
+  padding-left: 25px;
   float: right;
+  padding-top: 175px;
 }
 .divcenter {
-  padding-top: 175px;
+  padding-top: 200px;
 }
 
 .alignleft {
   float: left;
-  padding-left: 40px;
+  padding-bottom: 40px;
 }
+
 .alignright {
   float: right;
   padding-right: 40px;
 }
 
+.alignpage {
+  padding-bottom: 20px;
+}
+
 .example-container {
   display: flex;
   flex-direction: column;
-  max-height: 500px;
-  min-width: 300px;
   width: 100%;
-  padding: 10px;
+  padding-top: 25px;
 }
 
 .mat-table {

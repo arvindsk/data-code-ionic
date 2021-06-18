@@ -2,28 +2,28 @@
   <ion-toolbar class="header">
     <ion-toolbar class="toolbar1">
       <ion-title>
-        <div id="textbox">
-          <p class="alignleft">
+
+          <div class="alignleft">
           <img src="/assets/Logo-DIVERSE-VCID.jpg" alt="Italian Trulli" width="50" height="50" >
-          </p>
-          <p class="alignleft">
-            ADAPT<sup>TM</sup>
-          </p>
-          <p class="alignright">
-            Welcome <span>{{userId}}</span>
-          </p>
-        </div>
+
+            ADAPT<sup class="sup">TM</sup>
+          </div>
+          <div *ngIf="loggedIn" class="alignright">
+            Welcome <span>{{fname}}</span>
+
+          </div>
+
       </ion-title>
       <div style="clear: both;"></div>
     </ion-toolbar>
     <ion-toolbar class="toolbar2">
-      <ion-title>
-        <ion-segment (ionChange)="onSegmentChanged($event)">
+      <ion-title *ngIf="loggedIn">
+        <ion-segment [(ngModel)]="mainmenu" (ionChange)="onSegmentChanged($event)">
           <ion-segment-button value="summary" >
-            <ion-label><b>Summary</b></ion-label>
+            <ion-label class="label1"><b>Summary</b></ion-label>
           </ion-segment-button>
           <ion-segment-button value="collect-data" >
-            <ion-label><b>Collect Data</b></ion-label>
+            <ion-label class="label1"><b>Collect Data</b></ion-label>
           </ion-segment-button>
         </ion-segment>
 

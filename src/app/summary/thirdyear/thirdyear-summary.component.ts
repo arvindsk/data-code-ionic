@@ -63,7 +63,6 @@ export class ThirdyearSummaryComponent implements OnInit {
 
   loadSummary() {
     this.adaptService.getSummary().subscribe((data: Summary) => {
-      console.log(data);
       if (data) {
         this.headerCount=data.participantCount;
         this.tableValues = data.thirdyearStudySummary;

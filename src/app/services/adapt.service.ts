@@ -6,6 +6,7 @@ import {ParticipantStudy} from "../model/ParticipantStudy";
 import {Participant} from "../model/Participant";
 import {Summary} from "../model/Summary";
 import {LoginRequest} from "../model/LoginRequest";
+import {LoginResponse} from "../model/LoginResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -74,13 +75,13 @@ export class AdaptService {
     return this.httpClient.get<Summary>(this.baseUri + 'api/adapt/summary/get-summary', {headers});
   }
 
-  public login(loginRequest : LoginRequest): Observable<boolean> {
+  public login(loginRequest : LoginRequest): Observable<LoginResponse> {
     let headers = new HttpHeaders();
 
     headers = headers.append('Content-Type', 'application/json');
     const httpOptions = {headers};
 
-    return this.httpClient.post<boolean>(this.baseUri + 'api/adapt/login/loginuser', loginRequest, httpOptions);
+    return this.httpClient.post<LoginResponse>(this.baseUri + 'api/adapt/login/loginuser', loginRequest, httpOptions);
   }
 
 }

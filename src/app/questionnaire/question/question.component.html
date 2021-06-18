@@ -1,8 +1,4 @@
-<ion-header [translucent]="true" class="header">
-  <app-header></app-header>
 
-</ion-header>
-<ion-content>
 <!--  External navigation:
   <span id="surveyProgress"></span>
   <a id="surveyPrev" href="#" onclick="this.survey.prevPage();">Prev</a>
@@ -11,10 +7,9 @@
   <br />
   Go to page directly without validation: <select id="pageSelector" onchange="survey.currentPageNo = this.value"></select>
   <hr/>-->
-  <div class="survey-container contentcontainer codecontainer">
+  <div class="survey-container contentcontainer codecontainer aligncenter">
   <div id="surveyElement"></div>
   </div>
-</ion-content>
 
 
 <ng-template #modalContent let-modal>

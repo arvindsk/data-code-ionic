@@ -32,20 +32,19 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
   public flyout = false;
   isMobile=false;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private router: Router, private dataStorageService: DataStorageService,
               private adaptService: AdaptService,private breakpointObserver: BreakpointObserver) {
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       if(result.matches ){
         this.isMobile=true;
       }
-
       this.displayedColumns = result.matches ?
         ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'questionnaireCompleted'] :
         ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'questionnaireCompleted'];
     });
   }
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -53,7 +52,6 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
     this.columnHeader = [
       {field: 'participantId', header: 'Participant ID'},
       {field: 'firstName', header: 'First Name'},
@@ -95,8 +93,6 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
     ];*/
 
     this.loadParticipants();
-
-
   }
 
   loadParticipants() {
@@ -121,7 +117,6 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
   }
 
   public onTab(participantObj: any) {
-    console.log(participantObj);
     this.dataStorageService.storage = {
       participant: participantObj
     };

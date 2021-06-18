@@ -1,35 +1,16 @@
-<ion-header [translucent]="true" class="header">
-  <ion-toolbar class="header">
-    <ion-toolbar class="toolbar1">
-      <ion-title>
-        <p class="alignleft">
-          <img src="/assets/Logo-DIVERSE-VCID.jpg" alt="Italian Trulli" width="50" height="50" >
-        </p>
-        <p class="alignleft">ADAPT<sup>TM</sup></p>
-      </ion-title>
-    </ion-toolbar>
-    <ion-toolbar class="toolbar2">
-      <ion-title>
-
-      </ion-title>
-    </ion-toolbar>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<div>
   <div class="aligncenter">
-     Welcome To ADAPT<sup>TM</sup>
+     Welcome To ADAPT<sup class="sup">TM</sup>
   </div>
   <div class="errorcenter">{{errorMessage}}</div>
-  <form id="signInForm" autocomplete="off" [formGroup]="signInForm" (ngSubmit)="login()">
-    <div class="divcenter">
-      <div><app-input formControlName="username" type="text" id="username" name="username" autofocus="true" placeholder="email*"></app-input></div>
-      <div><app-input formControlName="password" type="password" id="password" name="password" hideInput="true" placeholder="password*"></app-input></div>
-      <div><app-button [visualState]="'primary-blue-colors'" (click)="login()">Login</app-button></div>
+  <div class="divcenter">
+    <form id="signInForm" autocomplete="off" [formGroup]="signInForm" (ngSubmit)="login()">
 
-    </div>
-  </form>
+        <div><app-input formControlName="username" type="text" id="username" name="username" autofocus="true" placeholder="email*"></app-input></div>
+        <div><app-input formControlName="password" type="password" id="password" name="password" hideInput="true" placeholder="password*"></app-input></div>
+        <div><app-button [visualState]="'primary-blue-colors'" (click)="login()">Login</app-button></div>
 
 
-</ion-content>
+    </form>
+  </div>
+</div>

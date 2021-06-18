@@ -15,6 +15,8 @@ import {HeaderModule} from './shared/header/header.module';
 import {FlyoutModule} from './shared/flyout/flyout.module';
 import {HttpClientModule} from '@angular/common/http';
 import {MaterialModule} from './material-module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {EmitService} from "./services/emit.service";
 
 
 @NgModule({
@@ -22,8 +24,8 @@ import {MaterialModule} from './material-module';
   entryComponents: [],
   imports: [BrowserModule, AdaptModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule,
     AccordionModule,IonicModule, ButtonModule, InputModule, TableModule, HeaderModule, FlyoutModule,HttpClientModule,
-    MaterialModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    MaterialModule, FormsModule, ReactiveFormsModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, EmitService ],
   bootstrap: [AppComponent],
   schemas: [ ]
 })

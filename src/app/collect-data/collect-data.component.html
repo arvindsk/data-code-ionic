@@ -1,12 +1,8 @@
-<ion-header [translucent]="true" class="header">
-  <app-header></app-header>
-
-</ion-header>
-
 <ion-content>
 
+
   <div class="container-flyout col-md-2">
-    <div class="create-booking-widget">
+
       <app-button id="search" [visualState]="'primary-navy-colors'" [showArrow]="false"
                   (click)="flyout = true">
         <span >Search</span>
@@ -25,11 +21,11 @@
             <div class="alignright"> <app-button id="participant" [visualState]="'primary-navy-colors'" [showArrow]="false"
                               (click)="flyout = false;search()"><span>Search</span></app-button></div>
           </div>
-        </div></app-flyout></div></div>
+        </div></app-flyout></div>
 
-<p-toast [style]="{marginTop: '50px'}"></p-toast>
+  <p-toast [style]="{marginTop: '10px'}"></p-toast>
 
-  <mat-card-title>List of Participant Summary</mat-card-title>
+
 
      <!-- <p-table #dt [columns]="columnHeader" [value]="tableValues" [resizableColumns]="true"
                sortMode="multiple" [responsive]="true" class="table-primary">
@@ -51,6 +47,8 @@
       </ng-template>
       </p-table>-->
   <div class="example-container">
+    <mat-card-title>List of Participant Summary</mat-card-title>
+    <p class="alignpage"></p>
   <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
 
     <ng-container matColumnDef="participantId">

@@ -3,7 +3,6 @@
     blockScroll="true"
     [ngClass]="{'flyout-large' : isTablet}"
     [visible]="show"
-    [position]="position"
-    (onHide)="hideFlyout.emit(true)">
+    [position]="position">
     <ng-content></ng-content>
 </p-sidebar>

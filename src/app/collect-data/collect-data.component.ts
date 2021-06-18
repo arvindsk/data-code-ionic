@@ -9,6 +9,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {BreakpointObserver} from "@angular/cdk/layout";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 
 @Component({
@@ -33,9 +34,18 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
   isMobile=false;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  public searchForm: FormGroup;
 
-  constructor(private router: Router, private dataStorageService: DataStorageService,
-              private adaptService: AdaptService,private breakpointObserver: BreakpointObserver) {
+  constructor(private router: Router,
+              private dataStorageService: DataStorageService,
+              private adaptService: AdaptService,
+              private breakpointObserver: BreakpointObserver,
+              private fb: FormBuilder) {
+    this.searchForm = this.fb.group({participantId: new FormControl('', [
+      ]), firstname: new FormControl('', [
+      ]), lastname: new FormControl('', [
+      ]), dob: new FormControl('', [
+      ])});
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       if(result.matches ){
         this.isMobile=true;
@@ -113,7 +123,40 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
   }
 
   search() {
+    this.tableValues = this.tableValues.filter(this.filterObj);
+  }
 
+  filterObj(element, index, array) {
+    let flag: boolean ;
+    if(this.searchForm.value.participantId != ''){
+      if(element.participantId == this.searchForm.value.participantId) {
+        flag = true;
+      }else {
+        flag = false;
+      }
+    }
+    if(this.searchForm.value.firstname != ''){
+      if(element.firstName == this.searchForm.value.firstname){
+        flag = true;
+      }else {
+        flag = false;
+      }
+    }
+    if(this.searchForm.value.lastname != ''){
+      if(element.lastName == this.searchForm.value.lastname){
+        flag = true;
+      }else {
+        flag = false;
+      }
+    }
+    if(this.searchForm.value.dob != ''){
+      if(element.dob == this.searchForm.value.dob){
+        flag = true;
+      }else {
+        flag = false;
+      }
+    }
+    return flag;
   }
 
   public onTab(participantObj: any) {

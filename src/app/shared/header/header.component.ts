@@ -62,10 +62,14 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  logout(){
+  logout():void{
     this.authService.logout();
     this.loggedIn = false;
     this.router.navigate(['/']);
+  }
+
+  toggle():void{
+
   }
 
 }

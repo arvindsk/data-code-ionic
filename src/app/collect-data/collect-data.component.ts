@@ -24,7 +24,7 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
-  public baseLine: any[];
+  public isFiltered: boolean;
   public columnHeader: any[];
   public tableValues: Participant[];
   dataSource = new MatTableDataSource<Participant>([]);
@@ -102,10 +102,18 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
 
     ];*/
 
-    this.loadParticipants();
+    this.loadParticipants("init");
+    this.isFiltered = false;
   }
 
-  loadParticipants() {
+  loadParticipants(source:string) {
+    if(source === 'clear'){
+      if(this.isFiltered){
+        this.isFiltered = false;
+      }else{
+        return;
+      }
+    }
     this.adaptService.getParticipants().subscribe((data: Participant[]) => {
       if (data) {
         this.tableValues = data;
@@ -156,6 +164,7 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
       return flag;
     }, this);
     this.dataSource.data = this.tableValues;
+    this.isFiltered = true;
   }
   
   public onTab(participantObj: any) {

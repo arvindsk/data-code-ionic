@@ -6,6 +6,7 @@ import {AdaptService} from "../services/adapt.service";
 import {LoginRequest} from "../model/LoginRequest";
 import {LoginResponse} from "../model/LoginResponse";
 import {EmitService} from "../services/emit.service";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
                private router: Router,
                private adaptService: AdaptService,
                private fb: FormBuilder,
-               private _emitSvc : EmitService) {
+               private _emitSvc : EmitService,
+               private authService : AuthService ) {
     this.signInForm = this.fb.group({
       username: new FormControl('', [ Validators.required,
         Validators.pattern(/.+@.+\..+/), // any char, then the @, then any char, then ., then any char
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.signInForm.reset();
   }
 
   postData() {
@@ -42,15 +45,20 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if(this.signInForm.value.username === '' || this.signInForm.value.password === ''){
-      this.errorMessage = "Please enter username and password";
+      this.errorMessage = "!!Please enter Username and Password!!";
     }else{const loginRequest: LoginRequest = new LoginRequest(this.signInForm.value.username, this.signInForm.value.password, this.site);
+      if(this.authService.isAuthenticated()){
+        return;
+      }
       this.adaptService.login(loginRequest).subscribe((data: LoginResponse) => {
         if (data.status === 'success') {
           this.name = data.name;
           this.postData();
+          this.authService.login(loginRequest.emailId, data.name, loginRequest.site);
+          this.signInForm.reset();
           this.router.navigate(['adapt/home']);
         }else{
-          this.errorMessage = "Username and Password mismatch";
+          this.errorMessage = "!!Username and Password mismatch!!";
         }
       });
     }

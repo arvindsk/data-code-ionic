@@ -4,6 +4,7 @@ import {Table} from "primeng/table";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginComponent} from "../../login/login.component";
 import {EmitService} from "../../services/emit.service";
+import {AuthService} from "../../services/auth.service";
 
 
 @Component({
@@ -24,13 +25,20 @@ export class HeaderComponent implements OnInit {
 
   constructor(  private route: ActivatedRoute,
                 private router: Router,
-                private emitSvc : EmitService) {
+                private emitSvc : EmitService,
+                private authService : AuthService) {
      }
 
   ngOnInit(): void {
     this.fname = '';
+    this.site = '';
     this.loggedIn = false;
     this.sub = this.emitSvc.subscribeToServiceEmitter ( this, this.onEmittedEvent );
+    if(this.authService.isAuthenticated()){
+      this.loggedIn = true;
+      this.fname = localStorage.getItem('fname');
+      this.site = localStorage.getItem('site');
+    }
   }
 
   onEmittedEvent ( obj, data ) {
@@ -52,6 +60,12 @@ export class HeaderComponent implements OnInit {
       this.mainmenu = "collect-data";
       void this.router.navigate(['adapt/collect-data']);
     }
+  }
+
+  logout(){
+    this.authService.logout();
+    this.loggedIn = false;
+    this.router.navigate(['/']);
   }
 
 }

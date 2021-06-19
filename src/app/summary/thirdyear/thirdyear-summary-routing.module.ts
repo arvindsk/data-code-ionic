@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ThirdyearSummaryComponent } from './thirdyear-summary.component';
+import {DirectAccessGuard} from "../../services/direct-access.guard";
 
 const routes: Routes = [
   {
     path: '',
-    component: ThirdyearSummaryComponent
+    component: ThirdyearSummaryComponent,
+    canActivate: [DirectAccessGuard]
   }
 ];
 

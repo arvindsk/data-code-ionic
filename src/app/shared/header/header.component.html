@@ -10,9 +10,8 @@
           </div>
           <div *ngIf="loggedIn" class="alignright">
             <p>
-            Welcome <span>{{fname}}</span>
+              Hi <span>{{fname}}</span> <span> ({{site}})</span> <span class="icon"><ion-icon  name="log-out-outline" (click)="logout()"></ion-icon></span>
             </p>
-            <p>Site : {{site}}</p>
           </div>
 
       </ion-title>

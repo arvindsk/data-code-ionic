@@ -37,15 +37,26 @@
 
 .aligncenter {
   text-align:center;
-  font-size: 2.5em;
   padding-top: 200px;
+}
+
+.p1{
+  font-size: 1.5em;
+}
+
+.p2{
+  font-size: 0.75em;
+}
+
+.p3{
+  font-size: 2.5em;
 }
 
 .errorcenter {
   text-align:center;
-  font-size: 1.5em;
+  font-size: 1em;
   color: red;
-  padding-top: 50px;
+  padding-top: 15px;
   padding-bottom: 20px;
 
 }

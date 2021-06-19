@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ParticipantSummaryComponent } from './participant-summary.component';
+import {DirectAccessGuard} from "../services/direct-access.guard";
 
 const routes: Routes = [
   {
@@ -40,7 +41,7 @@ const routes: Routes = [
       redirectTo: '/adapt/participant/baseline',
       pathMatch: 'full'
     }
-    ]
+    ], canActivate: [DirectAccessGuard]
   },
   {
     path: '',

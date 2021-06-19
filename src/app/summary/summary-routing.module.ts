@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SummaryComponent } from './summary.component';
+import {DirectAccessGuard} from "../services/direct-access.guard";
 
 const routes: Routes = [
   {
@@ -40,7 +41,7 @@ const routes: Routes = [
       redirectTo: '/adapt/summary/baseline',
       pathMatch: 'full'
     }
-    ]
+    ], canActivate: [DirectAccessGuard]
   },
   {
     path: '',

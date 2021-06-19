@@ -27,6 +27,7 @@ export class ThirdyearParticipantComponent implements OnInit {
   @ViewChild('dt') table: Table;
   userId = 'Test';
   public headerName;
+  public headerId;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -58,9 +59,9 @@ export class ThirdyearParticipantComponent implements OnInit {
 
   loadParticipantStudyList() {
     this.adaptService.loadParticipantStudyList(this.participant).subscribe((data: ParticipantStudy[]) => {
-      console.log(data);
       if (data) {
         this.headerName=this.participant.firstName;
+        this.headerId=this.participant.participantId;
         this.tableValues = data;
       }
     });

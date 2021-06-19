@@ -17,6 +17,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {MaterialModule} from './material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {EmitService} from "./services/emit.service";
+import {DirectAccessGuard} from "./services/direct-access.guard";
+import {AuthService} from "./services/auth.service";
 
 
 @NgModule({
@@ -25,7 +27,7 @@ import {EmitService} from "./services/emit.service";
   imports: [BrowserModule, AdaptModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule,
     AccordionModule,IonicModule, ButtonModule, InputModule, TableModule, HeaderModule, FlyoutModule,HttpClientModule,
     MaterialModule, FormsModule, ReactiveFormsModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, EmitService ],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, EmitService, AuthService, DirectAccessGuard ],
   bootstrap: [AppComponent],
   schemas: [ ]
 })

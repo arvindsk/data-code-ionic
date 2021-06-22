@@ -22,10 +22,10 @@
     <ion-toolbar class="toolbar2">
       <ion-title *ngIf="loggedIn">
         <ion-segment [(ngModel)]="mainmenu" (ionChange)="onSegmentChanged($event)">
-          <ion-segment-button value="summary" >
+          <ion-segment-button value="summary" class="ion-segment-button">
             <ion-label class="label1"><b>Summary</b></ion-label>
           </ion-segment-button>
-          <ion-segment-button value="collect-data" >
+          <ion-segment-button value="collect-data" class="ion-segment-button">
             <ion-label class="label1"><b>Collect Data</b></ion-label>
           </ion-segment-button>
         </ion-segment>

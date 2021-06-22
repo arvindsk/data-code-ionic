@@ -38,13 +38,18 @@
 }
 
 .toolbar1 {
-  --background: #35E8FB;
+  --background: #E98074;
   font-size: 2em;
   padding-top: 10px;
 }
 
 .toolbar2 {
-  --background: #35E8FB;
+  --background: #EAE7DC;
   margin-top: 2px;
   padding-top: 10px;
 }
+
+.ion-segment-button {
+  --color-checked: #E98074;
+}
+

@@ -7,6 +7,8 @@ import {ButtonModule} from "../shared/button/button.module";
 import {HeaderModule} from "../shared/header/header.module";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {TableModule} from "primeng";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -17,9 +19,10 @@ import {TableModule} from "primeng";
     IonicModule,
     ButtonModule,
     HeaderModule,
-
     NgbModule,
-    TableModule
+    TableModule,
+    FontAwesomeModule,
+    MatIconModule
   ]
 })
 export class QuestionnaireModule {

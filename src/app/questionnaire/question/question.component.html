@@ -7,9 +7,14 @@
   <br />
   Go to page directly without validation: <select id="pageSelector" onchange="survey.currentPageNo = this.value"></select>
   <hr/>-->
+<ion-content>
+  <fa-icon [icon]="faInfoCircle"></fa-icon>
+
+  <br>
   <div class="survey-container contentcontainer codecontainer aligncenter">
   <div id="surveyElement"></div>
   </div>
+</ion-content>
 
 
 <ng-template #modalContent let-modal>

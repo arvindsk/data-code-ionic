@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import 'inputmask/dist/inputmask/phone-codes/phone';
 import {init as initCustomWidget} from './customwidget';
-
+import $ from "jquery";
 import * as Survey from 'survey-angular';
 import {SurveyModel} from 'survey-angular';
 import * as widgets from 'surveyjs-widgets';
+import "easy-autocomplete/dist/easy-autocomplete.css";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'survey-angular/survey.css';
@@ -14,6 +15,7 @@ import {AdaptService} from "../../services/adapt.service";
 import {ParticipantStudy} from "../../model/ParticipantStudy";
 import {Observable} from "rxjs";
 import {DataStorageService} from "../../services/data-storage.service";
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 widgets.bootstrapslider(Survey);
 widgets.prettycheckbox(Survey);
@@ -49,7 +51,7 @@ export class QuestionComponent implements OnInit {
   result: any;
   json: any;
   survey;
-
+  faInfoCircle = faInfoCircle;
 
   storageName = 'survey_patient_history';
   userId = 'Test';
@@ -89,9 +91,9 @@ export class QuestionComponent implements OnInit {
       }
       this.openDesc = options.question.popupdescription;
       // Add a button;
-      const btn = document.createElement('button');
-      btn.className = 'btn btn-info btn-xs';
-      btn.innerHTML = 'More Info';
+      const btn = document.createElement('span');
+      btn.className = 'ques-icon';
+      btn.innerHTML = '<ion-icon size="small" name="information-circle"></ion-icon>';
       btn.onmouseover = () => {
         console.log(options.question.popupdescription);
         this.modal.open(this.modalContent, {ariaLabelledBy: 'modal-basic-title', size: 'sm', centered: true})
@@ -118,6 +120,7 @@ export class QuestionComponent implements OnInit {
       console.log('complete button click triggered' + JSON.stringify(onCompleteResult));
       this.saveSurveyData(onCompleteResult);
     });
+    this.survey.showPreviewBeforeComplete = 'showAnsweredQuestions';
 
     this.loadPreviousData(this.participantStudy).subscribe((prevData: ParticipantStudy) => {
       if (prevData !== null && prevData !== undefined) {

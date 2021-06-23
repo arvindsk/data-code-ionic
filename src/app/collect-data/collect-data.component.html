@@ -3,10 +3,10 @@
 
   <div class="container-flyout col-md-2">
     <span class="icon">
-      <ion-icon name="search" (click)="flyout = true"></ion-icon>
+        <ion-icon name="search" matTooltip="Search By Filter" (click)="flyout = true"></ion-icon>
     </span>
     <span class="iconpadded">
-      <ion-icon name="trash-sharp" (click)="loadParticipants('clear')"></ion-icon>
+        <ion-icon name="nuclear-outline" matTooltip="Clear Filter" (click)="loadParticipants('clear')" positionV="bottom"></ion-icon>
     </span>
       <app-flyout [show]="flyout" [position]="'right'" (hideFlyout)="flyout = false">
         <div class="grid">

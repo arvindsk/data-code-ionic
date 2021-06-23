@@ -34,12 +34,19 @@
   flex-direction: column;
   width: 100%;
   padding-top: 25px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .mat-table {
   overflow: auto;
   max-height: 500px;
 
+}
+
+.mat-header-cell{
+  font-size: 1.25em;
+  padding-top: 10px;
 }
 
 .mobile-label {

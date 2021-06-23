@@ -36,9 +36,10 @@
 }
 
 .sup{
-  //position: absolute;
   font-size: 30%;
-  //bottom: 300px;
+  vertical-align: top;
+  position: relative;
+  top: 0.25em;
 }
 
 .p1{

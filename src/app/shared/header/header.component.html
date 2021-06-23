@@ -4,7 +4,7 @@
       <ion-title>
 
           <div class="alignleft">
-          <img src="/assets/Logo-DIVERSE-VCID.jpg" alt="Italian Trulli" width="50" height="50" >
+            <a href="/adapt/home"><img src="/assets/Logo-DIVERSE-VCID.jpg" alt="Italian Trulli" width="50" height="50" ></a>
 
             ADAPT<sup class="sup">TM</sup>
           </div>
@@ -21,11 +21,11 @@
     </ion-toolbar>
     <ion-toolbar class="toolbar2">
       <ion-title *ngIf="loggedIn">
-        <ion-segment [(ngModel)]="mainmenu" (ionChange)="onSegmentChanged($event)">
+        <ion-segment [(ngModel)]="mainmenu" (ionChange)="onSegmentChanged($event)" >
           <ion-segment-button value="summary" class="ion-segment-button">
             <ion-label class="label1"><b>Summary</b></ion-label>
           </ion-segment-button>
-          <ion-segment-button value="collect-data" class="ion-segment-button">
+          <ion-segment-button value="collect-data" class="ion-segment-button" (click)="onSegmentClicked()">
             <ion-label class="label1"><b>Collect Data</b></ion-label>
           </ion-segment-button>
         </ion-segment>

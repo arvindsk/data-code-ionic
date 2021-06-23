@@ -10,6 +10,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {SummaryMap} from "../../model/SummaryMap";
+import {BreakpointObserver} from "@angular/cdk/layout";
 
 
 
@@ -30,6 +31,7 @@ export class BaselineSummaryComponent implements OnInit {
   @ViewChild('dt') table: Table;
   public tableValues;
   public headerCount;
+  isMobile=false;
   dataSource = new MatTableDataSource<SummaryMap>([]);
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -42,16 +44,26 @@ export class BaselineSummaryComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-    private dataStorageService: DataStorageService,
-    private adaptService: AdaptService) { }
+              private dataStorageService: DataStorageService,
+              private adaptService: AdaptService,
+              private breakpointObserver: BreakpointObserver,) {
+    breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+      if(result.matches ){
+        this.isMobile=true;
+      }
+      this.displayedColumns = result.matches ?
+        ['studyName', 'participantStudyCount'] :
+        ['studyName', 'participantStudyCount'];
+    });
+  }
 
   ngOnInit(): void {
 
-   /* this.columnHeader=[
+    this.columnHeader=[
       {field:'questionnaire', header :'Questionnaire'},
       {field:'noOfParticipants', header :'Number Of Participants'},
-    ]
-    this.tableValues=[
+    ];
+    /*this.tableValues=[
       {field:'vascularRisk', header:'Vascular Risk', value:'43'},
       {field:'cardioVascularRisk', header:'Cardio Vascular Risk', value:'34'},
       {field:'memory', header:'Memory', value:'24'},

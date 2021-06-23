@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DataStorageService} from "../../services/data-storage.service";
 import {AdaptService} from "../../services/adapt.service";
 import {Summary} from "../../model/Summary";
+import {BreakpointObserver} from "@angular/cdk/layout";
 
 
 
@@ -29,6 +30,7 @@ export class ThirdyearSummaryComponent implements OnInit {
   public tableValues : any[];
   @ViewChild('dt') table: Table;
   public headerCount;
+  isMobile=false;
   dataSource = new MatTableDataSource<SummaryMap>([]);
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -42,15 +44,25 @@ export class ThirdyearSummaryComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private dataStorageService: DataStorageService,
-              private adaptService: AdaptService) { }
+              private adaptService: AdaptService,
+              private breakpointObserver: BreakpointObserver,) {
+    breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+      if(result.matches ){
+        this.isMobile=true;
+      }
+      this.displayedColumns = result.matches ?
+        ['studyName', 'participantStudyCount'] :
+        ['studyName', 'participantStudyCount'];
+    });
+  }
 
   ngOnInit(): void {
 
-    /* this.columnHeader=[
-       {field:'questionnaire', header :'Questionnaire'},
-       {field:'noOfParticipants', header :'Number Of Participants'},
-     ]
-     this.tableValues=[
+    this.columnHeader=[
+      {field:'questionnaire', header :'Questionnaire'},
+      {field:'noOfParticipants', header :'Number Of Participants'},
+    ];
+     /*this.tableValues=[
        {field:'vascularRisk', header:'Vascular Risk', value:'43'},
        {field:'cardioVascularRisk', header:'Cardio Vascular Risk', value:'34'},
        {field:'memory', header:'Memory', value:'24'},

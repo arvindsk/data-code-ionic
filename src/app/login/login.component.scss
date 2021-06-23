@@ -73,9 +73,10 @@
 }
 
 .sup{
-  //position: absolute;
   font-size: 30%;
-  //bottom: 3em;
+  vertical-align: top;
+  position: relative;
+  top: 0.25em;
 }
 
 .header {

@@ -4,10 +4,12 @@
   padding-top: 1px;
   padding-bottom: 10px;
 }
+
 .sup{
-  position: absolute;
   font-size: 30%;
-  top: 2em;
+  vertical-align: top;
+  position: relative;
+  top: 1.25em;
 }
 
 .icon{

@@ -29,7 +29,7 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
   public tableValues: Participant[];
   dataSource = new MatTableDataSource<Participant>([]);
   @ViewChild('dt') table: Table;
-  displayedColumns: string[] = ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'questionnaireCompleted'];
+  displayedColumns: string[] = ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'completedDate'];
   public flyout = false;
   isMobile=false;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -51,8 +51,8 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
         this.isMobile=true;
       }
       this.displayedColumns = result.matches ?
-        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'questionnaireCompleted'] :
-        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'questionnaireCompleted'];
+        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'completedDate'] :
+        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'timeline', 'completedDate'];
     });
   }
 
@@ -69,7 +69,7 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
       {field: 'dob', header: 'DOB'},
       {field: 'registeredDate', header: 'Registered Date'},
       {field: 'timeline', header: 'Timeline'},
-      {field: 'questionnaireCompleted', header: 'Questionnaire Completed'},
+      {field: 'completedDate', header: 'Completed Date'},
     ];
     /*this.tableValues = [
       {

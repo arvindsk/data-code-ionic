@@ -62,6 +62,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  onSegmentClicked(){
+    this.mainmenu = "collect-data";
+    void this.router.navigate(['adapt/collect-data']);
+  }
+
   logout():void{
     this.authService.logout();
     this.loggedIn = false;

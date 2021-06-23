@@ -5,5 +5,5 @@ export class Participant {
   dob: string;
   registeredDate: Date;
   timeline: string;
-  questionnaireCompleted: string;
+  completedDate: Date;
 }

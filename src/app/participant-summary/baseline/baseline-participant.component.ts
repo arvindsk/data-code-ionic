@@ -6,6 +6,7 @@ import {DataStorageService} from "../../services/data-storage.service";
 import {Participant} from "../../model/Participant";
 import {AdaptService} from "../../services/adapt.service";
 import {ParticipantStudy} from "../../model/ParticipantStudy";
+import {BreakpointObserver} from "@angular/cdk/layout";
 
 
 @Component({
@@ -29,12 +30,21 @@ export class BaselineParticipantComponent implements OnInit {
   userId = "Test";
   public headerName;
   public headerId;
+  isMobile=false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private dataStorageService: DataStorageService,
+              private breakpointObserver: BreakpointObserver,
               private adaptService: AdaptService) {
-   // this.participant = this.dataStorageService.storage.participant;
+    breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+      if(result.matches ){
+        this.isMobile=true;
+      }
+      this.displayedColumns = result.matches ?
+        ['studyName', 'status', 'start', 'completedDate'] :
+        ['studyName', 'status', 'start', 'completedDate'];
+    });
   }
 
   ngOnInit(): void {
@@ -44,7 +54,7 @@ export class BaselineParticipantComponent implements OnInit {
     this.columnHeader = [
       {field: 'studyName', header: 'Questionnaire'},
       {field: 'status', header: 'Status'},
-      {field: 'start', header: 'View/Begin'},
+      {field: 'start', header: 'Begin/Continue/View'},
       {field: 'completedDate', header: 'Completed Date'},
     ];
     this.loadParticipantStudyList();

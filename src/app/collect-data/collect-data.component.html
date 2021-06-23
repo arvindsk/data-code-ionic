@@ -49,7 +49,7 @@
       </ng-template>
       </p-table>-->
   <div class="example-container">
-    <mat-card-title>List of Participant Summary</mat-card-title>
+    <mat-card-title class="iconpadded">List of Participant Summary</mat-card-title>
     <p class="alignpage"></p>
   <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
 
@@ -92,10 +92,10 @@
       <mat-cell *matCellDef="let element">
         <span class="mobile-label">Timeline:</span>{{element.timeline}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="questionnaireCompleted">
-      <mat-header-cell mat-sort-header *matHeaderCellDef> Questionnaire Completed </mat-header-cell>
+    <ng-container matColumnDef="completedDate">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Completed Date </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span class="mobile-label">Questionnaire Completed:</span>{{element.questionnaireCompleted | date}} </mat-cell>
+          <span class="mobile-label">Completed Date:</span>{{element.completedDate | date}} </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

@@ -2,8 +2,11 @@
   text-align:center;
   padding-top: 200px;
   padding-bottom: 20px;
-  padding-left: 350px;
-  padding-right: 350px;
+  padding-left: 75px;
+  padding-right: 75px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .mat-header-cell{

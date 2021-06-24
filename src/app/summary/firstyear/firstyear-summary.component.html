@@ -1,7 +1,9 @@
 <ion-content>
 <div class="aligncenter">
-  <h1>Summary of Questionnaires Completed</h1>
-  <h3>Total number of participants registered - {{headerCount}}</h3>
+  <mat-card-title-group>
+    <mat-card-title><h1>Summary of Questionnaires Completed</h1></mat-card-title>
+    <mat-card-title><h3>Total number of participants registered - {{headerCount}}</h3></mat-card-title>
+  </mat-card-title-group>
 
   <mat-table mat-table [dataSource]="tableValues" [class.isMobile]="isMobile" class="mat-elevation-z8">
     <ng-container matColumnDef="studyName">

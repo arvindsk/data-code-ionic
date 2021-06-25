@@ -34,7 +34,10 @@
       <ng-container matColumnDef="status">
         <mat-header-cell mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
-          <span class="mobile-label">Status:</span>{{element.status}} </mat-cell>
+          <span class="mobile-label">Status:</span>
+          <span *ngIf="element.activeTimeline!='thirdyear'">{{element.status}}</span>
+          <span *ngIf="element.activeTimeline=='thirdyear'">Not Attempted</span>
+        </mat-cell>
       </ng-container>
 
       <!-- Weight Column -->

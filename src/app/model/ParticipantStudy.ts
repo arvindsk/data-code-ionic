@@ -8,4 +8,5 @@ export class ParticipantStudy {
   studyId: number;
   completedDate: Date;
   enabled: boolean;
+  activeTimeline: string;
 }

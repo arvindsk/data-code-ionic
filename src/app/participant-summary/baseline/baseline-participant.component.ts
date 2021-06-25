@@ -49,7 +49,6 @@ export class BaselineParticipantComponent implements OnInit {
 
   ngOnInit(): void {
     this.participant = this.dataStorageService.storage.participant;
-    console.log(this.participant);
 
     this.columnHeader = [
       {field: 'studyName', header: 'Questionnaire'},

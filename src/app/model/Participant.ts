@@ -6,5 +6,4 @@ export class Participant {
   registeredDate: Date;
   timeline: string;
   completedDate: Date;
-  activeTimeline: string;
 }

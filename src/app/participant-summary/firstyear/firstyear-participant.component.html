@@ -42,9 +42,10 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef> Begin/Continue/View </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
           <span class="mobile-label">Begin/Continue/View:</span>
-          <span *ngIf="element.status=='Not Started'"><a class="nav-link" [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Begin</a></span>
-          <span *ngIf="element.status=='running'"><a class="nav-link" [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Continue</a></span>
-          <span *ngIf="element.status=='completed'"><a class="nav-link" [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">View</a></span>
+          <span *ngIf="element.status=='Not Started'&& element.activeTimeline=='firstyear'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Begin</a></span>
+          <span *ngIf="element.status=='In Progress' && element.activeTimeline=='firstyear'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Continue</a></span>
+          <span *ngIf="element.status=='Completed'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">View</a></span>
+          <span *ngIf="element.status!='Completed' && element.activeTimeline!='firstyear'">Begin</span>
         </mat-cell>
       </ng-container>
 

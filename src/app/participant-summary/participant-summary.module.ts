@@ -17,7 +17,7 @@ import {FirstyearParticipantRoutingModule} from "./firstyear/firstyear-participa
 import {ThirdyearParticipantModule} from "./thirdyear/thirdyear-participant.module";
 
 @NgModule({
-  "imports": [
+  imports: [
     CommonModule,
     FormsModule,
     IonicModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation, Input, Injector, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation, Input, Injector, Output, EventEmitter} from '@angular/core';
 import {MessageService} from 'primeng/api';
 import {Table} from "primeng/table";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -9,36 +9,35 @@ import {ParticipantStudy} from "../../model/ParticipantStudy";
 import {BreakpointObserver} from "@angular/cdk/layout";
 
 
-
 @Component({
   selector: 'app-firstyear-participant',
   templateUrl: './firstyear-participant.component.html',
   styleUrls: ['./firstyear-participant.component.scss'],
-  providers:[MessageService],
+  providers: [MessageService],
 })
 export class FirstyearParticipantComponent implements OnInit {
-  displayedColumns: string[] = ['studyName', 'status','view', 'completedDate'];
+  displayedColumns: string[] = ['studyName', 'status', 'view', 'completedDate'];
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
   public baseLine: any[];
   public columnHeader: any[];
-  public tableValues: any[];
+  public tableValues: ParticipantStudy[];
   public participant: Participant;
   @ViewChild('dt') table: Table;
   userId = "Test";
   public headerName;
   public headerId;
-  isMobile=false;
+  isMobile = false;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private dataStorageService: DataStorageService,
               private breakpointObserver: BreakpointObserver,
               private adaptService: AdaptService) {
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
-      if(result.matches ){
-        this.isMobile=true;
+      if (result.matches) {
+        this.isMobile = true;
       }
       this.displayedColumns = result.matches ?
         ['studyName', 'status', 'start', 'completedDate'] :
@@ -47,15 +46,34 @@ export class FirstyearParticipantComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.participant = this.dataStorageService.storage.participant;
 
     this.columnHeader = [
       {field: 'studyName', header: 'Questionnaire'},
       {field: 'status', header: 'Status'},
-      {field: 'start', header: 'View/Begin'},
+      {field: 'start', header: 'Begin/Continue/View'},
       {field: 'completedDate', header: 'Completed Date'},
     ];
-    this.loadParticipantStudyList();
+
+    // console.log(JSON.stringify(this.participant));
+    this.activatedRoute.queryParams.subscribe(params => {
+      const participantId = params.participantId;
+      if (undefined !== participantId && null !== participantId) {
+        this.participant = new Participant();
+        this.participant.participantId = participantId;
+        this.participant.timeline = 'firstyear';
+        this.loadParticipantStudyList();
+      } else {
+        if (undefined !== this.dataStorageService.storage) {
+          this.participant = this.dataStorageService.storage.participant;
+        }
+        if (undefined !== this.participant) {
+          this.participant.timeline = 'firstyear';
+          this.loadParticipantStudyList();
+        }
+      }
+    });
+
+
     /*    this.tableValues = [
           {field: 'vascularRisk', header: 'Vascular Risk', value: 'Not Started'},
           {field: 'cardioVascularRisk', header: 'Cardio Vascular Risk', value: 'Not Started'},
@@ -67,10 +85,15 @@ export class FirstyearParticipantComponent implements OnInit {
   }
 
   loadParticipantStudyList() {
+
+    this.dataStorageService.storage = {
+      participant: this.participant
+    };
+
     this.adaptService.loadParticipantStudyList(this.participant).subscribe((data: ParticipantStudy[]) => {
       if (data) {
-        this.headerName=this.participant.firstName;
-        this.headerId=this.participant.participantId;
+        this.headerName = data[0].firstName;
+        this.headerId = this.participant.participantId;
         this.tableValues = data;
       }
     });

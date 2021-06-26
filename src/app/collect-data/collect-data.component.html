@@ -57,7 +57,7 @@
       <mat-header-cell mat-sort-header *matHeaderCellDef>Participant ID </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <span class="mobile-label">Participant ID:</span>
-        <a class="nav-link" [routerLink]="['/adapt/participant']" (click)="onTab(element)">{{element.participantId}}</a> </mat-cell>
+        <a class="nav-link" [routerLink]="['/adapt/participant/baseline']" [queryParams]="{participantId: element.participantId}" (click)="onTab(element)">{{element.participantId}}</a> </mat-cell>
     </ng-container>
 
 

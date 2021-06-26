@@ -9,4 +9,5 @@ export class ParticipantStudy {
   completedDate: Date;
   enabled: boolean;
   activeTimeline: string;
+  firstName: string;
 }

@@ -9,7 +9,7 @@ import "easy-autocomplete/dist/easy-autocomplete.css";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'survey-angular/survey.css';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AdaptService} from "../../services/adapt.service";
 import {ParticipantStudy} from "../../model/ParticipantStudy";
@@ -57,6 +57,7 @@ export class QuestionComponent implements OnInit {
   userId = 'Test';
   openDesc;
   closeResult = '';
+  navigationUrl='';
   participantStudy: ParticipantStudy;
 
 
@@ -72,7 +73,7 @@ export class QuestionComponent implements OnInit {
     this.participantStudy=new ParticipantStudy();
     widgets.inputmask(Survey);
     this.participantStudy = this.dataStorageService.storage.participantStudy;
-
+    this.navigationUrl='/adapt/participant/'+this.participantStudy.timeline+'?participantId='+this.participantStudy.participantId;
     this.adaptService.getQuestionnaire(this.participantStudy.studyName).subscribe((data: any) => {
         this.json = data;
         this.loadQuestionnaire();
@@ -120,7 +121,11 @@ export class QuestionComponent implements OnInit {
       console.log('complete button click triggered' + JSON.stringify(onCompleteResult));
       this.saveSurveyData(onCompleteResult);
     });
-    this.survey.showPreviewBeforeComplete = 'showAnsweredQuestions';
+    this.survey.showPreviewBeforeComplete = 'showAllQuestions';
+    this.survey.navigateToUrl=this.navigationUrl;
+    if ('Completed' === this.participantStudy.status) {
+      this.survey.mode = 'display';
+    }
 
     this.loadPreviousData(this.participantStudy).subscribe((prevData: ParticipantStudy) => {
       if (prevData !== null && prevData !== undefined) {
@@ -195,6 +200,15 @@ export class QuestionComponent implements OnInit {
 
   close() {
     this.closeModal.emit(true);
+  }
+
+
+  backButtonClick() {
+    const navigationExtras: NavigationExtras = {
+      queryParams: { participantId: this.participantStudy.participantId }
+    };
+    const url='adapt/participant/'+this.participantStudy.timeline;
+    void this.router.navigate([url],navigationExtras);
   }
 
   private getDismissReason(reason: any): string {

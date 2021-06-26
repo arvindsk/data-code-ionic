@@ -1,4 +1,3 @@
-
 <!--  External navigation:
   <span id="surveyProgress"></span>
   <a id="surveyPrev" href="#" onclick="this.survey.prevPage();">Prev</a>
@@ -7,14 +6,22 @@
   <br />
   Go to page directly without validation: <select id="pageSelector" onchange="survey.currentPageNo = this.value"></select>
   <hr/>-->
-<ion-content>
-  <fa-icon [icon]="faInfoCircle"></fa-icon>
 
+<ion-content>
   <br>
   <div class="survey-container contentcontainer codecontainer aligncenter">
   <div id="surveyElement"></div>
   </div>
 </ion-content>
+<ion-footer>
+  <ion-toolbar class="footer-toolbar">
+    <ion-buttons slot="end">
+      <ion-back-button class="back-button-style" (click)="backButtonClick()"
+        [text]="'Back to Summary'"
+        defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
 
 
 <ng-template #modalContent let-modal>

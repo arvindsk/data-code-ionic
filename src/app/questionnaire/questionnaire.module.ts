@@ -9,21 +9,23 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {TableModule} from "primeng";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
   declarations: [QuestionComponent],
-  imports: [
-    CommonModule,
-    QuestionnaireRoutingModule,
-    IonicModule,
-    ButtonModule,
-    HeaderModule,
-    NgbModule,
-    TableModule,
-    FontAwesomeModule,
-    MatIconModule
-  ]
+    imports: [
+        CommonModule,
+        QuestionnaireRoutingModule,
+        IonicModule,
+        ButtonModule,
+        HeaderModule,
+        NgbModule,
+        TableModule,
+        FontAwesomeModule,
+        MatIconModule,
+        MatButtonModule
+    ]
 })
 export class QuestionnaireModule {
 }

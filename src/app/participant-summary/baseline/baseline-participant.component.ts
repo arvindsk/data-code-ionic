@@ -17,7 +17,7 @@ import {BreakpointObserver} from "@angular/cdk/layout";
 })
 export class BaselineParticipantComponent implements OnInit {
 
-  displayedColumns: string[] = ['studyName', 'status','view', 'completedDate'];
+  displayedColumns: string[] = ['studyName', 'status', 'view', 'completedDate'];
 
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
@@ -30,16 +30,16 @@ export class BaselineParticipantComponent implements OnInit {
   userId = "Test";
   public headerName;
   public headerId;
-  isMobile=false;
+  isMobile = false;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private dataStorageService: DataStorageService,
               private breakpointObserver: BreakpointObserver,
               private adaptService: AdaptService) {
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
-      if(result.matches ){
-        this.isMobile=true;
+      if (result.matches) {
+        this.isMobile = true;
       }
       this.displayedColumns = result.matches ?
         ['studyName', 'status', 'start', 'completedDate'] :
@@ -48,7 +48,9 @@ export class BaselineParticipantComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.participant = this.dataStorageService.storage.participant;
+    if (undefined !== this.dataStorageService.storage) {
+      this.participant = this.dataStorageService.storage.participant;
+    }
 
     this.columnHeader = [
       {field: 'studyName', header: 'Questionnaire'},
@@ -56,7 +58,24 @@ export class BaselineParticipantComponent implements OnInit {
       {field: 'start', header: 'Begin/Continue/View'},
       {field: 'completedDate', header: 'Completed Date'},
     ];
-    this.loadParticipantStudyList();
+
+    // console.log(JSON.stringify(this.participant));
+    this.activatedRoute.queryParams.subscribe(params => {
+      const participantId = params.participantId;
+      if (undefined !== participantId && null !== participantId) {
+        this.participant = new Participant();
+        this.participant.participantId = participantId;
+        this.participant.timeline = 'baseline';
+        this.loadParticipantStudyList();
+      } else {
+        if (undefined !== this.participant) {
+          this.participant.timeline = 'baseline';
+          this.loadParticipantStudyList();
+        }
+      }
+    });
+
+
     /*    this.tableValues = [
           {field: 'vascularRisk', header: 'Vascular Risk', value: 'Not Started'},
           {field: 'cardioVascularRisk', header: 'Cardio Vascular Risk', value: 'Not Started'},
@@ -68,10 +87,15 @@ export class BaselineParticipantComponent implements OnInit {
   }
 
   loadParticipantStudyList() {
+
+    this.dataStorageService.storage = {
+      participant: this.participant
+    };
+
     this.adaptService.loadParticipantStudyList(this.participant).subscribe((data: ParticipantStudy[]) => {
       if (data) {
-        this.headerName=this.participant.firstName;
-        this.headerId=this.participant.participantId;
+        this.headerName = data[0].firstName;
+        this.headerId = this.participant.participantId;
         this.tableValues = data;
       }
     });

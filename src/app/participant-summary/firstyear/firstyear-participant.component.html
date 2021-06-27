@@ -27,7 +27,8 @@
       <ng-container matColumnDef="studyName">
         <mat-header-cell mat-header-cell *matHeaderCellDef> Questionnaire </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
-          <span class="mobile-label">Questionnaire:</span>{{element.studyName}} </mat-cell>
+          <span class="mobile-label">Questionnaire:</span>{{element.studyName}}
+        <ion-icon *ngIf="element.studyName==='Physical Activity Screening'" size="small" name="information-circle" (click)="openModel()"></ion-icon></mat-cell>
       </ng-container>
 
       <!-- Name Column -->
@@ -64,4 +65,18 @@
     </mat-table>
 
   </div>
+  <ng-template #modalContent let-modal>
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-basic-title">Physical activity  instructions</h3>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    </div>
+    <div class="modal-body" style="font-size: small">
+      <div>
+        <img src="assets/exercise_intro.JPG">
+      </div>
+    </div>
+  </ng-template>
 </ion-content>

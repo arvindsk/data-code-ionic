@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation, Input, Injector, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {MessageService} from 'primeng/api';
 import {Table} from "primeng/table";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -7,6 +7,7 @@ import {DataStorageService} from "../../services/data-storage.service";
 import {AdaptService} from "../../services/adapt.service";
 import {ParticipantStudy} from "../../model/ParticipantStudy";
 import {BreakpointObserver} from "@angular/cdk/layout";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 
 @Component({
@@ -20,6 +21,9 @@ export class FirstyearParticipantComponent implements OnInit {
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
+  @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  closeResult = '';
   public baseLine: any[];
   public columnHeader: any[];
   public tableValues: ParticipantStudy[];
@@ -34,7 +38,8 @@ export class FirstyearParticipantComponent implements OnInit {
               private router: Router,
               private dataStorageService: DataStorageService,
               private breakpointObserver: BreakpointObserver,
-              private adaptService: AdaptService) {
+              private adaptService: AdaptService,
+              private modal: NgbModal) {
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       if (result.matches) {
         this.isMobile = true;
@@ -125,6 +130,26 @@ export class FirstyearParticipantComponent implements OnInit {
       participantStudy: data
     };
 
+  }
+
+  openModel() {
+    this.modal.open(this.modalContent, {ariaLabelledBy: 'modal-basic-title', size: 'lg', centered: true})
+      .result
+      .then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }
 

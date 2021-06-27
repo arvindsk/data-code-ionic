@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggle():void{
-
+    document.body.classList.toggle("dark");
   }
 
 }

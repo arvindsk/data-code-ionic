@@ -20,13 +20,18 @@
 }
 
 .toolbar3 {
-  background-color: #EAE7DC;
-  --background-focused: #E98074;
-  --color-selected: #E98074;
+  background-color: #E98074;
+  --background-focused: #EAE7DC;
+  --color-selected: #EAE7DC;
+  --color: #5D001E;
 }
 
 .toolbar2 {
-  --background: #EAE7DC;
+  --background: #E98074;
   margin-top: 2px;
   padding-top: 20px;
+}
+
+ion-icon {
+  pointer-events: none;
 }

@@ -47,6 +47,10 @@ table {
   display: none;
 }
 
+ion-icon {
+  pointer-events: none;
+}
+
 @media(max-width: 600px) {
   .mobile-label {
     width: 120px;

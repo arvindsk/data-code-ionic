@@ -1,7 +1,10 @@
 .toolbar3 {
-  background-color: #EAE7DC;
-  --background-focused: #E98074;
-  --color-selected: #E98074;
+  background-color: #E98074;
+  --background-focused: #EAE7DC;
+  --color-selected: #EAE7DC;
+  --color: #5D001E;
 }
 
-
+ion-icon {
+  pointer-events: none;
+}

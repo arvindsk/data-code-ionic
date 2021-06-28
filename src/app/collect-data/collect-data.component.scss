@@ -29,6 +29,10 @@
   padding-left: 30px;
 }
 
+ion-icon {
+  pointer-events: none;
+}
+
 .example-container {
   display: flex;
   flex-direction: column;

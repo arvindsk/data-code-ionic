@@ -39,6 +39,7 @@ button {
     // Visual States
     // --------------------------------------------
     // Global
+    &.custom-colors,
     &.primary-colors,
     &.primary-blue-colors,
     &.primary-navy-colors,
@@ -59,6 +60,13 @@ button {
         }
     }
 
+  &.custom-colors {
+    background-color: #5D001E;
+
+    &:hover {
+      background-color: #E98074;
+    }
+  }
     // Red big block
     &.primary-colors {
         background-color: $primary-color;

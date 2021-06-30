@@ -28,7 +28,11 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef> Questionnaire </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
           <span class="mobile-label">Questionnaire:</span>{{element.studyName}}
-          <ion-icon *ngIf="element.studyName==='Physical Activity Screening'" size="small" name="information-circle" (click)="openModel()"></ion-icon></mat-cell>
+          <mat-icon *ngIf="element.studyName==='Physical Activity Screening'" [inline]="true" (click)="openModel()" matTooltip="Instructions">
+            <ion-icon size="small" name="information-circle">
+            </ion-icon>
+          </mat-icon>
+        </mat-cell>
       </ng-container>
 
       <!-- Name Column -->

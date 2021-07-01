@@ -22,9 +22,9 @@
               <div>Last Name<app-input #appInputElement formControlName="lastname" name="lastname" ></app-input></div>
               <div>Date of Birth<app-input #appInputElement formControlName="dob" name="dob" placeholder="mm-dd"></app-input></div>
               <div></div>
-              <div class="alignleft"> <app-button id="cancel" [visualState]="'primary-navy-colors'" [showArrow]="false"
+              <div class="alignleft"> <app-button id="cancel" [visualState]="'custom-colors'" [showArrow]="false"
                                 (click)="flyout = false;loadParticipants('clear')"><span>Clear</span></app-button></div>
-              <div class="alignright"> <app-button id="participant" [visualState]="'primary-navy-colors'" [showArrow]="false"
+              <div class="alignright"> <app-button id="participant" [visualState]="'custom-colors'" [showArrow]="false"
                                 (click)="flyout = false;search()"><span>Search</span></app-button></div>
             </form>
           </div>

@@ -9,11 +9,11 @@
     </div>
     <div class="errorcenter">{{errorMessage}}</div>
     <div class="divcenter">
-      <form id="signInForm" autocomplete="off" [formGroup]="signInForm" (ngSubmit)="login()">
+      <form id="signInForm" autocomplete="off" [formGroup]="signInForm" (ngSubmit)="login()" (keydown.enter)="login()">
 
           <div><app-input formControlName="username" type="text" id="username" name="username" autofocus="true" placeholder="email*"></app-input></div>
           <div><app-input formControlName="password" type="password" id="password" name="password" hideInput="true" placeholder="password*"></app-input></div>
-          <div><app-button [visualState]="'custom-colors'" (keyup.enter)="login()" (click)="login()">Login</app-button></div>
+          <div><app-button [visualState]="'custom-colors'" (click)="login()">Login</app-button></div>
 
 
       </form>

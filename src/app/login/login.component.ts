@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    if(this.signInForm.value.username === '' || this.signInForm.value.password === ''){
+    if(this.signInForm.value.username===null || this.signInForm.value.password===null){
       this.errorMessage = "!!Please enter Username and Password!!";
     }else{const loginRequest: LoginRequest = new LoginRequest(this.signInForm.value.username, this.signInForm.value.password);
       if(this.authService.isAuthenticated()){

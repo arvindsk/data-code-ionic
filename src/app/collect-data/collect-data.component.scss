@@ -2,6 +2,9 @@
   padding-left: 25px;
   float: right;
   padding-top: 175px;
+  .col-md-2 {
+    flex: none !important;
+  }
 }
 .divcenter {
   padding-top: 200px;
@@ -18,15 +21,28 @@
 }
 
 .alignpage {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .icon {
   font-size: 2em;
 }
-.iconpadded {
+
+.icon2 {
   font-size: 2em;
   padding-left: 30px;
+  padding-right: 30px;
+}
+
+.flyoutwarning{
+  padding-bottom: 30px;
+  color: red;
+  font-size: 1em;
+}
+
+.heading {
+  padding-left: 30px;
+  color: #5D001E;
 }
 
 ion-icon {

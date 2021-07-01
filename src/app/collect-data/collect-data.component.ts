@@ -71,36 +71,6 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
       {field: 'timeline', header: 'Timeline'},
       {field: 'completedDate', header: 'Completed Date'},
     ];
-    /*this.tableValues = [
-      {
-        participantId: '143443',
-        firstName: 'Tony',
-        lastName: 'Stark',
-        dob: '05.03.1998',
-        registeredDate: '03.02.2021',
-        timeline: 'Baseline',
-        questionnaireCompleted: 'Vascular'
-      },
-      {
-        participantId: '363443',
-        firstName: 'Allen',
-        lastName: 'Wilkinson',
-        dob: '05.04.1998',
-        registeredDate: '03.03.2021',
-        timeline: '1st Year',
-        questionnaireCompleted: 'Memory'
-      },
-      {
-        participantId: '723443',
-        firstName: 'Karl',
-        lastName: 'Smith',
-        dob: '05.06.1998',
-        registeredDate: '03.04.2021',
-        timeline: '3rd Year',
-        questionnaireCompleted: 'Diet'
-      },
-
-    ];*/
 
     this.loadParticipants("init");
     this.isFiltered = false;
@@ -113,6 +83,7 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
       }else{
         return;
       }
+      this.searchForm.reset();
     }
     this.adaptService.getParticipants().subscribe((data: Participant[]) => {
       if (data) {

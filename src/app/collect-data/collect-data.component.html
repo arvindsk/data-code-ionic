@@ -7,7 +7,7 @@
         <ion-icon name="search" ></ion-icon>
       </mat-icon>
     </span>
-    <span class="iconpadded">
+    <span class="icon2">
       <mat-icon [inline]="true" (click)="loadParticipants('clear')" matTooltip="Clear Filter">
         <ion-icon name="nuclear-outline" positionV="bottom" ></ion-icon>
     </mat-icon>
@@ -16,13 +16,14 @@
         <div class="grid">
           <div class="divcenter">
             <form id="searchForm" autocomplete="off" [formGroup]="searchForm" (ngSubmit)="search()">
+              <div class="flyoutwarning">* Clear the search to reload the complete participant summary</div>
               <div>Participant Id<app-input #appInputElement formControlName="participantId" name="participantId" autofocus="true" ></app-input></div>
               <div>First name<app-input #appInputElement formControlName="firstname" name="firstname" ></app-input></div>
               <div>Last Name<app-input #appInputElement formControlName="lastname" name="lastname" ></app-input></div>
               <div>Date of Birth<app-input #appInputElement formControlName="dob" name="dob" placeholder="mm-dd"></app-input></div>
               <div></div>
               <div class="alignleft"> <app-button id="cancel" [visualState]="'primary-navy-colors'" [showArrow]="false"
-                                (click)="flyout = false"><span>Cancel</span></app-button></div>
+                                (click)="flyout = false;loadParticipants('clear')"><span>Clear</span></app-button></div>
               <div class="alignright"> <app-button id="participant" [visualState]="'primary-navy-colors'" [showArrow]="false"
                                 (click)="flyout = false;search()"><span>Search</span></app-button></div>
             </form>
@@ -53,7 +54,7 @@
       </ng-template>
       </p-table>-->
   <div class="example-container">
-    <mat-card-title class="iconpadded">List of Participant Summary</mat-card-title>
+    <mat-card-title class="heading"><h1>Summary of Participants</h1></mat-card-title>
     <p class="alignpage"></p>
   <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
 

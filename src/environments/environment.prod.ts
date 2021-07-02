@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUri: 'http://localhost:8080/',
+  baseUri: 'http://adaptboot-env.eba-ty3ytask.us-east-2.elasticbeanstalk.com/',
 };

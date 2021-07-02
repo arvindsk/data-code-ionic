@@ -17,25 +17,27 @@ import {Observable} from "rxjs";
 import {DataStorageService} from "../../services/data-storage.service";
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
-widgets.bootstrapslider(Survey);
-widgets.prettycheckbox(Survey);
-widgets.icheck(Survey);
+//widgets.bootstrapslider(Survey);
+//widgets.prettycheckbox(Survey);
+//widgets.icheck(Survey);
 widgets.select2(Survey);
 widgets.inputmask(Survey);
-widgets.jquerybarrating(Survey);
-widgets.jqueryuidatepicker(Survey);
-widgets.nouislider(Survey);
-widgets.select2tagbox(Survey);
-widgets.sortablejs(Survey);
-widgets.ckeditor(Survey);
+//widgets.jquerybarrating(Survey);
+//widgets.jqueryuidatepicker(Survey);
+//widgets.nouislider(Survey);
+//widgets.select2tagbox(Survey);
+//widgets.sortablejs(Survey);
+//widgets.ckeditor(Survey);
 widgets.autocomplete(Survey);
-widgets.bootstrapslider(Survey);
-widgets.prettycheckbox(Survey);
+//widgets.bootstrapslider(Survey);
+//idgets.prettycheckbox(Survey);
 initCustomWidget(Survey);
 
 Survey.JsonObject.metaData.addProperty('questionbase', 'popupdescription:text');
 Survey.JsonObject.metaData.addProperty('page', 'popupdescription:text');
-Survey.StylesManager.applyTheme('default');
+import "survey-angular/modern.css";
+
+Survey.StylesManager.applyTheme("modern");
 
 
 @Component({
@@ -70,6 +72,14 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
+    let defaultThemeColors = Survey.StylesManager.ThemeColors["default"];
+    defaultThemeColors["$main-color"] = "#5D001E";
+    defaultThemeColors["$main-hover-color"] = "#5D001E";
+    defaultThemeColors["$text-color"] = "#4a4a4a";
+    defaultThemeColors["$header-color"] = "#5D001E";
+    defaultThemeColors["$header-background-color"] = "#4a4a4a";
+    defaultThemeColors["$body-container-background-color"] = "#f8f8f8";
+    Survey.StylesManager.applyTheme();
     this.participantStudy=new ParticipantStudy();
     widgets.inputmask(Survey);
     this.participantStudy = this.dataStorageService.storage.participantStudy;

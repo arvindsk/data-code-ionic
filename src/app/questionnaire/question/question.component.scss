@@ -21,3 +21,11 @@
   --background-focused: #E98074;
   --color-selected: #E98074;
 }
+
+:host{
+  ::ng-deep{
+    .sv_main .sv_container .sv_header h3 {
+      font-weight: 500 !important;
+    }
+  }
+}

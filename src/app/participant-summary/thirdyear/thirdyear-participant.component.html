@@ -48,7 +48,7 @@
         <mat-cell mat-cell *matCellDef="let element">
           <span class="mobile-label">Begin/Continue/View:</span>
           <span *ngIf="element.status=='Not Started' && element.activeTimeline=='thirdyear'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Begin</a></span>
-          <span *ngIf="element.status=='In Progress' && element.activeTimeline=='thirdyear'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Continue</a></span>
+          <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='thirdyear'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Continue</a></span>
           <span *ngIf="element.status=='Completed'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">View</a></span>
           <span *ngIf="element.status!='Completed' && element.activeTimeline!='thirdyear'">Begin</span>
         </mat-cell>

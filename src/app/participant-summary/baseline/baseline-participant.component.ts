@@ -70,11 +70,11 @@ export class BaselineParticipantComponent implements OnInit {
       if (undefined !== participantId && null !== participantId) {
         this.participant = new Participant();
         this.participant.participantId = participantId;
-        this.participant.timeline = 'baseline';
+        this.participant.timeline = 'Baseline';
         this.loadParticipantStudyList();
       } else {
         if (undefined !== this.participant) {
-          this.participant.timeline = 'baseline';
+          this.participant.timeline = 'Baseline';
           this.loadParticipantStudyList();
         }
       }

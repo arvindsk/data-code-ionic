@@ -65,14 +65,14 @@ export class FirstyearParticipantComponent implements OnInit {
       if (undefined !== participantId && null !== participantId) {
         this.participant = new Participant();
         this.participant.participantId = participantId;
-        this.participant.timeline = 'firstyear';
+        this.participant.timeline = 'Firstyear';
         this.loadParticipantStudyList();
       } else {
         if (undefined !== this.dataStorageService.storage) {
           this.participant = this.dataStorageService.storage.participant;
         }
         if (undefined !== this.participant) {
-          this.participant.timeline = 'firstyear';
+          this.participant.timeline = 'Firstyear';
           this.loadParticipantStudyList();
         }
       }

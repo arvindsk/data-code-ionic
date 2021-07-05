@@ -1,8 +1,10 @@
 <p-sidebar
     styleClass="ui-sidebar-md"
+    [style]="{'overflow': 'scroll'}"
     blockScroll="true"
     [ngClass]="{'flyout-large' : isTablet}"
     [visible]="show"
     [position]="position">
+    (onHide)="hideFlyout.emit(false)">
     <ng-content></ng-content>
 </p-sidebar>

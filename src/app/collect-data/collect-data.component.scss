@@ -1,13 +1,13 @@
 .container-flyout {
   padding-left: 25px;
   float: right;
-  padding-top: 175px;
+  padding-top: 150px;
   .col-md-2 {
     flex: none !important;
   }
 }
 .divcenter {
-  padding-top: 200px;
+  padding-top: 190px;
 }
 
 .alignleft {
@@ -71,6 +71,12 @@ ion-icon {
 
 .mobile-label {
   display: none;
+}
+
+.error{
+  font-size: 1.25em;
+  color: red;
+  padding-left: 30px;
 }
 
 @media(max-width: 600px) {

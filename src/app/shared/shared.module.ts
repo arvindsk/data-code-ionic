@@ -37,11 +37,6 @@ import { FontAwesome } from './font-awesome/font-awesome.module';
 
 import { InputModule } from './input/input.module';
 import { ButtonModule } from './button/button.module';
-//import { DropdownSelectModule } from 'expo-shared/dropdown-select';
-import { DownloadLinkModule } from './download-link/download-link.module';
-import { DropdownModule as DropdownModuleExpoShared } from './dropdown/dropdown.module'; // Name conflict with primeng
-import { DropdownItemModule } from './dropdown-item/dropdown-item.module';
-import { MenuItemService } from './dropdown-item/menu-item.service';
 
 import { FlyoutModule } from './flyout/flyout.module';
 
@@ -76,20 +71,10 @@ import { FlyoutModule } from './flyout/flyout.module';
         ProgressBarModule,
         MessagesModule,
         MessageModule,
-        //ExpoTableModule,
-        DownloadLinkModule,
-
-
         FontAwesome,
-
         InputModule,
         ButtonModule,
-
-        DropdownModuleExpoShared,
-        DropdownItemModule,
-
         FlyoutModule
-
     ],
     declarations: [
 
@@ -109,20 +94,9 @@ import { FlyoutModule } from './flyout/flyout.module';
         TooltipModule,
         OverlayPanelModule,
         SelectButtonModule,
-
-        //ExpoTableModule,
-
-
-        DownloadLinkModule,
-
         FontAwesome,
-
         InputModule,
         ButtonModule,
-
-        DropdownModuleExpoShared,
-        DropdownItemModule,
-
         FlyoutModule
 
     ],

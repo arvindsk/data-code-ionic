@@ -1,9 +1,8 @@
 <ion-content>
 
-
   <div class="container-flyout col-md-2">
     <span class="icon">
-      <mat-icon matTooltip="Search By Filter" [inline]="true" (click)="flyout = true">
+      <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">
         <ion-icon name="search" ></ion-icon>
       </mat-icon>
     </span>
@@ -12,18 +11,18 @@
         <ion-icon name="nuclear-outline" positionV="bottom" ></ion-icon>
     </mat-icon>
     </span>
-      <app-flyout [show]="flyout" [position]="'right'" (hideFlyout)="flyout = false">
+      <app-flyout [show]="flyout" [position]="'right'" (hideFlyout)="flyout = false" >
         <div class="grid">
           <div class="divcenter">
-            <form id="searchForm" autocomplete="off" [formGroup]="searchForm" (ngSubmit)="search()">
+            <form id="searchForm" autocomplete="off" [formGroup]="searchForm" (ngSubmit)="search()" >
               <div class="flyoutwarning">* Clear the search to reload the complete participant summary</div>
-              <div>Participant Id<app-input #appInputElement formControlName="participantId" name="participantId" autofocus="true" ></app-input></div>
-              <div>First name<app-input #appInputElement formControlName="firstname" name="firstname" ></app-input></div>
+              <div>Participant ID<app-input #appInputElement formControlName="participantId" name="participantId" autofocus="true"></app-input></div>
+              <div>First Name<app-input #appInputElement formControlName="firstname" name="firstname" ></app-input></div>
               <div>Last Name<app-input #appInputElement formControlName="lastname" name="lastname" ></app-input></div>
               <div>Date of Birth<app-input #appInputElement formControlName="dob" name="dob" placeholder="mm-dd"></app-input></div>
               <div></div>
               <div class="alignleft"> <app-button id="cancel" [visualState]="'custom-colors'" [showArrow]="false"
-                                (click)="flyout = false;loadParticipants('clear')"><span>Clear</span></app-button></div>
+                                (click)="flyout = false;reset()"><span>Cancel</span></app-button></div>
               <div class="alignright"> <app-button id="participant" [visualState]="'custom-colors'" [showArrow]="false"
                                 (click)="flyout = false;search()"><span>Search</span></app-button></div>
             </form>
@@ -32,29 +31,9 @@
 
   <p-toast [style]="{marginTop: '10px'}"></p-toast>
 
-
-
-     <!-- <p-table #dt [columns]="columnHeader" [value]="tableValues" [resizableColumns]="true"
-               sortMode="multiple" [responsive]="true" class="table-primary">
-    <ng-template pTemplate="header"  let-columns>
-      <tr>
-        <th *ngFor="let cols of columns">{{cols.header}}</th>
-      </tr>
-    </ng-template>
-      <ng-template pTemplate="body" let-data let-columns="columns">
-        <tr>
-          <td> <a class="nav-link" [routerLink]="['/adapt/participant']" (click)="onTab(data)">{{data.participantId}}</a></td>
-          <td> {{data.firstName}}</td>
-          <td> {{data.lastName}}</td>
-          <td> {{data.dob}}</td>
-          <td> {{data.registeredDate | date}}</td>
-          <td> {{data.timeline}}</td>
-          <td> {{data.questionnaireCompleted}}</td>
-        </tr>
-      </ng-template>
-      </p-table>-->
   <div class="example-container">
     <mat-card-title class="heading"><h1>Summary of Participants</h1></mat-card-title>
+    <mat-card-title class="error">{{errorMessage}}</mat-card-title>
     <p class="alignpage"></p>
   <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
 
@@ -98,9 +77,9 @@
         <span class="mobile-label">Timeline:</span>{{element.timeline}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="completedDate">
-      <mat-header-cell mat-sort-header *matHeaderCellDef> Completed Date </mat-header-cell>
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Last Updated On </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span class="mobile-label">Completed Date:</span>{{element.completedDate | date}} </mat-cell>
+          <span class="mobile-label">Last Updated On:</span>{{element.completedDate | date}} </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

@@ -2,7 +2,7 @@ import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlyoutComponent } from './flyout.component';
 import { SidebarModule } from 'primeng/sidebar';
-import { ResponsiveService, ScreenSizes } from 'expo-shared';
+import { ResponsiveService, ScreenSizes } from '../services/responsive/responsive.service';
 import { of } from 'rxjs';
 
 describe('FlyoutComponent', () => {

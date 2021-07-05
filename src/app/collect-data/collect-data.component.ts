@@ -35,6 +35,7 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public searchForm: FormGroup;
+  errorMessage: string;
 
   constructor(private router: Router,
               private dataStorageService: DataStorageService,
@@ -74,6 +75,7 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
 
     this.loadParticipants("init");
     this.isFiltered = false;
+    this.errorMessage = "";
   }
 
   loadParticipants(source:string) {
@@ -83,7 +85,7 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
       }else{
         return;
       }
-      this.searchForm.reset();
+      this.reset();
     }
     this.adaptService.getParticipants().subscribe((data: Participant[]) => {
       if (data) {
@@ -101,31 +103,37 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
     this.tabClosed.emit(event.index);
   }
 
+  reset(){
+    this.searchForm.reset();
+    this.errorMessage = "";
+  }
+
   search() {
+    this.errorMessage = "";
     this.tableValues = this.tableValues.filter(function filterObj(element, index, array) {
       let flag: boolean ;
-      if(this.searchForm.value.participantId != ''){
+      if(this.searchForm.value.participantId!=null && this.searchForm.value.participantId != ''){
         if(element.participantId == this.searchForm.value.participantId) {
           flag = true;
         }else {
           flag = false;
         }
       }
-      if(this.searchForm.value.firstname != ''){
-        if(element.firstName == this.searchForm.value.firstname){
+      if(this.searchForm.value.firstname!= null && this.searchForm.value.firstname != ''){
+        if(element.firstName.toUpperCase() == this.searchForm.value.firstname.toString().toUpperCase()){
           flag = true;
         }else {
           flag = false;
         }
       }
-      if(this.searchForm.value.lastname != ''){
-        if(element.lastName == this.searchForm.value.lastname){
+      if(this.searchForm.value.lastname!=null && this.searchForm.value.lastname != ''){
+        if(element.lastName.toUpperCase() == this.searchForm.value.lastname.toString().toUpperCase()){
           flag = true;
         }else {
           flag = false;
         }
       }
-      if(this.searchForm.value.dob != ''){
+      if(this.searchForm.value.dob!=null && this.searchForm.value.dob != ''){
         if(element.dob == this.searchForm.value.dob){
           flag = true;
         }else {
@@ -135,6 +143,9 @@ export class CollectDataComponent implements OnInit, AfterViewInit {
       return flag;
     }, this);
     this.dataSource.data = this.tableValues;
+    if(this.tableValues.length === 0){
+      this.errorMessage = "!!No records found!!";
+    }
     this.isFiltered = true;
   }
   

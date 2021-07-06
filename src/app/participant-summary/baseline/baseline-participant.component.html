@@ -40,8 +40,8 @@
       <mat-header-cell mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element">
         <span class="mobile-label">Status:</span>
-        <span *ngIf="element.activeTimeline=='Baseline'">{{element.status}}</span>
-        <span *ngIf="element.activeTimeline!='Baseline'">Not Attempted</span>
+        <span *ngIf="element.activeTimeline=='Baseline' || element.status=='Completed'">{{element.status}}</span>
+        <span *ngIf="element.activeTimeline!='Baseline' && element.status!='Completed'">Not Attempted</span>
       </mat-cell>
     </ng-container>
 

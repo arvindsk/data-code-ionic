@@ -27,5 +27,12 @@
     .sv_main .sv_container .sv_header h3 {
       font-weight: 500 !important;
     }
+    .select2-search__field{
+      width: 100% !important;
+    }
+
+    .select2-container--classic .select2-selection--multiple {
+      border: 1px solid #5d001e !important;
+    }
   }
 }

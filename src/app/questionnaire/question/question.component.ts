@@ -1,43 +1,25 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import 'inputmask/dist/inputmask/phone-codes/phone';
-import {init as initCustomWidget} from './customwidget';
-import $ from "jquery";
+import $ from 'jquery';
+import select2Init from 'select2';
+import 'select2/dist/css/select2.min.css';
 import * as Survey from 'survey-angular';
-import {SurveyModel} from 'survey-angular';
 import * as widgets from 'surveyjs-widgets';
-import "easy-autocomplete/dist/easy-autocomplete.css";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'survey-angular/survey.css';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AdaptService} from "../../services/adapt.service";
-import {ParticipantStudy} from "../../model/ParticipantStudy";
-import {Observable} from "rxjs";
-import {DataStorageService} from "../../services/data-storage.service";
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-
-//widgets.bootstrapslider(Survey);
-//widgets.prettycheckbox(Survey);
-//widgets.icheck(Survey);
-widgets.select2(Survey);
-widgets.inputmask(Survey);
-//widgets.jquerybarrating(Survey);
-//widgets.jqueryuidatepicker(Survey);
-//widgets.nouislider(Survey);
-//widgets.select2tagbox(Survey);
-//widgets.sortablejs(Survey);
-//widgets.ckeditor(Survey);
-widgets.autocomplete(Survey);
-//widgets.bootstrapslider(Survey);
-//idgets.prettycheckbox(Survey);
-initCustomWidget(Survey);
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AdaptService} from '../../services/adapt.service';
+import {ParticipantStudy} from '../../model/ParticipantStudy';
+import {Observable} from 'rxjs';
+import {DataStorageService} from '../../services/data-storage.service';
 
 Survey.JsonObject.metaData.addProperty('questionbase', 'popupdescription:text');
 Survey.JsonObject.metaData.addProperty('page', 'popupdescription:text');
-import "survey-angular/modern.css";
+import 'survey-angular/modern.css';
 
-Survey.StylesManager.applyTheme("modern");
+Survey.StylesManager.applyTheme('modern');
 
 
 @Component({
@@ -53,13 +35,12 @@ export class QuestionComponent implements OnInit {
   result: any;
   json: any;
   survey;
-  faInfoCircle = faInfoCircle;
 
   storageName = 'survey_patient_history';
   userId = 'Test';
   openDesc;
   closeResult = '';
-  navigationUrl='';
+  navigationUrl = '';
   participantStudy: ParticipantStudy;
 
 
@@ -72,18 +53,21 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
-    let defaultThemeColors = Survey.StylesManager.ThemeColors["default"];
-    defaultThemeColors["$main-color"] = "#5D001E";
-    defaultThemeColors["$main-hover-color"] = "#5D001E";
-    defaultThemeColors["$text-color"] = "#4a4a4a";
-    defaultThemeColors["$header-color"] = "#5D001E";
-    defaultThemeColors["$header-background-color"] = "#4a4a4a";
-    defaultThemeColors["$body-container-background-color"] = "#f8f8f8";
+    widgets.select2(Survey);
+    widgets.select2tagbox(Survey);
+
+    const defaultThemeColors = Survey.StylesManager.ThemeColors.default;
+    defaultThemeColors['$main-color'] = '#5D001E';
+    defaultThemeColors['$main-hover-color'] = '#5D001E';
+    defaultThemeColors['$text-color'] = '#4a4a4a';
+    defaultThemeColors['$header-color'] = '#5D001E';
+    defaultThemeColors['$header-background-color'] = '#4a4a4a';
+    defaultThemeColors['$body-container-background-color'] = '#f8f8f8';
     Survey.StylesManager.applyTheme();
-    this.participantStudy=new ParticipantStudy();
+    this.participantStudy = new ParticipantStudy();
     widgets.inputmask(Survey);
     this.participantStudy = this.dataStorageService.storage.participantStudy;
-    this.navigationUrl='/adapt/participant/'+this.participantStudy.timeline.toLowerCase()+'?participantId='+this.participantStudy.participantId;
+    this.navigationUrl = '/adapt/participant/' + this.participantStudy.timeline.toLowerCase() + '?participantId=' + this.participantStudy.participantId;
     this.adaptService.getQuestionnaire(this.participantStudy.studyName).subscribe((data: any) => {
         this.json = data;
         this.loadQuestionnaire();
@@ -132,7 +116,7 @@ export class QuestionComponent implements OnInit {
       this.saveSurveyData(onCompleteResult);
     });
     this.survey.showPreviewBeforeComplete = 'showAllQuestions';
-    this.survey.navigateToUrl=this.navigationUrl;
+    this.survey.navigateToUrl = this.navigationUrl;
     if ('Completed' === this.participantStudy.status) {
       this.survey.mode = 'display';
     }
@@ -159,7 +143,7 @@ export class QuestionComponent implements OnInit {
     return this.adaptService.getQuestionnaireAnswer(participantStudyObj);
   }
 
-  saveSurveyData(result: SurveyModel) {
+  saveSurveyData(result: any) {
     const data = result.data;
     data.pageNo = result.currentPageNo;
 
@@ -215,11 +199,9 @@ export class QuestionComponent implements OnInit {
 
   backButtonClick() {
     const navigationExtras: NavigationExtras = {
-      queryParams: { participantId: this.participantStudy.participantId }
+      queryParams: {participantId: this.participantStudy.participantId}
     };
-    const url='' +
-      '' +
-      ''+this.participantStudy.timeline.toLowerCase();
+    const url='adapt/participant/'+this.participantStudy.timeline.toLowerCase();
     void this.router.navigate([url],navigationExtras);
   }
 

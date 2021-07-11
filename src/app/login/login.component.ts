@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
           this.postData();
           this.authService.login(loginRequest.emailId, data.name, data.site);
           this.signInForm.reset();
-          this.router.navigate(['adapt/home']);
+          this.router.navigate(['adapt/summary']);
         }else{
           this.errorMessage = "!!Username and Password mismatch!!";
         }

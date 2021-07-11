@@ -20,7 +20,7 @@ export class DirectAccessGuard implements CanActivate {
       return false;
     }
     if(state.url == '/adapt/login'){
-      this.router.navigate(['/adapt/home']);
+      this.router.navigate(['/adapt/summary']);
       return false;
     }
     return true;

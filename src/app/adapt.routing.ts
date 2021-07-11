@@ -12,11 +12,12 @@ export const routes: Routes = [
   {path: 'adapt/participant',
     loadChildren: () => import('./participant-summary/participant-summary.module').then(m => m.ParticipantSummaryModule)
   },
-  {path: 'adapt/collect-data', component: CollectDataComponent, canActivate: [DirectAccessGuard]},
+  {path: 'adapt/collect-data',
+    loadChildren: () => import('./collect-data/collect-data.module').then(m => m.CollectDataModule)
+  },
   {path: 'adapt/summary',
     loadChildren: () => import('./summary/summary.module').then(m => m.SummaryModule)
   },
-  {path: 'adapt/collectdata', component: CollectDataComponent, canActivate: [DirectAccessGuard]},
   {path: 'adapt/login', component: LoginComponent, canActivate: [DirectAccessGuard]},
 
   {

@@ -1,0 +1,89 @@
+<ion-content>
+
+  <div class="container-flyout col-md-2">
+    <span class="icon">
+      <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">
+        <ion-icon name="search" ></ion-icon>
+      </mat-icon>
+    </span>
+    <span class="icon2">
+      <mat-icon [inline]="true" (click)="loadParticipants('clear')" matTooltip="Clear Filter">
+        <ion-icon name="nuclear-outline" positionV="bottom" ></ion-icon>
+    </mat-icon>
+    </span>
+    <app-flyout [show]="flyout" [position]="'right'" (hideFlyout)="flyout = false" >
+      <div class="grid">
+        <div class="divcenter">
+          <form id="searchForm" autocomplete="off" [formGroup]="searchForm" (ngSubmit)="search()" >
+            <div class="flyoutwarning">* Clear the search to reload the complete participant summary</div>
+            <div>Participant ID<app-input #appInputElement formControlName="participantId" name="participantId" autofocus="true"></app-input></div>
+            <div>First Name<app-input #appInputElement formControlName="firstname" name="firstname" ></app-input></div>
+            <div>Last Name<app-input #appInputElement formControlName="lastname" name="lastname" ></app-input></div>
+            <div>Date of Birth<app-input #appInputElement formControlName="dob" name="dob" placeholder="mm-dd"></app-input></div>
+            <div></div>
+            <div class="alignleft"> <app-button id="cancel" [visualState]="'custom-colors'" [showArrow]="false"
+                                                (click)="flyout = false;reset()"><span>Cancel</span></app-button></div>
+            <div class="alignright"> <app-button id="participant" [visualState]="'custom-colors'" [showArrow]="false"
+                                                 (click)="flyout = false;search()"><span>Search</span></app-button></div>
+          </form>
+        </div>
+      </div></app-flyout></div>
+
+  <p-toast [style]="{marginTop: '10px'}"></p-toast>
+
+  <div class="example-container">
+    <mat-card-title class="heading"><h1>List of Participants</h1></mat-card-title>
+    <mat-card-title class="error">{{errorMessage}}</mat-card-title>
+    <p class="alignpage"></p>
+    <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="participantId">
+        <mat-header-cell mat-sort-header *matHeaderCellDef>Participant ID </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Participant ID:</span>
+          <a class="nav-link" [routerLink]="['/adapt/participant/baseline']" [queryParams]="{participantId: element.participantId}" (click)="onTab(element)">{{element.participantId}}</a> </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> First Name </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">First Name:</span>
+          {{element.firstName}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Last Name </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Last Name:</span>{{element.lastName}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="dob">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> DOB </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">DOB:</span>{{element.dob}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="registeredDate">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Registered Date </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Registered Date:</span>{{element.registeredDate | date}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="timeline">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Timeline </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Timeline:</span>{{element.timeline}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="completedDate">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Last Updated On </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Last Updated On:</span>{{element.completedDate | date}} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+  </div>
+</ion-content>

@@ -42,7 +42,6 @@ import {MaterialModule} from "./material-module";
 
   declarations:
     [
-      CollectDataComponent,
       HomePage,
       LoginComponent,
     ],

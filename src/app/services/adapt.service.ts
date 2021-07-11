@@ -52,11 +52,13 @@ export class AdaptService {
     );
   }
 
-  public getParticipants(): Observable<Participant[]> {
+  public getParticipants(timeline : string): Observable<Participant[]> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
 
-    return this.httpClient.get<Participant[]>(this.baseUri + 'api/adapt/collect-data/get-all-participants', {headers});
+    return this.httpClient.post<Participant[]>(this.baseUri + 'api/adapt/collect-data/get-all-participants',
+      timeline,
+      {headers});
   }
 
   public loadParticipantStudyList(participant: Participant): Observable<ParticipantStudy[]> {

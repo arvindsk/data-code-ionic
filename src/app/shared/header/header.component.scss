@@ -1,13 +1,14 @@
 .alignleft {
   float: left;
   font-size: 1.75em;
+  padding-top: 5px;
 }
 
 .sup{
   font-size: 30%;
   vertical-align: top;
   position: relative;
-  top: 1.25em;
+  top: 0.1em;
 }
 
 .icon{
@@ -16,9 +17,15 @@
   padding-left: 15px;
 }
 
+.icon1{
+  font-size: 1em;
+  vertical-align: middle;
+  padding-left: 15px;
+}
+
 .alignright {
   float: right;
-  padding-top: 10px;
+  padding-top: 15px;
   font-size: 1em;
 }
 
@@ -40,7 +47,6 @@
 .toolbar1 {
   --background: #EAE7DC;
   font-size: 2em;
-  padding-top: 10px;
   color: #5D001E;
 }
 

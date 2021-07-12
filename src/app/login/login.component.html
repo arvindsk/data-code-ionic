@@ -1,17 +1,17 @@
 <ion-content>
   <div>
     <div class="aligncenter">
-      <p class="p6">Welcome</p>
-      <p class="p3">to</p>
-      <p class="p1">Automated Data Assessment  Protocol (ADAPT<sup class="sup">TM</sup> )</p>
+      <p class="p5">Welcome</p>
+      <p class="p1">Automated Data Assessment  Protocol ( ADAPT<sup class="sup">TM</sup> ) </p>
       <p class="p2">*Copyright by Panch Research LLC, Chicago, USA</p>
-      <p class="p5">Diverse Vascular Cognitive Impairment Dementia (VCID)</p>
+      <p class="p3">for</p>
+      <p class="p6">Diverse Vascular Cognitive Impairment Dementia (DVCID)</p>
     </div>
     <div class="errorcenter">{{errorMessage}}</div>
     <div class="divcenter">
       <form id="signInForm" autocomplete="off" [formGroup]="signInForm" (ngSubmit)="login()" (keydown.enter)="login()">
 
-          <div><app-input formControlName="username" type="text" id="username" name="username" autofocus="true" placeholder="email*"></app-input></div>
+          <div><app-input formControlName="username" type="text" id="username" name="username" autofocus="true" placeholder="username/email*"></app-input></div>
           <div><app-input formControlName="password" type="password" id="password" name="password" hideInput="true" placeholder="password*"></app-input></div>
           <div><app-button [visualState]="'custom-colors'" (click)="login()">Login</app-button></div>
 

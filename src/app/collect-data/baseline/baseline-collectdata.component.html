@@ -3,12 +3,12 @@
   <div class="container-flyout col-md-2">
     <span class="icon">
       <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">
-        <ion-icon name="search" ></ion-icon>
+         <img src="/assets/searchicon.png" alt="Italian Trulli" width="50" height="45" />
       </mat-icon>
     </span>
     <span class="icon2">
       <mat-icon [inline]="true" (click)="loadParticipants('clear')" matTooltip="Clear Filter">
-        <ion-icon name="nuclear-outline" positionV="bottom" ></ion-icon>
+        <img src="/assets/clearicon.png" alt="Italian Trulli" width="50" height="40" />
     </mat-icon>
     </span>
     <app-flyout [show]="flyout" [position]="'right'" (hideFlyout)="flyout = false" >
@@ -38,7 +38,7 @@
     <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
 
       <ng-container matColumnDef="participantId">
-        <mat-header-cell mat-sort-header *matHeaderCellDef>Participant ID </mat-header-cell>
+        <mat-header-cell mat-sort-header *matHeaderCellDef>ADC ID </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <span class="mobile-label">Participant ID:</span>
           <a class="nav-link" [routerLink]="['/adapt/participant/baseline']" [queryParams]="{participantId: element.participantId}" (click)="onTab(element)">{{element.participantId}}</a> </mat-cell>
@@ -71,11 +71,7 @@
         <mat-cell *matCellDef="let element">
           <span class="mobile-label">Registered Date:</span>{{element.registeredDate | date}} </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="timeline">
-        <mat-header-cell mat-sort-header *matHeaderCellDef> Timeline </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span class="mobile-label">Timeline:</span>{{element.timeline}} </mat-cell>
-      </ng-container>
+
       <ng-container matColumnDef="completedDate">
         <mat-header-cell mat-sort-header *matHeaderCellDef> Last Updated On </mat-header-cell>
         <mat-cell *matCellDef="let element">

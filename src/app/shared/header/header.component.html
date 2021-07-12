@@ -4,13 +4,13 @@
       <ion-title>
 
           <div class="alignleft">
-            <a href="/adapt/home"><img src="/assets/Logo-DIVERSE-VCID.png" alt="Italian Trulli" width="60" height="60" ></a>
+            <a href="/adapt/home"><img src="/assets/adapt.png" alt="Italian Trulli" width="150" height="65" ></a>
 
-            ADAPT<sup class="sup">TM</sup>
+
           </div>
           <div *ngIf="loggedIn" class="alignright">
             <p>
-              Hi, <span>{{fname}}</span> <span> [{{site}}]</span>
+              <span class="icon1">Hi, <span>{{fname}}</span> <span> [{{site}}]</span></span>
               <span class="icon"><ion-icon  name="log-out" (click)="logout()"></ion-icon></span>
               <span class="icon"><ion-icon name="contrast-outline" (click)="toggle()"></ion-icon></span>
             </p>

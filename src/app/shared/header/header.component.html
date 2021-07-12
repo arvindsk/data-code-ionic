@@ -4,15 +4,15 @@
       <ion-title>
 
           <div class="alignleft">
-            <a href="/adapt/home"><img src="/assets/adapt.png" alt="Italian Trulli" width="150" height="65" ></a>
+            <a href="/adapt/summary"><img src="/assets/adapt.png" alt="Italian Trulli" width="150" height="65" /></a>
 
 
           </div>
           <div *ngIf="loggedIn" class="alignright">
             <p>
               <span class="icon1">Hi, <span>{{fname}}</span> <span> [{{site}}]</span></span>
-              <span class="icon"><ion-icon  name="log-out" (click)="logout()"></ion-icon></span>
-              <span class="icon"><ion-icon name="contrast-outline" (click)="toggle()"></ion-icon></span>
+              <span class="icon"><img src="/assets/logout.png" alt="Italian Trulli" width="60" height="43" (click)="logout()"/></span>
+              <span class="icon"><img src="/assets/darkicon.png" alt="Italian Trulli" width="60" height="40" (click)="toggle()"/></span>
             </p>
           </div>
 

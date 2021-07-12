@@ -119,14 +119,14 @@ export class FirstyearCollectDataComponent implements OnInit, AfterViewInit {
         }
       }
       if(this.searchForm.value.firstname!= null && this.searchForm.value.firstname != ''){
-        if(element.firstName.toUpperCase() == this.searchForm.value.firstname.toString().toUpperCase()){
+        if( element.firstName.toUpperCase().indexOf(this.searchForm.value.firstname.toString().toUpperCase()) >= 0){
           flag = true;
         }else {
           flag = false;
         }
       }
       if(this.searchForm.value.lastname!=null && this.searchForm.value.lastname != ''){
-        if(element.lastName.toUpperCase() == this.searchForm.value.lastname.toString().toUpperCase()){
+        if( element.lastName.toUpperCase().indexOf(this.searchForm.value.lastname.toString().toUpperCase()) >= 0){
           flag = true;
         }else {
           flag = false;

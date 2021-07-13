@@ -40,8 +40,10 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
           <span class="mobile-label">Status:</span>
-          <span *ngIf="element.activeTimeline!='Thirdyear' || element.status=='Completed'">{{element.status}}</span>
-          <span *ngIf="element.activeTimeline=='Thirdyear' && element.status!='Completed'">Not Attempted</span>
+          <span *ngIf="(element.endedTimeline || element.activeTimeline=='Thirdyear') && element.status!='Completed'; else printstatus;">Not Attempted</span>
+          <ng-template #printstatus>
+            {{element.status}}
+          </ng-template>
         </mat-cell>
       </ng-container>
 
@@ -50,10 +52,11 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef> Activity </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
           <span class="mobile-label">Begin/Continue/View:</span>
-          <span *ngIf="element.status=='Not Started'&& element.activeTimeline=='Firstyear'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Begin</a></span>
-          <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Firstyear'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Continue</a></span>
+          <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Firstyear' && !element.endedTimeline"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Begin</a></span>
+          <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Firstyear' && !element.endedTimeline"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Continue</a></span>
           <span *ngIf="element.status=='Completed'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">View</a></span>
           <span *ngIf="element.status!='Completed' && element.activeTimeline!='Firstyear'">Begin</span>
+          <span *ngIf="element.status!='Completed' && element.activeTimeline=='Firstyear' && element.endedTimeline">Begin</span>
         </mat-cell>
       </ng-container>
 

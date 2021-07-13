@@ -47,7 +47,7 @@
 
     <!-- Weight Column -->
     <ng-container matColumnDef="start">
-      <mat-header-cell mat-header-cell *matHeaderCellDef> Begin/Continue/View </mat-header-cell>
+      <mat-header-cell mat-header-cell *matHeaderCellDef> Activity </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element">
         <span class="mobile-label">Begin/Continue/View:</span>
         <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Baseline'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Begin</a></span>

@@ -16,7 +16,7 @@
           </tr>
         </ng-template>
       </p-table> -->
-    <mat-card-title class="heading"><h1>{{headerName}} [ID:{{headerId}}]</h1></mat-card-title>
+    <mat-card-title class="heading"><h1>{{headerName}} [ADC ID:{{headerId}}]</h1></mat-card-title>
     <p class="alignpage"></p>
     <mat-table mat-table [dataSource]="tableValues" [class.isMobile]="isMobile" class="mat-elevation-z8">
 
@@ -40,7 +40,7 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
           <span class="mobile-label">Status:</span>
-          <span *ngIf="element.activeTimeline=='Thirdyear' && element.status!='Completed' && element.endedTimeline; else printstatus;">Not Attempted</span>
+          <span *ngIf="element.activeTimeline=='Thirdyear' && element.status!='Submitted' && element.endedTimeline; else printstatus;">Not Attempted</span>
           <ng-template #printstatus>
             {{element.status}}
           </ng-template>
@@ -51,12 +51,12 @@
       <ng-container matColumnDef="start">
         <mat-header-cell mat-header-cell *matHeaderCellDef> Activity </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
-          <span class="mobile-label">Begin/Continue/View:</span>
+          <span class="mobile-label">Activity:</span>
           <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Thirdyear' && !element.endedTimeline"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Begin</a></span>
           <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Thirdyear' && !element.endedTimeline"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Continue</a></span>
-          <span *ngIf="element.status=='Completed'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">View</a></span>
-          <span *ngIf="element.status!='Completed' && element.activeTimeline!='Thirdyear'">Begin</span>
-          <span *ngIf="element.status!='Completed' && element.activeTimeline=='Thirdyear' && element.endedTimeline">Begin</span>
+          <span *ngIf="element.status=='Submitted'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">View</a></span>
+          <span *ngIf="element.status!='Submitted' && element.activeTimeline!='Thirdyear'">Begin</span>
+          <span *ngIf="element.status!='Submitted' && element.activeTimeline=='Thirdyear' && element.endedTimeline">Begin</span>
         </mat-cell>
       </ng-container>
 

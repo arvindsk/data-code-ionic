@@ -16,7 +16,7 @@
         <div class="divcenter">
           <form id="searchForm" autocomplete="off" [formGroup]="searchForm" (ngSubmit)="search()" >
             <div class="flyoutwarning">* Clear the search to reload the complete participant summary</div>
-            <div>Participant ID<app-input #appInputElement formControlName="participantId" name="participantId" autofocus="true"></app-input></div>
+            <div>ADC ID<app-input #appInputElement formControlName="participantId" name="participantId" autofocus="true"></app-input></div>
             <div>First Name<app-input #appInputElement formControlName="firstname" name="firstname" ></app-input></div>
             <div>Last Name<app-input #appInputElement formControlName="lastname" name="lastname" ></app-input></div>
             <div>Date of Birth<app-input #appInputElement formControlName="dob" name="dob" placeholder="mm-dd"></app-input></div>

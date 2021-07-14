@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.mainmenu = "summary";
     this.fname = '';
     this.site = '';
     this.loggedIn = false;

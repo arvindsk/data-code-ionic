@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BaselineSummaryRoutingModule } from './baseline-summary-routing.module';
 
 import { BaselineSummaryComponent } from './baseline-summary.component';
-import {TableModule} from "primeng";
+import {TableModule} from 'primeng/table';
 import {MaterialModule} from "../../material-module";
 
 @NgModule({

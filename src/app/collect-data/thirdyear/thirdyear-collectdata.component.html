@@ -1,38 +1,65 @@
-<ion-content>
+<p-sidebar [(visible)]="flyout"
+           position="right"
+           [showCloseIcon]="true"
+           [dismissible]="true"
+           [closeOnEscape]="true"
+           [baseZIndex]="99999"
+           appendTo="body"
+           styleClass="p-sidebar-sm">
 
-  <div class="container-flyout col-md-2">
-    <span class="icon">
-      <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">
-         <img src="/assets/searchicon.png" alt="Italian Trulli" width="50" height="45" />
-      </mat-icon>
-    </span>
-    <span class="icon2">
-      <mat-icon [inline]="true" (click)="loadParticipants('clear')" matTooltip="Clear Filter">
-        <img src="/assets/clearicon.png" alt="Italian Trulli" width="50" height="40" />
-    </mat-icon>
-    </span>
-    <app-flyout [show]="flyout" [position]="'right'" (hideFlyout)="flyout = false" >
-      <div class="grid">
-        <div class="divcenter">
-          <form id="searchForm" autocomplete="off" [formGroup]="searchForm" (ngSubmit)="search()" >
-            <div class="flyoutwarning">* Clear the search to reload the complete participant summary</div>
-            <div>ADC ID<app-input #appInputElement formControlName="participantId" name="participantId" autofocus="true"></app-input></div>
-            <div>First Name<app-input #appInputElement formControlName="firstname" name="firstname" ></app-input></div>
-            <div>Last Name<app-input #appInputElement formControlName="lastname" name="lastname" ></app-input></div>
-            <div>Date of Birth<app-input #appInputElement formControlName="dob" name="dob" placeholder="mm-dd"></app-input></div>
-            <div></div>
-            <div class="alignleft"> <app-button id="cancel" [visualState]="'custom-colors'" [showArrow]="false"
-                                                (click)="flyout = false;reset()"><span>Cancel</span></app-button></div>
-            <div class="alignright"> <app-button id="participant" [visualState]="'custom-colors'" [showArrow]="false"
-                                                 (click)="flyout = false;search()"><span>Search</span></app-button></div>
-          </form>
+  <div class="container" >
+    <form id="searchForm" [formGroup]="searchForm" (ngSubmit)="search()">
+      <div class="flyoutwarning">* Clear the search to reload the complete participant summary</div>
+      <div>ADC ID
+        <app-input #appInputElement formControlName="participantId" name="participantId"
+                   autofocus="true"></app-input>
+      </div>
+      <div>First Name
+        <app-input #appInputElement formControlName="firstname" name="firstname"></app-input>
+      </div>
+      <div>Last Name
+        <app-input #appInputElement formControlName="lastname" name="lastname"></app-input>
+      </div>
+      <div>Date of Birth
+        <app-input #appInputElement formControlName="dob" name="dob" placeholder="mm-dd"></app-input>
+      </div>
+
+      <div class="row">
+        <div class="col align-self-start">
+
+          <button type="button" (click)="flyout = false;search()" class="btn btn-primary button-background" >Search</button>
+
         </div>
-      </div></app-flyout></div>
+        <div class="col align-self-end">
+          <button type="button" (click)="flyout = false" class="btn btn-primary button-background" >Cancel</button>
+        </div>
+      </div>
 
+    </form>
+  </div>
+</p-sidebar>
+
+<ion-content style="--padding-top: 120px">
   <p-toast [style]="{marginTop: '10px'}"></p-toast>
 
   <div class="example-container">
-    <mat-card-title class="heading"><h1>List of Participants</h1></mat-card-title>
+    <div class="row">
+      <div class="col align-self-start ">
+        <mat-card-title class="heading"><h1>List of Participants</h1></mat-card-title>
+      </div>
+      <div class="col align-self-end">
+            <span class="icon">
+      <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">
+         <img src="/assets/searchicon.png" alt="Italian Trulli" width="50" height="45"/>
+      </mat-icon>
+    </span>
+        <span class="icon2">
+      <mat-icon [inline]="true" (click)="loadParticipants('clear')" matTooltip="Clear Filter">
+        <img src="/assets/clearicon.png" alt="Italian Trulli" width="50" height="40"/>
+    </mat-icon>
+    </span>
+      </div>
+    </div>
     <mat-card-title class="error">{{errorMessage}}</mat-card-title>
     <p class="alignpage"></p>
     <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">

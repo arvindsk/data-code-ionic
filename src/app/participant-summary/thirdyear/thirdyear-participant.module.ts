@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ThirdyearParticipantRoutingModule } from './thirdyear-participant-routing.module';
 
 import { ThirdyearParticipantComponent } from './thirdyear-participant.component';
-import {TableModule} from "primeng";
+import {TableModule} from 'primeng/table';
 import {MaterialModule} from "../../material-module";
 
 @NgModule({

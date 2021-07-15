@@ -7,11 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { ThirdyearCollectDataRoutingModule } from './thirdyear-collectdata-routing.module';
 
 import { ThirdyearCollectDataComponent } from './thirdyear-collectdata.component';
-import {TableModule, ToastModule} from "primeng";
-import {MaterialModule} from "../../material-module";
-import {FlyoutModule} from "../../shared/flyout/flyout.module";
-import {InputModule} from "../../shared/input/input.module";
-import {ButtonModule} from "../../shared/button/button.module";
+import {TableModule} from 'primeng/table';
+import {MaterialModule} from '../../material-module';
+import {FlyoutModule} from '../../shared/flyout/flyout.module';
+import {InputModule} from '../../shared/input/input.module';
+import {ToastModule} from 'primeng/toast';
+import {SidebarModule} from 'primeng/sidebar';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
     imports: [
@@ -22,10 +24,11 @@ import {ButtonModule} from "../../shared/button/button.module";
         TableModule,
         MaterialModule,
         FlyoutModule,
-      ToastModule,
-      InputModule,
-      ButtonModule,
-      ReactiveFormsModule,
+        ToastModule,
+        InputModule,
+        ButtonModule,
+        ReactiveFormsModule,
+        SidebarModule,
     ],
   declarations: [ThirdyearCollectDataComponent]
 })

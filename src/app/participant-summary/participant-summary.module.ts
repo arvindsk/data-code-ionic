@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import {ParticipantSummaryRoutingModule} from './participant-summary-routing.module';
 
-import {TableModule} from "primeng";
+import {TableModule} from 'primeng/table';
 import {HeaderModule} from "../shared/header/header.module";
 import {BaselineParticipantRoutingModule} from "./baseline/baseline-participant-routing.module";
 import {ThirdyearParticipantRoutingModule} from "./thirdyear/thirdyear-participant-routing.module";

@@ -7,11 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { BaselineCollectDataRoutingModule } from './baseline-collectdata-routing.module';
 
 import { BaselineCollectDataComponent } from './baseline-collectdata.component';
-import {TableModule, ToastModule} from 'primeng';
+import {TableModule} from 'primeng/table';
 import {MaterialModule} from '../../material-module';
-import {FlyoutModule} from "../../shared/flyout/flyout.module";
-import {InputModule} from "../../shared/input/input.module";
-import {ButtonModule} from "../../shared/button/button.module";
+import {FlyoutModule} from '../../shared/flyout/flyout.module';
+import {InputModule} from '../../shared/input/input.module';
+import {ToastModule} from 'primeng/toast';
+import {SidebarModule} from 'primeng/sidebar';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   imports: [
@@ -26,6 +28,8 @@ import {ButtonModule} from "../../shared/button/button.module";
     InputModule,
     ButtonModule,
     ReactiveFormsModule,
+    SidebarModule,
+    ButtonModule
   ],
   declarations: [BaselineCollectDataComponent]
 })

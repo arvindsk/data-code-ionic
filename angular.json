@@ -33,8 +33,12 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/quill/dist/quill.snow.css",
               "node_modules/survey-angular/survey.css",
               "node_modules/survey-creator/survey-creator.css",
               "node_modules/jquery-ui/themes/base/theme.css",

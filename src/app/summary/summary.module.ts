@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import {SummaryRoutingModule} from './summary-routing.module';
 
 import { SummaryComponent } from './summary.component';
-import {TableModule} from "primeng";
+import {TableModule} from 'primeng/table';
 import {BaselineSummaryModule} from "./baseline/baseline-summary.module";
 import {FirstyearSummaryModule} from "./firstyear/firstyear-summary.module";
 import {ThirdyearSummaryModule} from "./thirdyear/thirdyear-summary.module";

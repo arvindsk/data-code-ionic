@@ -1,13 +1,6 @@
-.container-flyout {
-  padding-left: 25px;
-  float: right;
-  padding-top: 150px;
-  .col-md-2 {
-    flex: none !important;
-  }
-}
+
 .divcenter {
-  padding-top: 190px;
+  padding-top: 20px;
 }
 
 .alignleft {
@@ -53,10 +46,18 @@ ion-icon {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-top: 25px;
+  //padding-top: 125px;
   padding-left: 30px;
   padding-right: 30px;
 }
+.side-nav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 
 .mat-table {
   overflow: auto;
@@ -99,4 +100,12 @@ ion-icon {
     padding: 8px 24px;
   }
 }
+
+.button-background{
+  background: #5D001E;
+  border-color: #5D001E;
+}
+
+
+
 

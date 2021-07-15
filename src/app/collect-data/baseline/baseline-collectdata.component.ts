@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MessageService} from 'primeng/api';
-import {Table} from "primeng/table";
-import {DataStorageService} from "../../services/data-storage.service";
-import {Router} from "@angular/router";
-import {AdaptService} from "../../services/adapt.service";
-import {Participant} from "../../model/Participant";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatSort} from "@angular/material/sort";
-import {BreakpointObserver} from "@angular/cdk/layout";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {Table} from 'primeng/table';
+import {DataStorageService} from '../../services/data-storage.service';
+import {Router} from '@angular/router';
+import {AdaptService} from '../../services/adapt.service';
+import {Participant} from '../../model/Participant';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class BaselineCollectDataComponent implements OnInit, AfterViewInit {
   @ViewChild('dt') table: Table;
   displayedColumns: string[] = ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'completedDate'];
   public flyout = false;
-  isMobile=false;
+  isMobile = false;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public searchForm: FormGroup;
@@ -42,14 +42,15 @@ export class BaselineCollectDataComponent implements OnInit, AfterViewInit {
               private adaptService: AdaptService,
               private breakpointObserver: BreakpointObserver,
               private fb: FormBuilder) {
-    this.searchForm = this.fb.group({participantId: new FormControl('', [
-      ]), firstname: new FormControl('', [
-      ]), lastname: new FormControl('', [
-      ]), dob: new FormControl('', [
-      ])});
+    this.searchForm = this.fb.group({
+      participantId: new FormControl('', []),
+      firstname: new FormControl('', []),
+      lastname: new FormControl('', []),
+      dob: new FormControl('', [])
+    });
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
-      if(result.matches ){
-        this.isMobile=true;
+      if (result.matches) {
+        this.isMobile = true;
       }
       this.displayedColumns = result.matches ?
         ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'completedDate'] :
@@ -72,16 +73,16 @@ export class BaselineCollectDataComponent implements OnInit, AfterViewInit {
       {field: 'completedDate', header: 'Completed Date'},
     ];
 
-    this.loadParticipants("init");
+    this.loadParticipants('init');
     this.isFiltered = false;
-    this.errorMessage = "";
+    this.errorMessage = '';
   }
 
-  loadParticipants(source:string) {
-    if(source === 'clear'){
-      if(this.isFiltered){
+  loadParticipants(source: string) {
+    if (source === 'clear') {
+      if (this.isFiltered) {
         this.isFiltered = false;
-      }else{
+      } else {
         return;
       }
       this.reset();
@@ -102,48 +103,48 @@ export class BaselineCollectDataComponent implements OnInit, AfterViewInit {
     this.tabClosed.emit(event.index);
   }
 
-  reset(){
+  reset() {
     this.searchForm.reset();
-    this.errorMessage = "";
+    this.errorMessage = '';
   }
 
   search() {
-    this.errorMessage = "";
+    this.errorMessage = '';
     this.tableValues = this.tableValues.filter(function filterObj(element, index, array) {
-      let flag: boolean ;
-      if(this.searchForm.value.participantId!=null && this.searchForm.value.participantId != ''){
-        if(element.participantId == this.searchForm.value.participantId) {
+      let flag: boolean;
+      if (this.searchForm.value.participantId != null && this.searchForm.value.participantId != '') {
+        if (element.participantId == this.searchForm.value.participantId) {
           flag = true;
-        }else {
+        } else {
           flag = false;
         }
       }
-      if(this.searchForm.value.firstname!= null && this.searchForm.value.firstname != ''){
-        if( element.firstName.toUpperCase().indexOf(this.searchForm.value.firstname.toString().toUpperCase()) >= 0){
+      if (this.searchForm.value.firstname != null && this.searchForm.value.firstname != '') {
+        if (element.firstName.toUpperCase().indexOf(this.searchForm.value.firstname.toString().toUpperCase()) >= 0) {
           flag = true;
-        }else {
+        } else {
           flag = false;
         }
       }
-      if(this.searchForm.value.lastname!=null && this.searchForm.value.lastname != ''){
-        if( element.lastName.toUpperCase().indexOf(this.searchForm.value.lastname.toString().toUpperCase()) >= 0){
+      if (this.searchForm.value.lastname != null && this.searchForm.value.lastname != '') {
+        if (element.lastName.toUpperCase().indexOf(this.searchForm.value.lastname.toString().toUpperCase()) >= 0) {
           flag = true;
-        }else {
+        } else {
           flag = false;
         }
       }
-      if(this.searchForm.value.dob!=null && this.searchForm.value.dob != ''){
-        if(element.dob == this.searchForm.value.dob){
+      if (this.searchForm.value.dob != null && this.searchForm.value.dob != '') {
+        if (element.dob == this.searchForm.value.dob) {
           flag = true;
-        }else {
+        } else {
           flag = false;
         }
       }
       return flag;
     }, this);
     this.dataSource.data = this.tableValues;
-    if(this.tableValues.length === 0){
-      this.errorMessage = "!!No records found!!";
+    if (this.tableValues.length === 0) {
+      this.errorMessage = '!!No records found!!';
     }
     this.isFiltered = true;
   }

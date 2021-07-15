@@ -53,7 +53,7 @@ ion-icon {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-top: 25px;
+  //padding-top: 25px;
   padding-left: 30px;
   padding-right: 30px;
 }
@@ -100,3 +100,7 @@ ion-icon {
   }
 }
 
+.button-background{
+  background: #5D001E;
+  border-color: #5D001E;
+}

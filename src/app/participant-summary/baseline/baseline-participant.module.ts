@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BaselineParticipantRoutingModule } from './baseline-participant-routing.module';
 
 import { BaselineParticipantComponent } from './baseline-participant.component';
-import {TableModule} from 'primeng';
+import {TableModule} from 'primeng/table';
 import {MaterialModule} from '../../material-module';
 
 @NgModule({

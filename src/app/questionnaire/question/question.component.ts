@@ -4,6 +4,7 @@ import $ from 'jquery';
 import select2Init from 'select2';
 import 'select2/dist/css/select2.min.css';
 import * as Survey from 'survey-angular';
+import {Question} from 'survey-angular';
 import * as widgets from 'surveyjs-widgets';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,10 +15,11 @@ import {AdaptService} from '../../services/adapt.service';
 import {ParticipantStudy} from '../../model/ParticipantStudy';
 import {Observable} from 'rxjs';
 import {DataStorageService} from '../../services/data-storage.service';
+import {ConfirmationService,Message, MessageService} from 'primeng/api';
+import 'survey-angular/modern.css';
 
 Survey.JsonObject.metaData.addProperty('questionbase', 'popupdescription:text');
 Survey.JsonObject.metaData.addProperty('page', 'popupdescription:text');
-import 'survey-angular/modern.css';
 
 Survey.StylesManager.applyTheme('modern');
 
@@ -26,6 +28,7 @@ Survey.StylesManager.applyTheme('modern');
   selector: 'app-questionnaire',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss'],
+  providers: [ConfirmationService,MessageService],
 })
 export class QuestionComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
@@ -42,13 +45,17 @@ export class QuestionComponent implements OnInit {
   closeResult = '';
   navigationUrl = '';
   participantStudy: ParticipantStudy;
-
+  readonlyMode = false;
+  isAllQuestionsNotAnswered=false;
+  msgs: Message[];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private modal: NgbModal,
               private adaptService: AdaptService,
-              private dataStorageService: DataStorageService) {
+              private dataStorageService: DataStorageService,
+              private confirmationService: ConfirmationService,
+              private messageService: MessageService) {
     //this.json = json;
   }
 
@@ -105,6 +112,7 @@ export class QuestionComponent implements OnInit {
     });
 
     this.survey.sendResultOnPageNext = true;
+    this.survey.showNavigationButtons = 'none';
     this.survey.onPartialSend.add((result, options) => {
       console.log('next button click triggered' + JSON.stringify(result.data));
       this.submitSurvey.emit(result.data);
@@ -115,10 +123,16 @@ export class QuestionComponent implements OnInit {
       console.log('complete button click triggered' + JSON.stringify(onCompleteResult));
       this.saveSurveyData(onCompleteResult);
     });
+
+    this.survey.onValueChanged.add(()=>{
+      this.messageService.clear();
+    });
     this.survey.showPreviewBeforeComplete = 'showAllQuestions';
     this.survey.navigateToUrl = this.navigationUrl;
     if ('Completed' === this.participantStudy.status) {
       this.survey.mode = 'display';
+      this.survey.questionsOnPageMode = 'singlePage';
+      this.readonlyMode = true;
     }
 
     this.loadPreviousData(this.participantStudy).subscribe((prevData: ParticipantStudy) => {
@@ -201,11 +215,106 @@ export class QuestionComponent implements OnInit {
     const navigationExtras: NavigationExtras = {
       queryParams: {participantId: this.participantStudy.participantId}
     };
-    const url='adapt/participant/'+this.participantStudy.timeline.toLowerCase();
-    void this.router.navigate([url],navigationExtras);
+    const url = 'adapt/participant/' + this.participantStudy.timeline.toLowerCase();
+    void this.router.navigate([url], navigationExtras);
   }
 
-  private getDismissReason(reason: any): string {
+  onPreviewClick() {
+    this.survey.showPreview();
+    const allQuestions: Array<Question> = this.survey.getAllQuestions();
+
+    for (const question of allQuestions) {
+      console.log('question..' + JSON.stringify(question));
+      const visibleIf = question.visibleIf;
+      if (visibleIf) {
+        const runCondition = this.survey.runCondition(visibleIf);
+        if (runCondition) {
+          if (!question.isAnswered) {
+            this.isAllQuestionsNotAnswered = true;
+            break;
+          }
+        }
+      } else {
+        if (question.visible) {
+          if (!question.isAnswered) {
+            this.isAllQuestionsNotAnswered = true;
+            break;
+          }
+        }
+
+      }
+    }
+
+    if (this.isAllQuestionsNotAnswered) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Some of the questions are not answered. Please answer all the questions'
+      });
+    }
+  }
+
+  onPreviousButtonClick() {
+    this.msgs=[];
+    this.survey.prevPage();
+  }
+
+  onNextButtonClick() {
+    this.msgs=[];
+    this.survey.nextPage();
+  }
+
+  onCompleteButtonClick() {
+    this.msgs=[];
+    let hasUnAnsweredQuestion = false;
+
+    const allQuestions: Array<Question> = this.survey.getAllQuestions();
+
+    for (const question of allQuestions) {
+      console.log('question..' + JSON.stringify(question));
+      const visibleIf = question.visibleIf;
+      if (visibleIf) {
+        const runCondition = this.survey.runCondition(visibleIf);
+        if (runCondition) {
+          if (!question.isAnswered) {
+            hasUnAnsweredQuestion = true;
+            break;
+          }
+        }
+      } else {
+        if (question.visible) {
+          if (!question.isAnswered) {
+            hasUnAnsweredQuestion = true;
+            break;
+          }
+        }
+
+      }
+    }
+    if (hasUnAnsweredQuestion) {
+      console.log('Some of the questions yet to be answered ');
+      this.confirmationService.confirm({
+        message: 'Some of questions are not answered.Do you wish to submit the Questionnaire?',
+        header: 'Confirmation',
+        acceptLabel: 'Submit',
+        rejectLabel: 'Cancel',
+        accept: () => {
+          this.survey.completeLastPage();
+        },
+        reject: () => {
+          this.messageService.clear();
+          this.onPreviewClick();
+          console.log('Cancel clicked');
+        },
+      });
+    } else {
+      console.log('All the questions are answered');
+      this.survey.completeLastPage();
+    }
+
+  }
+
+  getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -213,5 +322,27 @@ export class QuestionComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+
+  showPrevious(): boolean {
+    //console.log('current state.'+this.survey.state);
+    return (undefined !==this.survey && this.survey.state==='preview') || this.readonlyMode;
+  }
+
+  showNext(): boolean {
+    //console.log('current state.'+this.survey.state);
+    return  (undefined !==this.survey && this.survey.state==='preview') || this.readonlyMode
+      || (undefined !==this.survey && this.survey.isLastPage);
+  }
+
+  showPreview(): boolean {
+    //console.log('current state.'+this.survey.state);
+    return  (undefined !==this.survey && !this.survey.isLastPage) || this.readonlyMode;
+  }
+
+  showComplete(): boolean {
+   // console.log('current state.'+this.survey.state);
+    return  (undefined !==this.survey && !this.survey.isLastPage) || this.readonlyMode;;
   }
 }

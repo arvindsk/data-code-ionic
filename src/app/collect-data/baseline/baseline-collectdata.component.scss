@@ -46,9 +46,11 @@ ion-icon {
   display: flex;
   flex-direction: column;
   width: 100%;
-  //padding-top: 125px;
   padding-left: 30px;
   padding-right: 30px;
+  @media(max-width: 600px) {
+    padding-top: 90px;
+  }
 }
 .side-nav-container {
   position: absolute;
@@ -105,7 +107,3 @@ ion-icon {
   background: #5D001E;
   border-color: #5D001E;
 }
-
-
-
-

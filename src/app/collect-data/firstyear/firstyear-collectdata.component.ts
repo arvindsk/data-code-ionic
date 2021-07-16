@@ -42,14 +42,17 @@ export class FirstyearCollectDataComponent implements OnInit, AfterViewInit {
               private adaptService: AdaptService,
               private breakpointObserver: BreakpointObserver,
               private fb: FormBuilder) {
-    this.searchForm = this.fb.group({participantId: new FormControl('', [
-      ]), firstname: new FormControl('', [
-      ]), lastname: new FormControl('', [
-      ]), dob: new FormControl('', [
-      ])});
+    this.searchForm = this.fb.group({
+      participantId: new FormControl('', []),
+      firstname: new FormControl('', []),
+      lastname: new FormControl('', []),
+      dob: new FormControl('', [])
+    });
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       if(result.matches ){
         this.isMobile=true;
+      }else {
+        this.isMobile = false;
       }
       this.displayedColumns = result.matches ?
         ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'completedDate'] :

@@ -43,21 +43,49 @@
   <p-toast [style]="{marginTop: '10px'}"></p-toast>
 
   <div class="example-container">
-    <div class="row">
-      <div class="col align-self-start ">
-        <mat-card-title class="heading"><h1>List of Participants</h1></mat-card-title>
+    <div *ngIf="!isMobile" class="row">
+      <div class="col align-self-start">
+        <div style="float: left">
+          <mat-card-title class="heading"><h1>List of Participants</h1></mat-card-title>
+        </div>
+
       </div>
       <div class="col align-self-end">
+        <div style="float: right">
             <span class="icon">
-      <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">
-         <img src="/assets/searchicon.png" alt="Italian Trulli" width="50" height="45"/>
-      </mat-icon>
-    </span>
-        <span class="icon2">
-      <mat-icon [inline]="true" (click)="loadParticipants('clear')" matTooltip="Clear Filter">
-        <img src="/assets/clearicon.png" alt="Italian Trulli" width="50" height="40"/>
-    </mat-icon>
-    </span>
+              <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">
+                 <img src="/assets/searchicon.png" alt="Italian Trulli" width="50" height="45"/>
+             </mat-icon>
+          </span>
+          <span class="icon2">
+              <mat-icon [inline]="true" (click)="loadParticipants('clear')" matTooltip="Clear Filter">
+                <img src="/assets/clearicon.png" alt="Italian Trulli" width="50" height="40"/>
+              </mat-icon>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isMobile" class="row">
+      <div class="row">
+        <div style="float: left">
+          <mat-card-title class="heading"><h1>List of Participants</h1></mat-card-title>
+        </div>
+
+      </div>
+      <div class="row">
+        <div style="float: right">
+            <span class="icon">
+              <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">
+                 <img src="/assets/searchicon.png" alt="Italian Trulli" width="50" height="45"/>
+             </mat-icon>
+          </span>
+          <span class="icon2">
+              <mat-icon [inline]="true" (click)="loadParticipants('clear')" matTooltip="Clear Filter">
+                <img src="/assets/clearicon.png" alt="Italian Trulli" width="50" height="40"/>
+              </mat-icon>
+          </span>
+        </div>
       </div>
     </div>
     <mat-card-title class="error">{{errorMessage}}</mat-card-title>

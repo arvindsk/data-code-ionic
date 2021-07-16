@@ -56,6 +56,9 @@ ion-icon {
   //padding-top: 25px;
   padding-left: 30px;
   padding-right: 30px;
+  @media(max-width: 600px) {
+    padding-top: 90px;
+  }
 }
 
 .mat-table {

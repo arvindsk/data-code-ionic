@@ -51,6 +51,8 @@ export class BaselineCollectDataComponent implements OnInit, AfterViewInit {
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       if (result.matches) {
         this.isMobile = true;
+      }else {
+        this.isMobile = false;
       }
       this.displayedColumns = result.matches ?
         ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'completedDate'] :

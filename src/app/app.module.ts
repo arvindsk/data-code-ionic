@@ -19,14 +19,29 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EmitService} from './services/emit.service';
 import {DirectAccessGuard} from './services/direct-access.guard';
 import {AuthService} from './services/auth.service';
+import {CommonModule} from '@angular/common';
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, AdaptModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule,
-    AccordionModule, IonicModule, ButtonModule, InputModule, TableModule, HeaderModule, FlyoutModule, HttpClientModule,
-    MaterialModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule,
+    CommonModule,
+    AdaptModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    AccordionModule,
+    IonicModule,
+    ButtonModule,
+    InputModule,
+    TableModule,
+    HeaderModule,
+    FlyoutModule,
+    HttpClientModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule],
   providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, EmitService, AuthService, DirectAccessGuard],
   bootstrap: [AppComponent],
   schemas: []

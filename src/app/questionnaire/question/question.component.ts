@@ -46,7 +46,6 @@ export class QuestionComponent implements OnInit {
   navigationUrl = '';
   participantStudy: ParticipantStudy;
   readonlyMode = false;
-  isAllQuestionsNotAnswered=false;
   msgs: Message[];
 
   constructor(private route: ActivatedRoute,
@@ -125,7 +124,7 @@ export class QuestionComponent implements OnInit {
     });
 
     this.survey.onValueChanged.add(()=>{
-      this.messageService.clear();
+      this.messageService.clear('previewErrorMessage');
     });
     this.survey.showPreviewBeforeComplete = 'showAllQuestions';
     this.survey.navigateToUrl = this.navigationUrl;
@@ -220,35 +219,18 @@ export class QuestionComponent implements OnInit {
   }
 
   onPreviewClick() {
+    this.saveSurveyData(this.survey);
+    this.messageService.clear('previewErrorMessage');
     this.survey.showPreview();
     const allQuestions: Array<Question> = this.survey.getAllQuestions();
 
-    for (const question of allQuestions) {
-      console.log('question..' + JSON.stringify(question));
-      const visibleIf = question.visibleIf;
-      if (visibleIf) {
-        const runCondition = this.survey.runCondition(visibleIf);
-        if (runCondition) {
-          if (!question.isAnswered) {
-            this.isAllQuestionsNotAnswered = true;
-            break;
-          }
-        }
-      } else {
-        if (question.visible) {
-          if (!question.isAnswered) {
-            this.isAllQuestionsNotAnswered = true;
-            break;
-          }
-        }
+    const hasUnAnsweredQuestions =this.hasUnAnsweredQuestions();
 
-      }
-    }
-
-    if (this.isAllQuestionsNotAnswered) {
+    if (hasUnAnsweredQuestions) {
       this.messageService.add({
+        key: 'previewErrorMessage',
         severity: 'error',
-        summary: 'Error',
+        summary: ' ',
         detail: 'Some of the questions are not answered. Please answer all the questions'
       });
     }
@@ -266,31 +248,8 @@ export class QuestionComponent implements OnInit {
 
   onCompleteButtonClick() {
     this.msgs=[];
-    let hasUnAnsweredQuestion = false;
-
-    const allQuestions: Array<Question> = this.survey.getAllQuestions();
-
-    for (const question of allQuestions) {
-      console.log('question..' + JSON.stringify(question));
-      const visibleIf = question.visibleIf;
-      if (visibleIf) {
-        const runCondition = this.survey.runCondition(visibleIf);
-        if (runCondition) {
-          if (!question.isAnswered) {
-            hasUnAnsweredQuestion = true;
-            break;
-          }
-        }
-      } else {
-        if (question.visible) {
-          if (!question.isAnswered) {
-            hasUnAnsweredQuestion = true;
-            break;
-          }
-        }
-
-      }
-    }
+    this.saveSurveyData(this.survey);
+    const hasUnAnsweredQuestion = this.hasUnAnsweredQuestions();
     if (hasUnAnsweredQuestion) {
       console.log('Some of the questions yet to be answered ');
       this.confirmationService.confirm({
@@ -302,16 +261,58 @@ export class QuestionComponent implements OnInit {
           this.survey.completeLastPage();
         },
         reject: () => {
-          this.messageService.clear();
           this.onPreviewClick();
           console.log('Cancel clicked');
         },
       });
     } else {
       console.log('All the questions are answered');
-      this.survey.completeLastPage();
+      this.confirmationService.confirm({
+        message: 'Would you like to submit the Questionnaire?',
+        header: 'Confirmation',
+        acceptLabel: 'Submit',
+        rejectLabel: 'Cancel',
+        accept: () => {
+          this.survey.completeLastPage();
+        },
+        reject: () => {
+          this.onPreviewClick();
+          console.log('Cancel clicked');
+        },
+      });
     }
 
+  }
+
+  hasUnAnsweredQuestions() {
+    let hasUnAnsweredQuestion = false;
+
+    const allQuestions: Array<Question> = this.survey.getAllQuestions();
+
+    for (const question of allQuestions) {
+      console.log('question..' + JSON.stringify(question));
+      if (question.getType() !== 'image' && question.getType() !== 'html') {
+        const visibleIf = question.visibleIf;
+        if (visibleIf) {
+          const runCondition = this.survey.runCondition(visibleIf);
+          if (runCondition) {
+            if (!question.isAnswered) {
+              hasUnAnsweredQuestion = true;
+              break;
+            }
+          }
+        } else {
+          if (question.visible) {
+            if (!question.isAnswered) {
+              hasUnAnsweredQuestion = true;
+              break;
+            }
+          }
+
+        }
+      }
+    }
+    return hasUnAnsweredQuestion;
   }
 
   getDismissReason(reason: any): string {

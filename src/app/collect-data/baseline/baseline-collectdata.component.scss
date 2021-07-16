@@ -42,14 +42,20 @@ ion-icon {
   pointer-events: none;
 }
 
-.example-container {
+
+.aligncenter {
+  text-align:center;
+  padding-top: 120px;
+  padding-bottom: 20px;
+  padding-left: 75px;
+  padding-right: 75px;
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
   @media(max-width: 600px) {
-    padding-top: 90px;
+    padding-top: 200px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 .side-nav-container {

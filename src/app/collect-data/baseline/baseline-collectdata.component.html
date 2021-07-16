@@ -38,20 +38,19 @@
   </div>
 </p-sidebar>
 
-<ion-content style="--padding-top: 120px">
+<ion-content>
 
-  <p-toast [style]="{marginTop: '10px'}"></p-toast>
-
-  <div class="example-container">
+  <div class="aligncenter">
+    <p-toast [style]="{marginTop: '10px'}"></p-toast>
 
     <div *ngIf="!isMobile" class="row">
       <div class="col align-self-start">
-        <div style="float: left">
+        <div style="float: right">
           <mat-card-title class="heading"><h1>List of Participants</h1></mat-card-title>
         </div>
 
       </div>
-      <div class="col align-self-end">
+      <div class="col-5 align-self-end">
         <div style="float: right">
             <span class="icon">
               <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">

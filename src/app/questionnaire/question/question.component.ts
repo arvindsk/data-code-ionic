@@ -128,7 +128,7 @@ export class QuestionComponent implements OnInit {
     });
     this.survey.showPreviewBeforeComplete = 'showAllQuestions';
     this.survey.navigateToUrl = this.navigationUrl;
-    if ('Completed' === this.participantStudy.status) {
+    if ('Submitted' === this.participantStudy.status) {
       this.survey.mode = 'display';
       this.survey.questionsOnPageMode = 'singlePage';
       this.readonlyMode = true;

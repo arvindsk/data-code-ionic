@@ -4,7 +4,7 @@ import $ from 'jquery';
 import select2Init from 'select2';
 import 'select2/dist/css/select2.min.css';
 import * as Survey from 'survey-angular';
-import {Question} from 'survey-angular';
+import {ItemValue, Question} from 'survey-angular';
 import * as widgets from 'surveyjs-widgets';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -67,7 +67,7 @@ export class QuestionComponent implements OnInit {
     defaultThemeColors['$main-hover-color'] = '#5D001E';
     defaultThemeColors['$text-color'] = '#4a4a4a';
     defaultThemeColors['$header-color'] = '#5D001E';
-    defaultThemeColors['$header-background-color'] = '#4a4a4a';
+    defaultThemeColors['$header-background-color'] = '#f8f8f8';
     defaultThemeColors['$body-container-background-color'] = '#f8f8f8';
     Survey.StylesManager.applyTheme();
     this.participantStudy = new ParticipantStudy();
@@ -253,10 +253,10 @@ export class QuestionComponent implements OnInit {
     if (hasUnAnsweredQuestion) {
       console.log('Some of the questions yet to be answered ');
       this.confirmationService.confirm({
-        message: 'Some of questions are not answered.Do you wish to submit the Questionnaire?',
+        message: 'Some of questions are not answered.Would you like to submit the questionnaire?',
         header: 'Confirmation',
-        acceptLabel: 'Submit',
-        rejectLabel: 'Cancel',
+        acceptLabel: 'Yes',
+        rejectLabel: 'No',
         accept: () => {
           this.survey.completeLastPage();
         },
@@ -268,10 +268,10 @@ export class QuestionComponent implements OnInit {
     } else {
       console.log('All the questions are answered');
       this.confirmationService.confirm({
-        message: 'Would you like to submit the Questionnaire?',
+        message: 'Would you like to submit the questionnaire?',
         header: 'Confirmation',
-        acceptLabel: 'Submit',
-        rejectLabel: 'Cancel',
+        acceptLabel: 'Yes',
+        rejectLabel: 'No',
         accept: () => {
           this.survey.completeLastPage();
         },
@@ -292,25 +292,40 @@ export class QuestionComponent implements OnInit {
     for (const question of allQuestions) {
       console.log('question..' + JSON.stringify(question));
       if (question.getType() !== 'image' && question.getType() !== 'html') {
-        const visibleIf = question.visibleIf;
-        if (visibleIf) {
-          const runCondition = this.survey.runCondition(visibleIf);
-          if (runCondition) {
-            if (!question.isAnswered) {
-              hasUnAnsweredQuestion = true;
+
+        if (question.getType() === 'matrix') {
+          for (const row of question.rows) {
+            const rowVal: ItemValue = row;
+            console.log('rowval..',rowVal.value);
+            if (!question.value[rowVal.value]) {
+              hasUnAnsweredQuestion=true;
               break;
             }
           }
         } else {
-          if (question.visible) {
-            if (!question.isAnswered) {
-              hasUnAnsweredQuestion = true;
-              break;
-            }
-          }
 
+          const visibleIf = question.visibleIf;
+          if (visibleIf) {
+            const runCondition = this.survey.runCondition(visibleIf);
+            if (runCondition) {
+              if (!question.isAnswered) {
+                hasUnAnsweredQuestion = true;
+                break;
+              }
+            }
+          } else {
+            if (question.visible) {
+              if (!question.isAnswered) {
+                hasUnAnsweredQuestion = true;
+                break;
+              }
+            }
+
+          }
         }
+
       }
+
     }
     return hasUnAnsweredQuestion;
   }

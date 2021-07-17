@@ -40,8 +40,11 @@
 
 <ion-content>
 
-  <div class="aligncenter">
+  <div class="aligncenter row justify-content-center">
+    <div class="col-md-10">
+
     <p-toast [style]="{marginTop: '10px'}"></p-toast>
+
     <div *ngIf="!isMobile" class="row">
       <div class="col align-self-start">
         <div style="float: right">
@@ -87,8 +90,9 @@
         </div>
       </div>
     </div>
+
     <mat-card-title class="error">{{errorMessage}}</mat-card-title>
-    <p class="alignpage"></p>
+
     <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
 
       <ng-container matColumnDef="participantId">
@@ -135,5 +139,6 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
     <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+  </div>
   </div>
 </ion-content>

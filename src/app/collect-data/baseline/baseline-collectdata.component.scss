@@ -48,14 +48,14 @@ ion-icon {
   text-align:center;
   padding-top: 120px;
   padding-bottom: 20px;
-  padding-left: 75px;
-  padding-right: 75px;
-  display: flex;
-  flex-direction: column;
+  //padding-left: 75px;
+  //padding-right: 75px;
+  //display: flex;
+  //flex-direction: column;
   width: 100%;
   @media(max-width: 600px) {
     padding-top: 200px;
-    padding-left: 5px;
+    padding-left: 10px;
     padding-right: 5px;
   }
 }
@@ -108,9 +108,28 @@ ion-icon {
     align-items: start;
     padding: 8px 24px;
   }
+  .mat-column-completedDate {
+    display: flex !important;
+  }
+}
+
+.mat-column-completedDate {
+  display: grid;
+  text-align: center;
+  align-items: center;
 }
 
 .button-background{
   background: #5D001E;
   border-color: #5D001E;
+}
+
+.row{
+  @media(max-width: 600px) {
+    --bs-gutter-x: .5rem;
+  }
+}
+
+.mat-header-cell{
+  font-weight: bold;
 }

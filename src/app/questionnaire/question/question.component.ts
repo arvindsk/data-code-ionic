@@ -15,7 +15,7 @@ import {AdaptService} from '../../services/adapt.service';
 import {ParticipantStudy} from '../../model/ParticipantStudy';
 import {Observable} from 'rxjs';
 import {DataStorageService} from '../../services/data-storage.service';
-import {ConfirmationService,Message, MessageService} from 'primeng/api';
+import {ConfirmationService, Message, MessageService} from 'primeng/api';
 import 'survey-angular/modern.css';
 
 Survey.JsonObject.metaData.addProperty('questionbase', 'popupdescription:text');
@@ -28,7 +28,7 @@ Survey.StylesManager.applyTheme('modern');
   selector: 'app-questionnaire',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss'],
-  providers: [ConfirmationService,MessageService],
+  providers: [ConfirmationService, MessageService],
 })
 export class QuestionComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
@@ -123,7 +123,7 @@ export class QuestionComponent implements OnInit {
       this.saveSurveyData(onCompleteResult);
     });
 
-    this.survey.onValueChanged.add(()=>{
+    this.survey.onValueChanged.add(() => {
       this.messageService.clear('previewErrorMessage');
     });
     this.survey.showPreviewBeforeComplete = 'showAllQuestions';
@@ -224,36 +224,36 @@ export class QuestionComponent implements OnInit {
     this.survey.showPreview();
     const allQuestions: Array<Question> = this.survey.getAllQuestions();
 
-    const hasUnAnsweredQuestions =this.hasUnAnsweredQuestions();
+    const hasUnAnsweredQuestions = this.hasUnAnsweredQuestions();
 
     if (hasUnAnsweredQuestions) {
       this.messageService.add({
         key: 'previewErrorMessage',
         severity: 'error',
         summary: ' ',
-        detail: 'Some of the questions are not answered. Please answer all the questions'
+        detail: 'Some of the questions are unanswered. Please respond to unanswered questions.'
       });
     }
   }
 
   onPreviousButtonClick() {
-    this.msgs=[];
+    this.msgs = [];
     this.survey.prevPage();
   }
 
   onNextButtonClick() {
-    this.msgs=[];
+    this.msgs = [];
     this.survey.nextPage();
   }
 
   onCompleteButtonClick() {
-    this.msgs=[];
+    this.msgs = [];
     this.saveSurveyData(this.survey);
     const hasUnAnsweredQuestion = this.hasUnAnsweredQuestions();
     if (hasUnAnsweredQuestion) {
       console.log('Some of the questions yet to be answered ');
       this.confirmationService.confirm({
-        message: 'Some of questions are not answered.Would you like to submit the questionnaire?',
+        message: 'Some of the questions are unanswered. Would you like to continue to respond (OR) submit the questionnaire with unanswered responses?',
         header: 'Confirmation',
         acceptLabel: 'Yes',
         rejectLabel: 'No',
@@ -296,9 +296,9 @@ export class QuestionComponent implements OnInit {
         if (question.getType() === 'matrix') {
           for (const row of question.rows) {
             const rowVal: ItemValue = row;
-            console.log('rowval..',rowVal.value);
+            console.log('rowval..', rowVal.value);
             if (!question.value[rowVal.value]) {
-              hasUnAnsweredQuestion=true;
+              hasUnAnsweredQuestion = true;
               break;
             }
           }
@@ -343,22 +343,23 @@ export class QuestionComponent implements OnInit {
 
   showPrevious(): boolean {
     //console.log('current state.'+this.survey.state);
-    return (undefined !==this.survey && this.survey.state==='preview') || this.readonlyMode;
+    return (undefined !== this.survey && this.survey.state === 'preview') || this.readonlyMode;
   }
 
   showNext(): boolean {
     //console.log('current state.'+this.survey.state);
-    return  (undefined !==this.survey && this.survey.state==='preview') || this.readonlyMode
-      || (undefined !==this.survey && this.survey.isLastPage);
+    return (undefined !== this.survey && this.survey.state === 'preview') || this.readonlyMode
+      || (undefined !== this.survey && this.survey.isLastPage);
   }
 
   showPreview(): boolean {
     //console.log('current state.'+this.survey.state);
-    return  (undefined !==this.survey && !this.survey.isLastPage) || this.readonlyMode;
+    return (undefined !== this.survey && !this.survey.isLastPage) || this.readonlyMode;
   }
 
   showComplete(): boolean {
-   // console.log('current state.'+this.survey.state);
-    return  (undefined !==this.survey && !this.survey.isLastPage) || this.readonlyMode;;
+    // console.log('current state.'+this.survey.state);
+    return (undefined !== this.survey && !this.survey.isLastPage) || this.readonlyMode;
+    ;
   }
 }

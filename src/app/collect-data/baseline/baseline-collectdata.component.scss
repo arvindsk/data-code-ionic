@@ -113,11 +113,33 @@ ion-icon {
   }
 }
 
-.mat-column-completedDate {
-  display: grid;
-  text-align: center;
-  align-items: center;
+.mat-column-participantId {
+  flex: 0 0 16%;
 }
+
+.mat-column-firstName {
+  flex: 0 0 20%;
+  text-align: left;
+}
+
+.mat-column-lastName {
+  flex: 0 0 20%;
+  text-align: left;
+}
+
+.mat-column-dob {
+  flex: 0 0 10%;
+}
+
+.mat-column-registeredDate {
+  flex: 0 0 17%;
+}
+
+.mat-column-completedDate {
+  flex: 0 0 17%;
+}
+
+
 
 .button-background{
   background: #5D001E;

@@ -74,7 +74,7 @@ export class QuestionComponent implements OnInit {
     widgets.inputmask(Survey);
     this.participantStudy = this.dataStorageService.storage.participantStudy;
     this.navigationUrl = '/adapt/participant/' + this.participantStudy.timeline.toLowerCase() + '?participantId=' + this.participantStudy.participantId;
-    this.adaptService.getQuestionnaire(this.participantStudy.studyName).subscribe((data: any) => {
+    this.adaptService.getQuestionnaire(this.participantStudy.studyId).subscribe((data: any) => {
         this.json = data;
         this.loadQuestionnaire();
       },

@@ -18,11 +18,11 @@ export class AdaptService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getQuestionnaire(questionnaireType: string): Observable<any> {
+  public getQuestionnaire(questionnaireType: number): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     let params = new HttpParams();
-    params = params.append('questionnaireType', questionnaireType);
+    params = params.append('study_id', String(questionnaireType));
 
     return this.httpClient.get<any>(this.baseUri + 'api/adapt/questionnaire/questionnaireType', {headers, params});
   }

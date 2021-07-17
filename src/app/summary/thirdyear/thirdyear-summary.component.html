@@ -1,5 +1,7 @@
 <ion-content>
-<div class="aligncenter">
+    <div class="row aligncenter">
+      <div class="col-md-6 offset-md-3">
+
   <mat-card-title-group>
     <mat-card-title class="heading"><h1>Summary of Questionnaires Submitted</h1></mat-card-title>
     <mat-card-title><h3>Total number of participants registered - {{headerCount}}</h3></mat-card-title>
@@ -14,11 +16,12 @@
     <ng-container matColumnDef="participantStudyCount">
       <mat-header-cell mat-header-cell *matHeaderCellDef > Number of Participants </mat-header-cell>>
       <mat-cell mat-cell *matCellDef="let element">
-        <span class="mobile-label">Number Of Participants:</span>{{element.participantStudyCount}} </mat-cell>>
+        <span class="mobile-label">Number of Participants:</span>{{element.participantStudyCount}} </mat-cell>>
     </ng-container>
     <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
   </div>
+</div>
 </ion-content>
 

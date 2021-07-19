@@ -5,11 +5,12 @@
            [closeOnEscape]="true"
            [baseZIndex]="99999"
            appendTo="body"
-           styleClass="p-sidebar-sm">
+           styleClass="p-sidebar-md">
 
   <div class="container">
     <form id="searchForm" [formGroup]="searchForm" (ngSubmit)="search()">
       <div class="flyoutwarning">* Clear the search to reload the complete participant summary</div>
+      <div class="flyoutwarning1">* Use ADC ID or other searches, names can be used as wild card</div>
       <div>ADC ID
         <app-input #appInputElement formControlName="participantId" name="participantId"
                    autofocus="true"></app-input>

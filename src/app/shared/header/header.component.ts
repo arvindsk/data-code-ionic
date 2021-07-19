@@ -30,7 +30,11 @@ export class HeaderComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.mainmenu = "summary";
+    if(location.pathname.indexOf("summary")>=0){
+      this.mainmenu = "summary";
+    }else{
+      this.mainmenu = "collect-data";
+    }
     this.fname = '';
     this.site = '';
     this.loggedIn = false;

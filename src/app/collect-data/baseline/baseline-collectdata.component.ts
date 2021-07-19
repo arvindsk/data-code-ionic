@@ -120,26 +120,48 @@ export class BaselineCollectDataComponent implements OnInit, AfterViewInit {
         } else {
           flag = false;
         }
-      }
-      if (this.searchForm.value.firstname != null && this.searchForm.value.firstname != '') {
-        if (element.firstName.toUpperCase().indexOf(this.searchForm.value.firstname.toString().toUpperCase()) >= 0) {
-          flag = true;
-        } else {
-          flag = false;
-        }
-      }
-      if (this.searchForm.value.lastname != null && this.searchForm.value.lastname != '') {
-        if (element.lastName.toUpperCase().indexOf(this.searchForm.value.lastname.toString().toUpperCase()) >= 0) {
-          flag = true;
-        } else {
-          flag = false;
-        }
-      }
-      if (this.searchForm.value.dob != null && this.searchForm.value.dob != '') {
-        if (element.dob == this.searchForm.value.dob) {
-          flag = true;
-        } else {
-          flag = false;
+      }else {
+        if (this.searchForm.value.firstname != null && this.searchForm.value.firstname != '') {
+          if (element.firstName.toUpperCase().indexOf(this.searchForm.value.firstname.toString().toUpperCase()) >= 0) {
+            flag = true;
+            if (this.searchForm.value.lastname != null && this.searchForm.value.lastname != '') {
+              if (element.lastName.toUpperCase().indexOf(this.searchForm.value.lastname.toString().toUpperCase()) >= 0) {
+                flag = true;
+                if (this.searchForm.value.dob != null && this.searchForm.value.dob != '') {
+                  if (element.dob == this.searchForm.value.dob) {
+                    flag = true;
+                  } else {
+                    flag = false;
+                  }
+                }
+              } else {
+                flag = false;
+              }
+            }
+          } else {
+            flag = false;
+          }
+        }else if (this.searchForm.value.lastname != null && this.searchForm.value.lastname != '') {
+            if (element.lastName.toUpperCase().indexOf(this.searchForm.value.lastname.toString().toUpperCase()) >= 0) {
+              flag = true;
+              if (this.searchForm.value.dob != null && this.searchForm.value.dob != '') {
+                if (element.dob == this.searchForm.value.dob) {
+                  flag = true;
+                } else {
+                  flag = false;
+                }
+              }
+            } else {
+              flag = false;
+            }
+        }else{
+          if (this.searchForm.value.dob != null && this.searchForm.value.dob != '') {
+            if (element.dob == this.searchForm.value.dob) {
+              flag = true;
+            } else {
+              flag = false;
+            }
+          }
         }
       }
       return flag;

@@ -343,7 +343,9 @@ export class QuestionComponent implements OnInit {
 
   showPrevious(): boolean {
     //console.log('current state.'+this.survey.state);
-    return (undefined !== this.survey && this.survey.state === 'preview') || this.readonlyMode;
+    return (undefined !== this.survey && this.survey.state === 'preview')
+      || this.readonlyMode
+      || (undefined !== this.survey && this.survey.isFirstPage);
   }
 
   showNext(): boolean {

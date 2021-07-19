@@ -24,8 +24,8 @@
       <!--      <ion-back-button class="back-button-style" (click)="backButtonClick()"
               [text]="'Back to Participant Summary'"
               defaultHref="home"></ion-back-button>-->
-      <ion-button size="small" fill="solid" color="warning" (click)="backButtonClick()">Exit</ion-button>
-      <ion-button [hidden]="showPrevious()" size="small" fill="solid" color="primary" (click)="onPreviousButtonClick()">
+      <ion-button size="small" fill="solid" color="dark" (click)="backButtonClick()">Exit</ion-button>
+      <ion-button [hidden]="showPrevious()" size="small" fill="solid" color="secondary" (click)="onPreviousButtonClick()">
         Previous
       </ion-button>
       <!--      <ion-back-button class="back-button-style" (click)="backButtonClick()"
@@ -33,9 +33,9 @@
         defaultHref="home"></ion-back-button>-->
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button [hidden]="showNext()" size="small" fill="solid" color="primary" (click)="onNextButtonClick()">Next
+      <ion-button [hidden]="showNext()" size="small" fill="solid" color="secondary" (click)="onNextButtonClick()">Next
       </ion-button>
-      <ion-button [hidden]="showPreview()" size="small" fill="solid" color="danger" (click)="onPreviewClick()">Preview
+      <ion-button [hidden]="showPreview()" size="small" fill="solid" color="primary" (click)="onPreviewClick()">Preview
       </ion-button>
       <ion-button [hidden]="showComplete()" size="small" fill="solid" color="success" (click)="onCompleteButtonClick()">
         Submit

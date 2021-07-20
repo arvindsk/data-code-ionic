@@ -1,3 +1,4 @@
+/*
 .alignleft {
   float: left;
   font-size: 1.75em;
@@ -59,4 +60,121 @@
 .ion-segment-button {
   --color-checked: #EAE7DC;
 }
+*/
 
+.navbar {
+  //padding-top: 20px;
+  //margin-bottom: 20px;
+}
+
+.custom-icon {
+  font-size: 21px;
+  padding-top: 17px;
+  line-height: 16px;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+
+.navbar-brand {
+  padding: 0;
+}
+
+
+@media (min-width: 768px) {
+  .nav-item {
+    font-size: 20px;
+    //font-weight: bold;
+    padding-right: 25px;
+  }
+  .nav-link.active {
+    color: #000 !important;
+    font-weight: 500;
+    border-bottom: 2px solid #000;
+  }
+
+  .nav-link {
+    padding-bottom: 18px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-link.active {
+    color: #000 !important;
+    font-weight: 500;
+    //border-bottom: 2px solid #871212;
+  }
+}
+
+
+.navbar {
+  background: #EAE7DC;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-bottom: 1px solid #d6d6d6;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .1);
+  padding-bottom: 0;
+}
+
+.nav-link img {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+.navbar .navbar-brand {
+  color: #555;
+  padding-left: 0;
+  padding-right: 25px;
+  font-family: 'Merienda One', sans-serif;
+}
+
+.navbar .navbar-brand i {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.navbar .dropdown-item i {
+  font-size: 16px;
+  min-width: 22px;
+}
+
+.navbar .dropdown-menu {
+  border-radius: 1px;
+  border-color: #e5e5e5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+}
+
+.navbar .dropdown-menu a {
+  color: #555555;
+  padding: 8px 20px;
+  line-height: normal;
+}
+
+.navbar .dropdown-menu a:hover,
+.navbar .dropdown-menu a:active {
+  color: #871212;
+}
+
+
+
+:host{
+  ::ng-deep{
+    .switch-medium, .switch{
+      margin-top: 6px !important;
+    }
+
+    .switch .off{
+      color: #0d0d0d !important;
+    }
+
+    .switch-medium.switch-labeled{
+      width: 70px !important;
+    }
+    .switch-medium.switch-labeled.checked small {
+      left: 40px !important;
+    }
+
+  }
+}

@@ -27,7 +27,7 @@ table {
 
 .aligncenter {
   text-align:center;
-  padding-top: 120px;
+  padding-top: 80px;
   padding-bottom: 20px;
   //padding-left: 75px;
   //padding-right: 75px;
@@ -35,7 +35,7 @@ table {
   //flex-direction: column;
   width: 100%;
   @media(max-width: 600px) {
-    padding-top: 200px;
+    padding-top: 80px;
     padding-left: 10px;
     padding-right: 5px;
   }

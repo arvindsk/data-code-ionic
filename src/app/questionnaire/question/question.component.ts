@@ -73,7 +73,7 @@ export class QuestionComponent implements OnInit {
     this.participantStudy = new ParticipantStudy();
     widgets.inputmask(Survey);
     this.participantStudy = this.dataStorageService.storage.participantStudy;
-    this.navigationUrl = '/adapt/participant/' + this.participantStudy.timeline.toLowerCase() + '?participantId=' + this.participantStudy.participantId;
+    this.navigationUrl = '/adapt/collect-data/participant/' + this.participantStudy.timeline.toLowerCase() + '?participantId=' + this.participantStudy.participantId;
     this.adaptService.getQuestionnaire(this.participantStudy.studyId).subscribe((data: any) => {
         this.json = data;
         this.loadQuestionnaire();
@@ -214,7 +214,7 @@ export class QuestionComponent implements OnInit {
     const navigationExtras: NavigationExtras = {
       queryParams: {participantId: this.participantStudy.participantId}
     };
-    const url = 'adapt/participant/' + this.participantStudy.timeline.toLowerCase();
+    const url = '/adapt/collect-data/participant/' + this.participantStudy.timeline.toLowerCase();
     void this.router.navigate([url], navigationExtras);
   }
 

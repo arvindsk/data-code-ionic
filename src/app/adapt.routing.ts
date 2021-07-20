@@ -9,7 +9,7 @@ import {DirectAccessGuard} from "./services/direct-access.guard";
 export const routes: Routes = [
   //{ path: '', component: AdaptLoginComponent },
   {path: 'adapt/home', component: HomePage, canActivate: [DirectAccessGuard]},
-  {path: 'adapt/participant',
+  {path: 'adapt/collect-data/participant',
     loadChildren: () => import('./participant-summary/participant-summary.module').then(m => m.ParticipantSummaryModule)
   },
   {path: 'adapt/collect-data',
@@ -21,7 +21,7 @@ export const routes: Routes = [
   {path: 'adapt/login', component: LoginComponent, canActivate: [DirectAccessGuard]},
 
   {
-    path: 'adapt/questionnaire',
+    path: 'adapt/collect-data/participant/questionnaire',
     loadChildren: () => import('./questionnaire/questionnaire.module').then(m => m.QuestionnaireModule)
   }
 ];

@@ -1,9 +1,59 @@
+<nav class="navbar navbar-expand-md navbar-light" aria-label="Fourth navbar example">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="#">
+        <img src="/assets/adapt.png" alt="" width="120" height="50" class="d-inline-block align-text-top">
+
+      </a>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04"
+            aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div *ngIf="loggedIn" class="collapse navbar-collapse" id="navbarsExample04">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a [routerLink]="['adapt/summary']" class="nav-link" [routerLinkActive]="['active']"
+             aria-current="page">Summary</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['adapt/collect-data']"
+             class="nav-link"
+             [routerLinkActive]="['active']"
+             aria-current="page">Collect Data</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="icon1">Hi, <span>{{fname}}</span> <span> [{{site}}]</span></span></a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdown04">
+            <!--            <li>
+                          <a class="dropdown-item" (click)="toggle()"><i class="bi bi-circle-half custom-icon"></i> Dark/Light</a>
+                        </li>-->
+            <li class="nav-item">
+              <ui-switch color="black" labelOff="Light" defaultBgColor="grey" labelOn="Dark" [(ngModel)]="enable"
+                         (change)="toggle()"></ui-switch>
+
+            </li>
+            <div class="dropdown-divider"></div>
+            <li>
+              <a href="#" class="dropdown-item" (click)="logout()"><i class="bi bi-box-arrow-right custom-icon"></i>
+                Logout</a>
+            </li>
+
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
 
 
-
-
-
-  <ion-toolbar class="header">
+<!--  <ion-toolbar class="header">
     <ion-toolbar class="toolbar1">
       <ion-title>
 
@@ -35,4 +85,4 @@
 
       </ion-title>
     </ion-toolbar>
-  </ion-toolbar>
+  </ion-toolbar>-->

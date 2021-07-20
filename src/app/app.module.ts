@@ -20,6 +20,9 @@ import {EmitService} from './services/emit.service';
 import {DirectAccessGuard} from './services/direct-access.guard';
 import {AuthService} from './services/auth.service';
 import {CommonModule} from '@angular/common';
+import { ThemeModule } from './theme/theme.module';
+import { lightTheme } from './theme/light-theme';
+import { darkTheme } from './theme/dark-theme';
 
 
 @NgModule({
@@ -41,7 +44,11 @@ import {CommonModule} from '@angular/common';
     HttpClientModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    ThemeModule.forRoot({
+      themes: [lightTheme, darkTheme],
+      active: 'light'
+    })],
   providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, EmitService, AuthService, DirectAccessGuard],
   bootstrap: [AppComponent],
   schemas: []

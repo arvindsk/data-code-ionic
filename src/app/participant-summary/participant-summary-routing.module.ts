@@ -38,14 +38,14 @@ const routes: Routes = [
     },
     {
       path: '',
-      redirectTo: '/adapt/participant/baseline',
+      redirectTo: '/adapt/collect-data/participant/baseline',
       pathMatch: 'full'
     }
     ], canActivate: [DirectAccessGuard]
   },
   {
     path: '',
-    redirectTo: '/adapt/participant/baseline',
+    redirectTo: '/adapt/collect-data/participant/baseline',
     pathMatch: 'full'
   }
 ];

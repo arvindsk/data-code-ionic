@@ -38,9 +38,9 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef> Activity </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
           <span class="mobile-label">Activity:</span>
-          <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Firstyear' && !element.endedTimeline"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Begin</a></span>
-          <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Firstyear' && !element.endedTimeline"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">Continue</a></span>
-          <span *ngIf="element.status=='Submitted'"><a [routerLink]="['/adapt/questionnaire']" (click)="onTab(element)">View</a></span>
+          <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Firstyear' && !element.endedTimeline"><a [routerLink]="['/adapt/collect-data/participant/questionnaire']" (click)="onTab(element)">Begin</a></span>
+          <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Firstyear' && !element.endedTimeline"><a [routerLink]="['/adapt/collect-data/participant/questionnaire']" (click)="onTab(element)">Continue</a></span>
+          <span *ngIf="element.status=='Submitted'"><a [routerLink]="['/adapt/collect-data/participant/questionnaire']" (click)="onTab(element)">View</a></span>
           <span *ngIf="element.status!='Submitted' && element.activeTimeline!='Firstyear'">Begin</span>
           <span *ngIf="element.status!='Submitted' && element.activeTimeline=='Firstyear' && element.endedTimeline">Begin</span>
         </mat-cell>

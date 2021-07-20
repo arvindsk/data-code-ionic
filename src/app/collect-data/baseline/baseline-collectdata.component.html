@@ -111,7 +111,7 @@
       <ng-container matColumnDef="participantId">
         <mat-header-cell mat-sort-header *matHeaderCellDef>ADC ID</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span class="mobile-label">Participant ID:</span>
+          <span class="mobile-label">ADC ID:</span>
           <a class="nav-link" [routerLink]="['/adapt/collect-data/participant/baseline']"
              [queryParams]="{participantId: element.participantId}"
              (click)="onTab(element)">{{element.participantId}}</a></mat-cell>

@@ -45,30 +45,30 @@
   <div class="aligncenter row justify-content-center">
     <div class="col-md-10">
 
-    <p-toast [style]="{marginTop: '10px'}"></p-toast>
+      <p-toast [style]="{marginTop: '10px'}"></p-toast>
 
-    <div *ngIf="!isMobile" class="row">
-      <div class="col align-self-start">
-        <div style="float: right">
-          <mat-card-title class="heading"><h1>List of Participants</h1></mat-card-title>
+      <div *ngIf="!isMobile" class="row">
+        <div class="col align-self-start">
+          <div style="float: right">
+            <mat-card-title class="heading"><h1>List of Participants</h1></mat-card-title>
+          </div>
+
         </div>
+        <div class="col-5 align-self-end">
+          <div style="float: right">
+            <!--            <span class="icon">
+                          <mat-icon matTooltip="Search by Filter"  [inline]="true" (click)="loadParticipants('clear');flyout = true">search
+                            &lt;!&ndash; <img src="/assets/searchicon.png" alt="Italian Trulli" width="50" height="45"/>&ndash;&gt;
+                         </mat-icon>
 
-      </div>
-      <div class="col-5 align-self-end">
-        <div style="float: right">
-<!--            <span class="icon">
-              <mat-icon matTooltip="Search by Filter"  [inline]="true" (click)="loadParticipants('clear');flyout = true">search
-                &lt;!&ndash; <img src="/assets/searchicon.png" alt="Italian Trulli" width="50" height="45"/>&ndash;&gt;
-             </mat-icon>
+                      </span>-->
 
-          </span>-->
+            <button mat-button type="submit" (click)="loadParticipants('clear');flyout = true">
+              <mat-icon aria-hidden="false" aria-label="search">search</mat-icon>
+              <p>Search</p>
+            </button>
 
-          <button mat-button type="submit" (click)="loadParticipants('clear');flyout = true">
-            <mat-icon aria-hidden="false" aria-label="search" >search</mat-icon>
-            <p>Search</p>
-          </button>
-
-          <button mat-button type="submit" (click)="loadParticipants('clear');flyout = true">
+          <button mat-button type="submit" (click)="loadParticipants('clear')">
             <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
             <p>Clear</p>
           </button>
@@ -95,7 +95,7 @@
             <p>Search</p>
           </button>
 
-          <button mat-button type="submit" (click)="loadParticipants('clear');flyout = true">
+          <button mat-button type="submit" (click)="loadParticipants('clear')">
             <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
             <p>Clear</p>
           </button>
@@ -103,46 +103,46 @@
       </div>
     </div>
 
-    <mat-card-title class="error">{{errorMessage}}</mat-card-title>
+      <mat-card-title class="error">{{errorMessage}}</mat-card-title>
 
-    <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
+      <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
 
-      <ng-container matColumnDef="participantId">
-        <mat-header-cell mat-sort-header *matHeaderCellDef>ADC ID</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span class="mobile-label">ADC ID:</span>
-          <a class="nav-link" [routerLink]="['/adapt/collect-data/participant/baseline']"
-             [queryParams]="{participantId: element.participantId}"
-             (click)="onTab(element)">{{element.participantId}}</a></mat-cell>
-      </ng-container>
-
-
-      <ng-container matColumnDef="firstName">
-        <mat-header-cell mat-sort-header *matHeaderCellDef> First Name</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span class="mobile-label">First Name:</span>
-          {{element.firstName}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="participantId">
+          <mat-header-cell mat-sort-header *matHeaderCellDef>ADC ID</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">ADC ID:</span>
+            <a class="nav-link" [routerLink]="['/adapt/collect-data/participant/baseline']"
+               [queryParams]="{participantId: element.participantId}"
+               (click)="onTab(element)">{{element.participantId}}</a></mat-cell>
+        </ng-container>
 
 
-      <ng-container matColumnDef="lastName">
-        <mat-header-cell mat-sort-header *matHeaderCellDef> Last Name</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span class="mobile-label">Last Name:</span>{{element.lastName}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> First Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">First Name:</span>
+            {{element.firstName}} </mat-cell>
+        </ng-container>
 
 
-      <ng-container matColumnDef="dob">
-        <mat-header-cell mat-sort-header *matHeaderCellDef> DOB</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span class="mobile-label">DOB:</span>{{element.dob}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Last Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">Last Name:</span>{{element.lastName}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="registeredDate">
-        <mat-header-cell mat-sort-header *matHeaderCellDef> Registered Date</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span class="mobile-label">Registered Date:</span>{{element.registeredDate | date}} </mat-cell>
-      </ng-container>
+
+        <ng-container matColumnDef="dob">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> DOB</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">DOB:</span>{{element.dob}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="registeredDate">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Registered Date</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">Registered Date:</span>{{element.registeredDate | date}} </mat-cell>
+        </ng-container>
 
       <ng-container matColumnDef="completedDate">
         <mat-header-cell mat-sort-header *matHeaderCellDef> Last Updated On</mat-header-cell>

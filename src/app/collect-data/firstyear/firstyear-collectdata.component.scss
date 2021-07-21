@@ -27,22 +27,27 @@
   padding-right: 30px;
 }
 
+.flyoutwarning{
+  padding-top: 30px;
+  color: red;
+  font-size: 1em;
+}
+
 .flyoutwarning1{
   padding-bottom: 30px;
   color: red;
   font-size: 1em;
 }
 
-.flyoutwarning{
-  padding-top: 30px;
-  padding-bottom: 10px;
-  color: red;
-  font-size: 1em;
+.custom-theme-settings {
+  background: var(--background);
+  color: var(--on-background);
 }
 
 .heading {
   padding-left: 30px;
-  color: #5D001E;
+ // color: #5D001E;
+  color: var(--on-my-page-header);
 }
 
 ion-icon {
@@ -51,7 +56,7 @@ ion-icon {
 
 
 .aligncenter {
-  text-align:center;
+  //text-align:center;
   padding-top: 80px;
   padding-bottom: 20px;
   //padding-left: 75px;
@@ -69,12 +74,26 @@ ion-icon {
 .mat-table {
   overflow: auto;
   max-height: 500px;
+  background: var(--my-table-background);
+  color: var(--on-my-table-background);
 
 }
 
 .mat-header-cell{
+  font-weight: 500;
   font-size: 1.25em;
   padding-top: 10px;
+  background: var(--my-table-background);
+  color: var(--on-my-table-background);
+}
+
+.mat-select-value-text .mat-select-value{
+  color: var(--on-my-table-background) !important;
+}
+
+.mat-cell {
+  background: var(--my-table-background);
+  color: var(--on-my-table-background);
 }
 
 .mobile-label {
@@ -92,6 +111,8 @@ ion-icon {
     width: 120px;
     display: inline-block;
     font-weight: bold;
+    background: var(--my-table-background);
+    color: var(--on-my-table-background);
   }
   mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
     padding-left: 0;
@@ -139,6 +160,7 @@ ion-icon {
 }
 
 
+
 .button-background{
   background: #5D001E;
   border-color: #5D001E;
@@ -150,14 +172,26 @@ ion-icon {
   }
 }
 
-.mat-header-cell{
-  font-weight: bold;
-}
-
 :host {
   ::ng-deep {
     .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
       line-height: 25px !important;
     }
+    .mat-paginator{
+      //background: var(--my-mat-paginator-background);
+      background: var(--my-table-background);
+      color: var(--on-my-table-background);
+    }
+
+     .mat-paginator-page-size .mat-select-trigger{
+      background: var(--my-table-background);
+      color: var(--on-my-table-background);
+    }
+    .mat-select-value{
+      color: var(--on-my-table-background);
+    }
+    .mat-select-arrow{
+      color: var(--on-my-table-background);
+}
   }
 }

@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content class="custom-theme-settings">
     <div class="row aligncenter">
       <div class="col-md-6 offset-md-3">
 
@@ -16,7 +16,7 @@
     <ng-container matColumnDef="participantStudyCount">
       <mat-header-cell mat-header-cell *matHeaderCellDef > Number of Participants </mat-header-cell>>
       <mat-cell mat-cell *matCellDef="let element">
-        <span class="mobile-label">Number Of Participants:</span>{{element.participantStudyCount}} </mat-cell>>
+        <span class="mobile-label">Number of Participants:</span>{{element.participantStudyCount}} </mat-cell>>
     </ng-container>
     <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

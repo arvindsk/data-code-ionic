@@ -62,13 +62,18 @@ export class QuestionComponent implements OnInit {
     widgets.select2(Survey);
     widgets.select2tagbox(Survey);
 
-    const defaultThemeColors = Survey.StylesManager.ThemeColors.default;
-    defaultThemeColors['$main-color'] = '#5D001E';
-    defaultThemeColors['$main-hover-color'] = '#5D001E';
-    defaultThemeColors['$text-color'] = '#4a4a4a';
-    defaultThemeColors['$header-color'] = '#5D001E';
-    defaultThemeColors['$header-background-color'] = '#f8f8f8';
-    defaultThemeColors['$body-container-background-color'] = '#f8f8f8';
+    const themeColors = Survey.StylesManager.ThemeColors.default;
+    themeColors['$main-color'] = 'var(--my-qs-primary-dark)';
+    themeColors['$main-hover-color'] = 'var(--my-qs-primary-dark)';
+    themeColors['$text-color'] = 'var(--my-qs-text-primary)';
+    themeColors['$header-color'] = 'var(--my-qs-secondary-main)';
+    themeColors['$border-color'] = 'var(--my-qs-divider)';
+    themeColors['$header-background-color'] = 'var(--my-qs-header-background-color)';
+    themeColors['$body-background-color'] = 'var(--my-qs-background-default)';
+    themeColors['$body-container-background-color'] = 'var(--my-qs-background-paper)';
+    themeColors['$inputs-background-color'] = 'var(--my-qs-input-background-color)';
+    themeColors['$error-color'] = 'var(--my-qs-error-main)';
+    themeColors['$error-background-color'] = 'var(--my-qs-error-light)';
     Survey.StylesManager.applyTheme();
     this.participantStudy = new ParticipantStudy();
     widgets.inputmask(Survey);

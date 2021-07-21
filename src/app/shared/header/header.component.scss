@@ -98,6 +98,7 @@
   }
 
   .nav-link {
+    margin-top: 16px;
     padding-bottom: 18px !important;
   }
 }
@@ -131,7 +132,7 @@
 .navbar .navbar-brand {
   color: #555;
   padding-left: 0;
-  padding-right: 25px;
+  padding-right: 15px;
   font-family: 'Merienda One', sans-serif;
 }
 
@@ -166,20 +167,24 @@
 
 :host{
   ::ng-deep{
-    .switch-medium, .switch{
-      margin-top: 6px !important;
+    .switch-small, .switch{
+      //margin-top: 20px !important;
+    }
+
+    .switch {
+      //margin-top: 10px !important;
     }
 
     .switch .off{
       color: #0d0d0d !important;
     }
 
-    .switch-medium.switch-labeled{
+/*    .switch-medium.switch-labeled{
       width: 70px !important;
     }
     .switch-medium.switch-labeled.checked small {
       left: 40px !important;
-    }
+    }*/
 
   }
 }

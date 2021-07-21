@@ -153,3 +153,11 @@ ion-icon {
 .mat-header-cell{
   font-weight: bold;
 }
+
+:host {
+  ::ng-deep {
+    .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
+      line-height: 25px !important;
+    }
+  }
+}

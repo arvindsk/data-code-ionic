@@ -55,16 +55,15 @@
       </div>
       <div class="col-5 align-self-end">
         <div style="float: right">
-            <span class="icon">
-              <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">
-                 <img src="/assets/searchicon.png" alt="Italian Trulli" width="50" height="45"/>
-             </mat-icon>
-          </span>
-          <span class="icon2">
-              <mat-icon [inline]="true" (click)="loadParticipants('clear')" matTooltip="Clear Filter">
-                <img src="/assets/clearicon.png" alt="Italian Trulli" width="50" height="40"/>
-              </mat-icon>
-          </span>
+          <button mat-button type="submit" (click)="loadParticipants('clear');flyout = true">
+            <mat-icon aria-hidden="false" aria-label="search" >search</mat-icon>
+            <p>Search</p>
+          </button>
+
+          <button mat-button type="submit" (click)="loadParticipants('clear');flyout = true">
+            <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
+            <p>Clear</p>
+          </button>
         </div>
       </div>
     </div>
@@ -78,16 +77,15 @@
       </div>
       <div class="row">
         <div style="float: right">
-            <span class="icon">
-              <mat-icon matTooltip="Search by Filter" [inline]="true" (click)="loadParticipants('clear');flyout = true">
-                 <img src="/assets/searchicon.png" alt="Italian Trulli" width="50" height="45"/>
-             </mat-icon>
-          </span>
-          <span class="icon2">
-              <mat-icon [inline]="true" (click)="loadParticipants('clear')" matTooltip="Clear Filter">
-                <img src="/assets/clearicon.png" alt="Italian Trulli" width="50" height="40"/>
-              </mat-icon>
-          </span>
+          <button mat-button type="submit" (click)="loadParticipants('clear');flyout = true">
+            <mat-icon aria-hidden="false" aria-label="search" >search</mat-icon>
+            <p>Search</p>
+          </button>
+
+          <button mat-button type="submit" (click)="loadParticipants('clear');flyout = true">
+            <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
+            <p>Clear</p>
+          </button>
         </div>
       </div>
     </div>

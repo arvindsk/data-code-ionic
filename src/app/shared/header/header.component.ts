@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
   fname: string;
-  site: string;
+  @Output() site : string;
   loggedIn: boolean;
   mainmenu = 'summary';
   enable: false;

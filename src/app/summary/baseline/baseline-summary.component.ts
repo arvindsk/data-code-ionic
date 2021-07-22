@@ -22,7 +22,7 @@ import {BreakpointObserver} from "@angular/cdk/layout";
 })
 export class BaselineSummaryComponent implements OnInit {
 
-
+  @Input() site: string;
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
@@ -59,6 +59,8 @@ export class BaselineSummaryComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.site = localStorage.getItem("site");
+
     this.columnHeader=[
       {field:'questionnaire', header :'Questionnaire'},
       {field:'noOfParticipants', header :'Number Of Participants'},
@@ -74,7 +76,7 @@ export class BaselineSummaryComponent implements OnInit {
   }
 
   loadSummary() {
-    this.adaptService.getSummary().subscribe((data: Summary) => {
+    this.adaptService.getSummary(this.site).subscribe((data: Summary) => {
       if (data) {
        this.headerCount=data.participantCount;
         this.tableValues = data.baselineStudySummary;

@@ -20,7 +20,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 })
 export class FirstyearCollectDataComponent implements OnInit, AfterViewInit {
 
-
+  @Input() site: string;
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
@@ -66,6 +66,9 @@ export class FirstyearCollectDataComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+
+    this.site = localStorage.getItem("site");
+
     this.columnHeader = [
       {field: 'participantId', header: 'Participant ID'},
       {field: 'firstName', header: 'First Name'},
@@ -89,7 +92,7 @@ export class FirstyearCollectDataComponent implements OnInit, AfterViewInit {
       }
       this.reset();
     }
-    this.adaptService.getParticipants('Firstyear').subscribe((data: Participant[]) => {
+    this.adaptService.getParticipants(this.site).subscribe((data: Participant[]) => {
       if (data) {
         this.tableValues = data;
         this.dataSource.data = data;

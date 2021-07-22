@@ -52,12 +52,12 @@ export class AdaptService {
     );
   }
 
-  public getParticipants(timeline : string): Observable<Participant[]> {
+  public getParticipants(host : string): Observable<Participant[]> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
 
     return this.httpClient.post<Participant[]>(this.baseUri + 'api/adapt/collect-data/get-all-participants',
-      timeline,
+      host,
       {headers});
   }
 
@@ -70,11 +70,11 @@ export class AdaptService {
       {headers});
   }
 
-  public getSummary(): Observable<Summary> {
+  public getSummary(host: string): Observable<Summary> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
 
-    return this.httpClient.get<Summary>(this.baseUri + 'api/adapt/summary/get-summary', {headers});
+    return this.httpClient.post<Summary>(this.baseUri + 'api/adapt/summary/get-summary', host,{headers});
   }
 
   public login(loginRequest : LoginRequest): Observable<LoginResponse> {

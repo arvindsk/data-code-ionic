@@ -26,6 +26,14 @@
   padding-left: 30px;
   // color: #5D001E;
   color: var(--on-my-page-header);
+  line-height: 0.25;
+}
+
+.heading1 {
+  font-size: medium;
+}
+.heading2 {
+  line-height: 5;
 }
 
 .mat-table {

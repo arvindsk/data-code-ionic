@@ -45,12 +45,22 @@
 }
 
 .heading {
+  text-align: center;
   padding-left: 30px;
- // color: #5D001E;
+  // color: #5D001E;
   color: var(--on-my-page-header);
+  line-height: 0.25;
 }
 
 .heading1 {
+  text-align: center;
+  font-size: medium;
+}
+.heading2 {
+  line-height: 5;
+}
+
+.heading3 {
   text-align: center;
 }
 

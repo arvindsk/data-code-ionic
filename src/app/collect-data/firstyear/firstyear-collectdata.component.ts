@@ -21,6 +21,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 export class FirstyearCollectDataComponent implements OnInit, AfterViewInit {
 
   @Input() site: string;
+  sitename: string;
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
@@ -68,6 +69,7 @@ export class FirstyearCollectDataComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     this.site = localStorage.getItem("site");
+    this.sitename = localStorage.getItem("sitename");
 
     this.columnHeader = [
       {field: 'participantId', header: 'Participant ID'},

@@ -2,13 +2,18 @@
     <div class="row aligncenter">
       <div class="col-md-6 offset-md-3">
 
-  <mat-card-title-group>
-    <mat-card-title class="heading"><h1>Diverse VCID Study</h1></mat-card-title>
-    <mat-card-title ><h2>Completion Report</h2></mat-card-title>
-    <mat-card-title><h3>Total number of participants registered - {{headerCount}}</h3></mat-card-title>
-  </mat-card-title-group>
+        <mat-card-title-group>
+          <mat-card-title class="heading">
+            <h1>Diverse VCID Study</h1>
+            <p class="heading1">{{sitename}}</p>
+          </mat-card-title>
+          <mat-card-title ><p class="heading2"></p> </mat-card-title>
+          <mat-card-title><h2>Completion Report</h2></mat-card-title>
+          <mat-card-title><h3>Total number of participants registered - {{headerCount}}</h3></mat-card-title>
+        </mat-card-title-group>
 
-  <mat-table mat-table [dataSource]="tableValues" [class.isMobile]="isMobile" class="mat-elevation-z8">
+
+        <mat-table mat-table [dataSource]="tableValues" [class.isMobile]="isMobile" class="mat-elevation-z8">
     <ng-container matColumnDef="studyName">
       <mat-header-cell mat-header-cell *matHeaderCellDef > Questionnaire </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element">

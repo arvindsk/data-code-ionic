@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   public name: string;
   public signInForm: FormGroup;
   site: string;
+  sitename: string;
   @Output() errorMessage : any;
   constructor( private route: ActivatedRoute,
                private router: Router,
@@ -54,8 +55,9 @@ export class LoginComponent implements OnInit {
         if (data.status === 'success') {
           this.name = data.name;
           this.site = data.site;
+          this.sitename = data.sitename
           this.postData();
-          this.authService.login(loginRequest.emailId, data.name, data.site);
+          this.authService.login(loginRequest.emailId, data.name, data.site, data.sitename);
           this.signInForm.reset();
           this.router.navigate(['adapt/summary']);
         }else{

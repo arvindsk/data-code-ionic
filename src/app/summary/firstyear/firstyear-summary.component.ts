@@ -22,6 +22,7 @@ import {BreakpointObserver} from "@angular/cdk/layout";
 export class FirstyearSummaryComponent implements OnInit {
 
   @Input() site: string;
+  sitename: string;
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
@@ -59,6 +60,8 @@ export class FirstyearSummaryComponent implements OnInit {
   ngOnInit(): void {
 
     this.site = localStorage.getItem("site");
+    this.sitename = localStorage.getItem("sitename");
+
     this.columnHeader=[
       {field:'questionnaire', header :'Questionnaire'},
       {field:'noOfParticipants', header :'Number Of Participants'},

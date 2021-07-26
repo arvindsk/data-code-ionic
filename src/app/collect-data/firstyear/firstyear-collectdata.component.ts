@@ -30,7 +30,7 @@ export class FirstyearCollectDataComponent implements OnInit, AfterViewInit {
   public tableValues: Participant[];
   dataSource = new MatTableDataSource<Participant>([]);
   @ViewChild('dt') table: Table;
-  displayedColumns: string[] = ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'completedDate'];
+  displayedColumns: string[] = ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'firstyearStatus'];
   public flyout = false;
   isMobile=false;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -56,8 +56,8 @@ export class FirstyearCollectDataComponent implements OnInit, AfterViewInit {
         this.isMobile = false;
       }
       this.displayedColumns = result.matches ?
-        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'completedDate'] :
-        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'completedDate'];
+        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'firstyearStatus'] :
+        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'firstyearStatus'];
     });
   }
 
@@ -77,7 +77,7 @@ export class FirstyearCollectDataComponent implements OnInit, AfterViewInit {
       {field: 'lastName', header: 'Last Name'},
       {field: 'dob', header: 'DOB'},
       {field: 'registeredDate', header: 'Registered Date'},
-      {field: 'completedDate', header: 'Completed Date'},
+      {field: 'status', header: 'Status'},
     ];
 
     this.loadParticipants("init");

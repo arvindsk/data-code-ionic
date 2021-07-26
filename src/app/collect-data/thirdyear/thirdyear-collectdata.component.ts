@@ -30,7 +30,7 @@ export class ThirdyearCollectDataComponent implements OnInit, AfterViewInit {
   public tableValues: Participant[];
   dataSource = new MatTableDataSource<Participant>([]);
   @ViewChild('dt') table: Table;
-  displayedColumns: string[] = ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'completedDate'];
+  displayedColumns: string[] = ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'thirdyearStatus'];
   public flyout = false;
   isMobile=false;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -56,8 +56,8 @@ export class ThirdyearCollectDataComponent implements OnInit, AfterViewInit {
         this.isMobile = false;
       }
       this.displayedColumns = result.matches ?
-        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'completedDate'] :
-        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'completedDate'];
+        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'thirdyearStatus'] :
+        ['participantId', 'firstName', 'lastName', 'dob', 'registeredDate', 'thirdyearStatus'];
     });
   }
 

@@ -146,10 +146,10 @@
           <span class="mobile-label">Registered Date:</span>{{element.registeredDate | date}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="completedDate">
-        <mat-header-cell mat-sort-header *matHeaderCellDef> Last Updated On </mat-header-cell>
+      <ng-container matColumnDef="thirdyearStatus">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span class="mobile-label">Last Updated On:</span>{{element.completedDate | date}} </mat-cell>
+          <span class="mobile-label">Status:</span>{{element.thirdyearStatus}} </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

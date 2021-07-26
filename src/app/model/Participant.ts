@@ -5,5 +5,7 @@ export class Participant {
   dob: string;
   registeredDate: Date;
   timeline: string;
-  completedDate: Date;
+  baselineStatus: string;
+  firstyearStatus: string;
+  thirdyearStatus: string;
 }

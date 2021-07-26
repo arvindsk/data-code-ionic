@@ -15,11 +15,12 @@ export class AuthService {
     return true;
   }
 
-  public login(userid, fname, site, sitename){
+  public login(userid, fname, site, sitename, naccId){
     localStorage.setItem('userid', userid);
     localStorage.setItem('fname', fname);
     localStorage.setItem('site', site);
     localStorage.setItem('sitename', sitename);
+    localStorage.setItem('naccId', naccId);
   }
 
   public logout(){

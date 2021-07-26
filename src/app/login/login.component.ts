@@ -17,6 +17,7 @@ import {AuthService} from "../services/auth.service";
 export class LoginComponent implements OnInit {
 
   public name: string;
+  public naccId: number;
   public signInForm: FormGroup;
   site: string;
   sitename: string;
@@ -42,6 +43,8 @@ export class LoginComponent implements OnInit {
   postData() {
     this._emitSvc.emitThisData("fname:"+this.name);
     this._emitSvc.emitThisData("site:"+this.site);
+    this._emitSvc.emitThisData("sitename:"+this.sitename);
+    this._emitSvc.emitThisData("naccId:"+this.naccId);
   }
 
   login(): void {
@@ -55,9 +58,10 @@ export class LoginComponent implements OnInit {
         if (data.status === 'success') {
           this.name = data.name;
           this.site = data.site;
-          this.sitename = data.sitename
+          this.sitename = data.sitename;
+          this.naccId = data.naccId;
           this.postData();
-          this.authService.login(loginRequest.emailId, data.name, data.site, data.sitename);
+          this.authService.login(loginRequest.emailId, data.name, data.site, data.sitename, data.naccId);
           this.signInForm.reset();
           this.router.navigate(['adapt/summary']);
         }else{

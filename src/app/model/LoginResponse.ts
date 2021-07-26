@@ -3,4 +3,5 @@ export class LoginResponse {
   name: string;
   site: string;
   sitename: string;
+  naccId: number;
 }

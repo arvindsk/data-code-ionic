@@ -23,6 +23,7 @@ export class ThirdyearSummaryComponent implements OnInit {
 
   @Input() site: string;
   sitename: string;
+  naccId: string;
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
@@ -61,6 +62,7 @@ export class ThirdyearSummaryComponent implements OnInit {
 
     this.site = localStorage.getItem("site");
     this.sitename = localStorage.getItem("sitename");
+    this.naccId = localStorage.getItem("naccId");
 
     this.columnHeader=[
       {field:'questionnaire', header :'Questionnaire'},
@@ -78,7 +80,7 @@ export class ThirdyearSummaryComponent implements OnInit {
   }
 
   loadSummary() {
-    this.adaptService.getSummary(this.site).subscribe((data: Summary) => {
+    this.adaptService.getSummary(this.naccId).subscribe((data: Summary) => {
       if (data) {
         this.headerCount=data.participantCount;
         this.tableValues = data.thirdyearStudySummary;

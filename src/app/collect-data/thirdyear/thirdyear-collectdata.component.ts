@@ -22,6 +22,7 @@ export class ThirdyearCollectDataComponent implements OnInit, AfterViewInit {
 
   @Input() site: string;
   sitename: string;
+  naccId: string;
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
   @Output() tabClosed: EventEmitter<any> = new EventEmitter();
@@ -70,6 +71,7 @@ export class ThirdyearCollectDataComponent implements OnInit, AfterViewInit {
 
     this.site = localStorage.getItem("site");
     this.sitename = localStorage.getItem("sitename");
+    this.naccId = localStorage.getItem("naccId");
 
     this.columnHeader = [
       {field: 'participantId', header: 'Participant ID'},
@@ -94,7 +96,7 @@ export class ThirdyearCollectDataComponent implements OnInit, AfterViewInit {
       }
       this.reset();
     }
-    this.adaptService.getParticipants(this.site).subscribe((data: Participant[]) => {
+    this.adaptService.getParticipants(this.naccId).subscribe((data: Participant[]) => {
       if (data) {
         this.tableValues = data;
         this.dataSource.data = data;

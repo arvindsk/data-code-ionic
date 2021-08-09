@@ -10,8 +10,8 @@
   <div class="container" >
     <form id="searchForm" [formGroup]="searchForm" (ngSubmit)="search()">
       <div class="flyoutwarning">* Clear the search to reload the complete participant summary</div>
-      <div class="flyoutwarning1">* Use ADC ID or other searches, names can be used as wild card</div>
-      <div>ADC ID
+      <div class="flyoutwarning1">* Use Participant ID or other searches, names can be used as wild card</div>
+      <div>Participant ID
         <app-input #appInputElement formControlName="participantId" name="participantId"
                    autofocus="true"></app-input>
       </div>
@@ -109,9 +109,9 @@
     <mat-table matSort [dataSource]="dataSource" [class.isMobile]="isMobile" class="mat-elevation-z8">
 
       <ng-container matColumnDef="participantId">
-        <mat-header-cell mat-sort-header *matHeaderCellDef>ADC ID </mat-header-cell>
+        <mat-header-cell mat-sort-header *matHeaderCellDef>Participant ID </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span class="mobile-label">ADC ID:</span>
+          <span class="mobile-label">Participant ID:</span>
           <a class="nav-link" [routerLink]="['/adapt/collect-data/participant/firstyear']"
              [queryParams]="{participantId: element.participantId}"
              (click)="onTab(element)">{{element.participantId}}</a></mat-cell>

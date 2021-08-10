@@ -228,6 +228,47 @@ export class QuestionComponent implements OnInit {
     this.messageService.clear('previewErrorMessage');
     this.survey.showPreview();
     const allQuestions: Array<Question> = this.survey.getAllQuestions();
+    this.survey.onAfterRenderQuestion.add((survey, options) => {
+
+      if (survey.state !== 'preview') {
+        return;
+      }
+      console.log('options',options);
+      const question=options.question;
+        if (question.getType() !== 'image' && question.getType() !== 'html') {
+
+          if (question.getType() === 'matrix') {
+            for (const row of question.rows) {
+              const rowVal: ItemValue = row;
+              console.log('rowval..', rowVal.value);
+              console.log('question.value..', question.value);
+              if (question.value===undefined || !question.value[rowVal.value]) {
+                this.addWarningButton(options);
+                break;
+              }
+            }
+          } else {
+
+            const visibleIf = question.visibleIf;
+            if (visibleIf) {
+              const runCondition = this.survey.runCondition(visibleIf);
+              if (runCondition) {
+                if (!question.isAnswered) {
+                  this.addWarningButton(options);
+                }
+              }
+            } else {
+              if (question.visible) {
+                if (!question.isAnswered) {
+                  this.addWarningButton(options);
+                }
+              }
+
+            }
+          }
+
+        }
+    });
 
     const hasUnAnsweredQuestions = this.hasUnAnsweredQuestions();
 
@@ -238,6 +279,18 @@ export class QuestionComponent implements OnInit {
         summary: ' ',
         detail: 'Some of the questions are unanswered. Please respond to unanswered questions.'
       });
+    }
+  }
+
+  addWarningButton(options) {
+    const btn = document.createElement('span');
+    btn.className = 'ques-icon-warning';
+    btn.innerHTML = '<i class="bi bi-exclamation-triangle-fill" style="font-size: 2rem; color: red;"></i>';
+    const header = options.htmlElement.querySelector('h5');
+    const errorIcon = options.htmlElement.querySelector('.ques-icon-warning');
+    console.log('errorIcon', errorIcon);
+    if (errorIcon === null) {
+      header.appendChild(btn);
     }
   }
 
@@ -295,14 +348,15 @@ export class QuestionComponent implements OnInit {
     const allQuestions: Array<Question> = this.survey.getAllQuestions();
 
     for (const question of allQuestions) {
-      console.log('question..' + JSON.stringify(question));
+     // console.log('question',question);
+     // console.log('question..' + JSON.stringify(question));
       if (question.getType() !== 'image' && question.getType() !== 'html') {
 
         if (question.getType() === 'matrix') {
           for (const row of question.rows) {
             const rowVal: ItemValue = row;
             console.log('rowval..', rowVal.value);
-            if (!question.value[rowVal.value]) {
+            if (question.value===undefined || !question.value[rowVal.value]) {
               hasUnAnsweredQuestion = true;
               break;
             }
@@ -367,6 +421,6 @@ export class QuestionComponent implements OnInit {
   showComplete(): boolean {
     // console.log('current state.'+this.survey.state);
     return (undefined !== this.survey && !this.survey.isLastPage) || this.readonlyMode;
-    ;
+
   }
 }

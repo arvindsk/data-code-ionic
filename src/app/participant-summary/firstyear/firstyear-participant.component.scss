@@ -113,22 +113,25 @@ ion-icon {
   }
 }
 
-
 .mat-column-studyName {
-  flex: 0 0 35%;
+  flex: 0 0 25%;
   text-align: left;
 }
 
+.mat-column-access {
+  flex: 0 0 25%;
+}
+
 .mat-column-status {
-  flex: 0 0 20%;
+  flex: 0 0 15%;
 }
 
 .mat-column-start {
-  flex: 0 0 20%;
+  flex: 0 0 15%;
 }
 
 .mat-column-completedDate {
-  flex: 0 0 25%;
+  flex: 0 0 20%;
 }
 
 .row{

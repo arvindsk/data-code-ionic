@@ -9,6 +9,11 @@ import {ParticipantStudy} from "../../model/ParticipantStudy";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
+interface Access
+{
+  name: string;
+  code: string;
+}
 
 @Component({
   selector: 'app-baseline-participant',
@@ -16,9 +21,10 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./baseline-participant.component.scss'],
   providers: [MessageService],
 })
+
 export class BaselineParticipantComponent implements OnInit {
 
-  displayedColumns: string[] = ['studyName', 'status', 'view', 'completedDate'];
+  displayedColumns: string[] = ['studyName', 'access', 'status', 'view', 'completedDate'];
 
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
@@ -35,6 +41,13 @@ export class BaselineParticipantComponent implements OnInit {
   public headerName;
   public headerId;
   isMobile = false;
+  acccessMode: Access[];
+
+  selectedVascularMode: String;
+  selectedSleepMode: String;
+  selectedEcodMode: String;
+  selectedDietMode: String;
+  selectedPhysicalMode: String;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -42,13 +55,23 @@ export class BaselineParticipantComponent implements OnInit {
               private breakpointObserver: BreakpointObserver,
               private adaptService: AdaptService,
               private modal: NgbModal) {
+    this.acccessMode = [
+      {name: 'Onsite by Coordinator', code: 'coordinator'},
+      {name: 'Onsite by Participant', code: 'participant'},
+      {name: 'Email Participant', code: 'email'}
+    ];
+    this.selectedVascularMode=this.acccessMode[0].code;
+    this.selectedSleepMode=this.acccessMode[0].code;
+    this.selectedEcodMode=this.acccessMode[0].code;
+    this.selectedDietMode=this.acccessMode[0].code;
+    this.selectedPhysicalMode=this.acccessMode[0].code;
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       if (result.matches) {
         this.isMobile = true;
       }
       this.displayedColumns = result.matches ?
-        ['studyName', 'status', 'start', 'completedDate'] :
-        ['studyName', 'status', 'start', 'completedDate'];
+        ['studyName', 'access', 'status', 'start', 'completedDate'] :
+        ['studyName', 'access', 'status', 'start', 'completedDate'];
     });
   }
 
@@ -59,6 +82,7 @@ export class BaselineParticipantComponent implements OnInit {
 
     this.columnHeader = [
       {field: 'studyName', header: 'Questionnaire'},
+      {field: 'access', header: 'Access'},
       {field: 'status', header: 'Status'},
       {field: 'start', header: 'Begin/Continue/View'},
       {field: 'completedDate', header: 'Completed Date'},

@@ -1,6 +1,6 @@
 <ion-content>
   <div class="aligncenter row justify-content-center">
-    <div class="col-md-7">
+    <div class="col-md-8">
 
     <mat-card-title class="heading"><h1>{{headerName}} [Participant ID:{{headerId}}]</h1></mat-card-title>
     <p class="alignpage"></p>
@@ -18,6 +18,42 @@
             <ion-icon size="small" name="information-circle">
             </ion-icon>
           </mat-icon>-->
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="access">
+        <mat-header-cell mat-header-cell *matHeaderCellDef> Access</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let element">
+          <span class="mobile-label">Access:</span>
+          <span>
+              <mat-form-field>
+                <mat-select *ngIf="element.studyName==='Vascular Risk'" [(value)]="selectedVascularMode">
+                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
+                  <mat-option value="participant">Onsite-Participant</mat-option>
+                  <mat-option value="email">Email-Participant</mat-option>
+                </mat-select>
+                <mat-select *ngIf="element.studyName==='Sleep'" [(value)]="selectedSleepMode">
+                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
+                  <mat-option value="participant">Onsite-Participant</mat-option>
+                  <mat-option value="email">Email-Participant</mat-option>
+                </mat-select>
+                <mat-select *ngIf="element.studyName==='Everyday Cognition (E-Cog)'" [(value)]="selectedEcodMode">
+                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
+                  <mat-option value="participant">Onsite-Participant</mat-option>
+                  <mat-option value="email">Email-Participant</mat-option>
+                </mat-select>
+                <mat-select *ngIf="element.studyName==='Diet Screening'" [(value)]="selectedDietMode">
+                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
+                  <mat-option value="participant">Onsite-Participant</mat-option>
+                  <mat-option value="email">Email-Participant</mat-option>
+                </mat-select>
+                <mat-select *ngIf="element.studyName==='Physical Activity Screening'" [(value)]="selectedPhysicalMode">
+                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
+                  <mat-option value="participant">Onsite-Participant</mat-option>
+                  <mat-option value="email">Email-Participant</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </span>
         </mat-cell>
       </ng-container>
 

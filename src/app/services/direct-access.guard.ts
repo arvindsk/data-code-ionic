@@ -15,9 +15,12 @@ export class DirectAccessGuard implements CanActivate {
     if (!this.authService.isAuthenticated()) {
       if(state.url == '/adapt/login'){
         return true;
+      }else if (state.url == '/adapt/collect-data/participant/questionnaire'){
+        return true;
+      }else {
+        this.router.navigate(['']); // Navigate away to some other page
+        return false;
       }
-      this.router.navigate(['']); // Navigate away to some other page
-      return false;
     }
     if(state.url == '/adapt/login'){
       this.router.navigate(['/adapt/summary']);

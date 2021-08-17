@@ -8,4 +8,5 @@ export class Participant {
   baselineStatus: string;
   firstyearStatus: string;
   thirdyearStatus: string;
+  email: string;
 }

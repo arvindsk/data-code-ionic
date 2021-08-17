@@ -10,4 +10,6 @@ export class ParticipantStudy {
   enabled: boolean;
   activeTimeline: string;
   firstName: string;
+  access: string;
+  quid: string;
 }

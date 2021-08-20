@@ -1,5 +1,9 @@
 <ion-content>
   <div class="aligncenter row justify-content-center">
+    <div class="pmessagestyle">
+      <p-messages [key]="'baselineAccessMessage'" [hideTransitionOptions]="'10ms'" ></p-messages>
+    </div>
+    <!--<p-toast position="top-right" [baseZIndex]="50000"></p-toast>-->
     <div class="col-md-8">
 
     <mat-card-title class="heading"><h1>{{headerName}} [Participant ID:{{headerId}}]</h1></mat-card-title>
@@ -27,7 +31,7 @@
           <span class="mobile-label">Access:</span>
           <span>
               <mat-form-field>
-                <mat-select *ngIf="element.studyName==='Vascular Risk'" [(value)]="selectedVascularMode">
+<!--                <mat-select *ngIf="element.studyName==='Vascular Risk'" [(value)]="selectedVascularMode">
                   <mat-option value="coordinator">Onsite-Coordinator</mat-option>
                   <mat-option value="participant">Onsite-Participant</mat-option>
                   <mat-option value="email">Email-Participant</mat-option>
@@ -46,11 +50,12 @@
                   <mat-option value="coordinator">Onsite-Coordinator</mat-option>
                   <mat-option value="participant">Onsite-Participant</mat-option>
                   <mat-option value="email">Email-Participant</mat-option>
-                </mat-select>
-                <mat-select *ngIf="element.studyName==='Physical Activity Screening'" [(value)]="selectedPhysicalMode">
-                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
+                </mat-select>-->
+                <mat-select  [disabled]="element.status!='Submitted' && element.activeTimeline!='Firstyear'" [(ngModel)]="element.access" (ngModelChange)="onDropdownValueChange(element)">
+                      <mat-option  *ngFor="let access of acccessMode" [value]="access.code">   {{ access.name }} </mat-option>
+<!--                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
                   <mat-option value="participant">Onsite-Participant</mat-option>
-                  <mat-option value="email">Email-Participant</mat-option>
+                  <mat-option value="email">Email-Participant</mat-option>-->
                 </mat-select>
               </mat-form-field>
             </span>

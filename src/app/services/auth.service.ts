@@ -24,7 +24,11 @@ export class AuthService {
   }
 
   public logout(){
-    localStorage.clear();
+    localStorage.removeItem('userid');
+    localStorage.removeItem('fname');
+    localStorage.removeItem('site');
+    localStorage.removeItem('sitename');
+    localStorage.removeItem('naccId');
   }
 
 }

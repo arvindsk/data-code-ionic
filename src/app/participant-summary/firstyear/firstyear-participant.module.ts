@@ -9,16 +9,18 @@ import { FirstyearParticipantRoutingModule } from './firstyear-participant-routi
 import { FirstyearParticipantComponent } from './firstyear-participant.component';
 import {TableModule} from 'primeng/table';
 import {MaterialModule} from "../../material-module";
+import {MessagesModule} from "primeng/messages";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    FirstyearParticipantRoutingModule,
-    TableModule,
-    MaterialModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        FirstyearParticipantRoutingModule,
+        TableModule,
+        MaterialModule,
+        MessagesModule,
+    ],
   declarations: [FirstyearParticipantComponent]
 })
 export class FirstyearParticipantModule {}

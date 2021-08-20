@@ -1,5 +1,10 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [key]="'baselinesubmit'" [baseZIndex]="10000"></p-confirmDialog>
 <ion-content>
   <div class="aligncenter row justify-content-center">
+    <div class="pmessagestyle">
+      <p-messages [key]="'baselineAccessMessage'" [hideTransitionOptions]="'10ms'" ></p-messages>
+    </div>
+    <!--<p-toast position="top-right" [baseZIndex]="50000"></p-toast>-->
     <div class="col-md-8">
 
       <mat-card-title class="heading"><h1>{{headerName}} [Participant ID:{{headerId}}]</h1></mat-card-title>
@@ -27,7 +32,7 @@
             <span class="mobile-label">Access:</span>
             <span>
               <mat-form-field>
-                <mat-select *ngIf="element.studyName==='Vascular Risk'" [(value)]="selectedVascularMode">
+<!--                <mat-select *ngIf="element.studyName==='Vascular Risk'" [(value)]="selectedVascularMode">
                   <mat-option value="coordinator">Onsite-Coordinator</mat-option>
                   <mat-option value="participant">Onsite-Participant</mat-option>
                   <mat-option value="email">Email-Participant</mat-option>
@@ -46,11 +51,12 @@
                   <mat-option value="coordinator">Onsite-Coordinator</mat-option>
                   <mat-option value="participant">Onsite-Participant</mat-option>
                   <mat-option value="email">Email-Participant</mat-option>
-                </mat-select>
-                <mat-select *ngIf="element.studyName==='Physical Activity Screening'" [(value)]="selectedPhysicalMode">
-                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
+                </mat-select>-->
+                <mat-select  [(ngModel)]="element.access" (ngModelChange)="onDropdownValueChange(element)">
+                      <mat-option *ngFor="let access of acccessMode" [value]="access.code">   {{ access.name }} </mat-option>
+<!--                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
                   <mat-option value="participant">Onsite-Participant</mat-option>
-                  <mat-option value="email">Email-Participant</mat-option>
+                  <mat-option value="email">Email-Participant</mat-option>-->
                 </mat-select>
               </mat-form-field>
             </span>
@@ -72,13 +78,15 @@
           <mat-header-cell mat-header-cell *matHeaderCellDef> Activity</mat-header-cell>
           <mat-cell mat-cell *matCellDef="let element">
             <span class="mobile-label">Activity:</span>
-            <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Baseline'"><a
-              [routerLink]="['/adapt/collect-data/participant/questionnaire']" (click)="onTab(element)">Begin</a></span>
-            <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Baseline'"><a
-              [routerLink]="['/adapt/collect-data/participant/questionnaire']" (click)="onTab(element)">Continue</a></span>
-            <span *ngIf="element.status=='Submitted'"><a [routerLink]="['/adapt/collect-data/participant/questionnaire']"
+            <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Baseline'"><a href="javascript:void(0)"
+             (click)="onTab(element)">Begin</a></span>
+            <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Baseline'"><a href="javascript:void(0)"
+              (click)="onTab(element)">Continue</a></span>
+            <span *ngIf="element.status=='Submitted'"><a href="javascript:void(0)"
                                                          (click)="onTab(element)">View</a></span>
             <span *ngIf="element.status!='Submitted' && element.activeTimeline!='Baseline'">Begin</span>
+            <span *ngIf="element.status=='Ready for Submission' && element.activeTimeline=='Baseline'"><a href="javascript:void(0)"
+                                                                                                          (click)="onSubmitClick(element)">Submit</a></span>
           </mat-cell>
         </ng-container>
 

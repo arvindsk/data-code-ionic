@@ -8,6 +8,7 @@ import {AdaptService} from "../../services/adapt.service";
 import {ParticipantStudy} from "../../model/ParticipantStudy";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UpdateStatusModel} from "../../model/update-status.model";
 
 interface Access
 {
@@ -37,20 +38,22 @@ export class FirstyearParticipantComponent implements OnInit {
   userId = "Test";
   public headerName;
   public headerId;
-  isMobile = false; acccessMode: Access[];
+  isMobile = false;
+  acccessMode: Access[];
 
-  selectedVascularMode: String;
-  selectedSleepMode: String;
-  selectedEcodMode: String;
-  selectedDietMode: String;
-  selectedPhysicalMode: String;
+  selectedVascularMode: string;
+  selectedSleepMode: string;
+  selectedEcodMode: string;
+  selectedDietMode: string;
+  selectedPhysicalMode: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private dataStorageService: DataStorageService,
               private breakpointObserver: BreakpointObserver,
               private adaptService: AdaptService,
-              private modal: NgbModal) {
+              private modal: NgbModal,
+              private messageService: MessageService) {
     this.acccessMode = [
       {name: 'Onsite by Coordinator', code: 'coordinator'},
       {name: 'Onsite by Participant', code: 'participant'},
@@ -167,6 +170,30 @@ export class FirstyearParticipantComponent implements OnInit {
       });
   }
 
+  onDropdownValueChange(element: ParticipantStudy) {
+    this.messageService.clear('baselineAccessMessage');
+    console.log(element.access);
+    this.adaptService.updateParticipantStudy(element).subscribe((data: UpdateStatusModel) => {
+      console.log(status);
+        if (data.status === 'SUCCESS') {
+          console.log('updated successfully');
+          this.messageService.add({
+            key: 'baselineAccessMessage',
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Access updated'
+          });
+        }else {
+          this.messageService.add({
+            key: 'baselineAccessMessage',
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Error occurred while updating access field'
+          });
+        }
+      });
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -176,5 +203,7 @@ export class FirstyearParticipantComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+
 }
 

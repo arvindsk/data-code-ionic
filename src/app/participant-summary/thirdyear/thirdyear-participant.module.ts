@@ -9,6 +9,7 @@ import { ThirdyearParticipantRoutingModule } from './thirdyear-participant-routi
 import { ThirdyearParticipantComponent } from './thirdyear-participant.component';
 import {TableModule} from 'primeng/table';
 import {MaterialModule} from "../../material-module";
+import {MessagesModule} from "primeng/messages";
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import {MaterialModule} from "../../material-module";
         ThirdyearParticipantRoutingModule,
         TableModule,
         MaterialModule,
+        MessagesModule,
     ],
   declarations: [ThirdyearParticipantComponent]
 })

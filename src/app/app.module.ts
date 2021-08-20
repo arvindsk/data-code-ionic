@@ -23,6 +23,7 @@ import {CommonModule} from '@angular/common';
 import { ThemeModule } from './theme/theme.module';
 import { lightTheme } from './theme/light-theme';
 import { darkTheme } from './theme/dark-theme';
+import {NonAuthGuard} from "./services/non-auth.guard";
 
 
 @NgModule({
@@ -49,7 +50,7 @@ import { darkTheme } from './theme/dark-theme';
       themes: [lightTheme, darkTheme],
       active: 'light'
     })],
-  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, EmitService, AuthService, DirectAccessGuard],
+  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, EmitService, AuthService, DirectAccessGuard,NonAuthGuard],
   bootstrap: [AppComponent],
   schemas: []
 })

@@ -49,13 +49,20 @@ export class HeaderComponent implements OnInit {
   }
 
   onEmittedEvent(obj, data) {
-    if (data.includes('fname:')) {
-      obj.fname = data.split(':', 2)[1];
+
+    if (data.includes('loggedin:')) {
+      obj.loggedIn=false;
+    }else{
+      if (data.includes('fname:')) {
+        obj.fname = data.split(':', 2)[1];
+      }
+      if (data.includes('site:')) {
+        obj.site = data.split(':', 2)[1];
+      }
+
+      obj.loggedIn = true;
     }
-    if (data.includes('site:')) {
-      obj.site = data.split(':', 2)[1];
-    }
-    obj.loggedIn = true;
+
   }
 
   onSegmentChanged(ev: any) {

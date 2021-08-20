@@ -1,13 +1,16 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {Table} from "primeng/table";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 import {DataStorageService} from "../../services/data-storage.service";
 import {Participant} from "../../model/Participant";
 import {AdaptService} from "../../services/adapt.service";
 import {ParticipantStudy} from "../../model/ParticipantStudy";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UpdateStatusModel} from "../../model/update-status.model";
+import {AuthService} from "../../services/auth.service";
+import {EmitService} from "../../services/emit.service";
 
 interface Access
 {
@@ -19,7 +22,7 @@ interface Access
   selector: 'app-baseline-participant',
   templateUrl: './baseline-participant.component.html',
   styleUrls: ['./baseline-participant.component.scss'],
-  providers: [MessageService],
+  providers: [ConfirmationService, MessageService],
 })
 
 export class BaselineParticipantComponent implements OnInit {
@@ -43,18 +46,22 @@ export class BaselineParticipantComponent implements OnInit {
   isMobile = false;
   acccessMode: Access[];
 
-  selectedVascularMode: String;
-  selectedSleepMode: String;
-  selectedEcodMode: String;
-  selectedDietMode: String;
-  selectedPhysicalMode: String;
+  selectedVascularMode: string;
+  selectedSleepMode: string;
+  selectedEcodMode: string;
+  selectedDietMode: string;
+  selectedPhysicalMode: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private dataStorageService: DataStorageService,
               private breakpointObserver: BreakpointObserver,
               private adaptService: AdaptService,
-              private modal: NgbModal) {
+              private modal: NgbModal,
+              private messageService: MessageService,
+              private confirmationService: ConfirmationService,
+              private authService: AuthService,
+              private _emitSvc: EmitService) {
     this.acccessMode = [
       {name: 'Onsite by Coordinator', code: 'coordinator'},
       {name: 'Onsite by Participant', code: 'participant'},
@@ -150,11 +157,24 @@ export class BaselineParticipantComponent implements OnInit {
     this.tabClosed.emit(event.index);
   }
 
-  onTab(data: any) {
+  onTab(data: ParticipantStudy) {
     console.log(data);
     this.dataStorageService.storage = {
       participantStudy: data
     };
+    if ('participant' === data.access) {
+      this.authService.logout();
+      this._emitSvc.emitThisData('loggedin:');
+      const navigationExtras: NavigationExtras = {
+        queryParams: {quid: data.quid}
+      };
+      const url = '/questionnaire';
+      void this.router.navigate([url], navigationExtras);
+    } else if ('email' === data.access) {
+      console.log('email');
+    } else {
+      void this.router.navigate(['/adapt/collect-data/participant/questionnaire']);
+    }
 
   }
 
@@ -168,6 +188,76 @@ export class BaselineParticipantComponent implements OnInit {
       });
   }
 
+  onDropdownValueChange(element: ParticipantStudy) {
+    this.messageService.clear('baselineAccessMessage');
+    console.log(element.access);
+    this.adaptService.updateParticipantStudy(element).subscribe((data: UpdateStatusModel) => {
+      console.log(status);
+        if (data.status === 'SUCCESS') {
+          console.log('updated successfully');
+          this.messageService.add({
+            key: 'baselineAccessMessage',
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Access updated'
+          });
+        }else {
+          this.messageService.add({
+            key: 'baselineAccessMessage',
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Error occurred while updating access field'
+          });
+        }
+      });
+  }
+
+  onSubmitClick(element: ParticipantStudy) {
+
+    this.messageService.clear('baselineAccessMessage');
+
+    this.confirmationService.confirm({
+      key:'baselinesubmit',
+      message: 'Would you like to submit the questionnaire?',
+      header: 'Confirmation',
+      acceptLabel: 'Yes',
+      rejectLabel: 'No',
+      accept: () => {
+        this.updateSubmitStatus(element);
+      },
+      reject: () => {
+        console.log('Cancel clicked');
+      },
+    });
+
+
+  }
+
+  updateSubmitStatus(element: ParticipantStudy) {
+    element.status='completed';
+    this.adaptService.updateParticipantStudy(element).subscribe((data: UpdateStatusModel) => {
+      console.log(status);
+      if (data.status === 'SUCCESS') {
+        this.loadParticipantStudyList();
+        localStorage.removeItem('participant');
+        console.log('updated successfully');
+        this.messageService.add({
+          key: 'baselineAccessMessage',
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Questionnaire submitted successfully'
+        });
+      } else {
+        this.messageService.add({
+          key: 'baselineAccessMessage',
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Unable to submit the questionnaire'
+        });
+      }
+    });
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -177,5 +267,8 @@ export class BaselineParticipantComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+
+
 }
 

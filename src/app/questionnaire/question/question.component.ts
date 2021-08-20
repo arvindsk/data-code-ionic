@@ -77,15 +77,19 @@ export class QuestionComponent implements OnInit {
     Survey.StylesManager.applyTheme();
     this.participantStudy = new ParticipantStudy();
     widgets.inputmask(Survey);
-    this.participantStudy = this.dataStorageService.storage.participantStudy;
-    this.navigationUrl = '/adapt/collect-data/participant/' + this.participantStudy.timeline.toLowerCase() + '?participantId=' + this.participantStudy.participantId;
-    this.adaptService.getQuestionnaire(this.participantStudy.studyId).subscribe((data: any) => {
-        this.json = data;
-        this.loadQuestionnaire();
-      },
-      error => {
-        console.log('error occurred while loading questionnaire');
+    //this.participantStudy = this.dataStorageService.storage.participantStudy;
+
+    this.getParticipantStudy().then(()=> {
+        this.navigationUrl = '/adapt/collect-data/participant/' + this.participantStudy.timeline.toLowerCase() + '?participantId=' + this.participantStudy.participantId;
+        this.adaptService.getQuestionnaire(this.participantStudy.studyId).subscribe((data: any) => {
+            this.json = data;
+            this.loadQuestionnaire();
+          },
+          error => {
+            console.log('error occurred while loading questionnaire');
+          });
       });
+
   }
 
   loadQuestionnaire() {
@@ -259,7 +263,7 @@ export class QuestionComponent implements OnInit {
               }
             } else {
               if (question.visible) {
-                if (!question.isAnswered) {
+                if (!question.isAnswered || (question.value !==undefined && question.value === 'null')) {
                   this.addWarningButton(options);
                 }
               }
@@ -285,12 +289,14 @@ export class QuestionComponent implements OnInit {
   addWarningButton(options) {
     const btn = document.createElement('span');
     btn.className = 'ques-icon-warning';
-    btn.innerHTML = '<i class="bi bi-exclamation-triangle-fill" style="font-size: 2rem; color: red;"></i>';
+    btn.innerHTML = '<i class="bi bi-exclamation-triangle-fill" style="font-size: 1rem; color: red;"></i>';
     const header = options.htmlElement.querySelector('h5');
+    //header.classList.add('ques-icon-warning-text');
+    header.style.color = '#dc4141';
     const errorIcon = options.htmlElement.querySelector('.ques-icon-warning');
     console.log('errorIcon', errorIcon);
     if (errorIcon === null) {
-      header.appendChild(btn);
+      //header.appendChild(btn);
     }
   }
 
@@ -305,6 +311,7 @@ export class QuestionComponent implements OnInit {
   }
 
   onCompleteButtonClick() {
+    localStorage.setItem('participant', JSON.stringify(this.participantStudy));
     this.msgs = [];
     this.saveSurveyData(this.survey);
     const hasUnAnsweredQuestion = this.hasUnAnsweredQuestions();
@@ -422,5 +429,22 @@ export class QuestionComponent implements OnInit {
     // console.log('current state.'+this.survey.state);
     return (undefined !== this.survey && !this.survey.isLastPage) || this.readonlyMode;
 
+  }
+
+  public getParticipantStudy() {
+    return new Promise((resolve) => {
+      this.route.queryParams.subscribe(params => {
+        const quid = params.quid;
+        if (undefined !== quid && null !== quid) {
+          this.adaptService.getParticipantStudy(quid).subscribe((data: ParticipantStudy) => {
+            this.participantStudy = data;
+            resolve();
+          });
+        } else {
+          this.participantStudy = this.dataStorageService.storage.participantStudy;
+          resolve();
+        }
+      });
+    });
   }
 }

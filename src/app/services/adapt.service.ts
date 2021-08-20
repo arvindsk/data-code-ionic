@@ -7,6 +7,7 @@ import {Participant} from "../model/Participant";
 import {Summary} from "../model/Summary";
 import {LoginRequest} from "../model/LoginRequest";
 import {LoginResponse} from "../model/LoginResponse";
+import {UpdateStatusModel} from "../model/update-status.model";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,18 @@ export class AdaptService {
     const httpOptions = {headers};
     return this.httpClient.post<boolean>(
       this.baseUri + 'api/adapt/questionnaire/saveQuestionnaireFilled',
+      participantStudy,
+      httpOptions
+    );
+  }
+
+  updateParticipantStudy(participantStudy: ParticipantStudy): Observable<UpdateStatusModel> {
+    let headers = new HttpHeaders();
+
+    headers = headers.append('Content-Type', 'application/json');
+    const httpOptions = {headers};
+    return this.httpClient.post<UpdateStatusModel>(
+      this.baseUri + 'api/adapt/collect-data/update-participant-study',
       participantStudy,
       httpOptions
     );
@@ -84,6 +97,16 @@ export class AdaptService {
     const httpOptions = {headers};
 
     return this.httpClient.post<LoginResponse>(this.baseUri + 'api/adapt/login/loginuser', loginRequest, httpOptions);
+  }
+
+  public getParticipantStudy(quid: string): Observable<ParticipantStudy> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    let params = new HttpParams();
+    params = params.append('quid', String(quid));
+
+    return this.httpClient.get<ParticipantStudy>(this.baseUri + 'api/adapt/collect-data/get-participant-study', {headers, params});;
   }
 
 }

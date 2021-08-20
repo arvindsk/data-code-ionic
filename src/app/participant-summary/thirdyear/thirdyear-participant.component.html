@@ -1,3 +1,4 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [key]="'thirdyesrsubmit'" [baseZIndex]="10000"></p-confirmDialog>
 <ion-content>
   <div class="aligncenter row justify-content-center">
     <div class="pmessagestyle">
@@ -79,11 +80,13 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef> Activity </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
           <span class="mobile-label">Activity:</span>
-          <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Thirdyear' && !element.endedTimeline"><a [routerLink]="['/adapt/collect-data/participant/questionnaire']" (click)="onTab(element)">Begin</a></span>
-          <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Thirdyear' && !element.endedTimeline"><a [routerLink]="['/adapt/collect-data/participant/questionnaire']" (click)="onTab(element)">Continue</a></span>
-          <span *ngIf="element.status=='Submitted'"><a [routerLink]="['/adapt/collect-data/participant/questionnaire']" (click)="onTab(element)">View</a></span>
+          <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Thirdyear' && !element.endedTimeline"><a href="javascript:void(0)" (click)="onTab(element)">Begin</a></span>
+          <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Thirdyear' && !element.endedTimeline"><a href="javascript:void(0)" (click)="onTab(element)">Continue</a></span>
+          <span *ngIf="element.status=='Submitted'"><a href="javascript:void(0)" (click)="onTab(element)">View</a></span>
           <span *ngIf="element.status!='Submitted' && element.activeTimeline!='Thirdyear'">Begin</span>
           <span *ngIf="element.status!='Submitted' && element.activeTimeline=='Thirdyear' && element.endedTimeline">Begin</span>
+          <span *ngIf="element.status=='Ready for Submission' && element.activeTimeline=='Thirdyear'"><a href="javascript:void(0)"
+                                                                                                        (click)="onSubmitClick(element)">Submit</a></span>
         </mat-cell>
       </ng-container>
 

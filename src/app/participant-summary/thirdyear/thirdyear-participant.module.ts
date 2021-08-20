@@ -10,6 +10,7 @@ import { ThirdyearParticipantComponent } from './thirdyear-participant.component
 import {TableModule} from 'primeng/table';
 import {MaterialModule} from "../../material-module";
 import {MessagesModule} from "primeng/messages";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
     imports: [
@@ -20,6 +21,7 @@ import {MessagesModule} from "primeng/messages";
         TableModule,
         MaterialModule,
         MessagesModule,
+        ConfirmDialogModule,
     ],
   declarations: [ThirdyearParticipantComponent]
 })

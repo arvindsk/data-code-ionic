@@ -2,6 +2,14 @@
   width: 100%;
 }
 
+.custom-container{
+  padding-top: 80px;
+  padding-bottom: 20px;
+  @media(max-width: 600px) {
+    padding-top: 80px;
+  }
+}
+
 .mat-row .mat-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
@@ -13,12 +21,7 @@
   border-color: currentColor;
 }*/
 
-.pmessagestyle{
-  @media(min-width: 600px) {
-    width:50%;
-    float: right;
-  }
-}
+
 
 .custom-theme-settings {
   background: var(--background);
@@ -147,3 +150,7 @@ ion-icon {
   }
 }
 
+.spinner__loading {
+  display: flex;
+  justify-content: center;
+}

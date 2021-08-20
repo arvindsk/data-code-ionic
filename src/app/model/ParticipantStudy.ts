@@ -12,4 +12,5 @@ export class ParticipantStudy {
   firstName: string;
   access: string;
   quid: string;
+  email: string;
 }

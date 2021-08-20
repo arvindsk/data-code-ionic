@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.signInForm.reset();
+    this.authService.logout();
   }
 
   postData() {

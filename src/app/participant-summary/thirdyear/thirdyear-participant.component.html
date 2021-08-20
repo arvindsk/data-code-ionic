@@ -1,4 +1,120 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [key]="'thirdyesrsubmit'" [baseZIndex]="10000"></p-confirmDialog>
+<p-sidebar [(visible)]="flyout"
+           position="right"
+           [showCloseIcon]="true"
+           [dismissible]="true"
+           [closeOnEscape]="true"
+           [baseZIndex]="99999"
+           appendTo="body"
+           styleClass="p-sidebar-md">
+
+  <div class="custom-container">
+    <mat-card>
+      <mat-card-content>
+        <div *ngIf="loadingData; else content">
+
+          <div class="spinner__loading">
+            <div>
+              <mat-spinner>
+              </mat-spinner>
+              <h3>Sending Email.Please wait...</h3>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #content>
+          <div class="jumbotron">
+            <div class="pmessagestyle">
+              <p-messages [key]="'emailMessageError'" [hideTransitionOptions]="'10ms'" ></p-messages>
+            </div>
+            <div *ngIf="!resendClicked" class="container">
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+                <div class="row">
+                  <div class="form-group">
+                    <label>Please Enter Participant Email ID</label>
+                    <div class="input-group mb-3">
+                      <input type="text" formControlName="email" class="form-control" aria-describedby="button-addon2" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                      <button class="btn btn-secondary" type="button" (click)="clearField()" id="button-addon2"><em class="bi bi-x"></em></button>
+                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Please enter valid email address</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row justify-content-between">
+                  <div class="col-4">
+                    <button type="button" (click)="onSubmit()" class="btn btn-primary button-background">Send
+                    </button>
+
+                  </div>
+                  <div class="col-4">
+                    <button type="button" (click)="flyout = false" class="btn btn-primary button-background">Cancel</button>
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+            <div *ngIf="resendClicked" class="container">
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+                <div class="row">
+                  <div *ngIf="!editEmailbuttonClicked">
+                    <h3>Questionnaire already emailed, would you like to resend? Please confirm</h3>
+                    <button class="btn btn-outline-primary" type="button" (click)="editEmailClicked()" id="edit-button">Edit Email Address</button>
+                  </div>
+
+                  <div *ngIf="editEmailbuttonClicked" class="form-group">
+                    <label>Please Enter Participant Email ID</label>
+                    <div class="input-group mb-3">
+                      <input type="text" formControlName="email" class="form-control" aria-describedby="button-addon3" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                      <button class="btn btn-secondary" type="button" (click)="clearField()" id="button-addon3"><em class="bi bi-x"></em></button>
+                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Please enter valid email address</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row justify-content-between">
+                  <div *ngIf="resendClicked && editEmailbuttonClicked" class="col-4">
+                    <button type="button" (click)="onSubmit()" class="btn btn-primary button-background">Send
+                    </button>
+
+                  </div>
+                  <div *ngIf="!resendClicked && !editEmailbuttonClicked" class="col-4">
+                    <button type="button" (click)="onSubmit()" class="btn btn-primary button-background">Send
+                    </button>
+
+                  </div>
+
+                  <div *ngIf="resendClicked && !editEmailbuttonClicked" class="col-4">
+                    <button type="button" (click)="onSubmit()" class="btn btn-primary button-background">Yes
+                    </button>
+
+                  </div>
+
+                  <div class="col-4">
+                    <button type="button" (click)="flyout = false;editEmailbuttonClicked=false;resendClicked=false" class="btn btn-primary button-background">Cancel</button>
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </ng-template>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</p-sidebar>
+
 <ion-content>
   <div class="aligncenter row justify-content-center">
     <div class="pmessagestyle">
@@ -32,31 +148,10 @@
           <span class="mobile-label">Access:</span>
           <span>
               <mat-form-field>
-<!--                <mat-select *ngIf="element.studyName==='Vascular Risk'" [(value)]="selectedVascularMode">
-                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
-                  <mat-option value="participant">Onsite-Participant</mat-option>
-                  <mat-option value="email">Email-Participant</mat-option>
-                </mat-select>
-                <mat-select *ngIf="element.studyName==='Sleep'" [(value)]="selectedSleepMode">
-                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
-                  <mat-option value="participant">Onsite-Participant</mat-option>
-                  <mat-option value="email">Email-Participant</mat-option>
-                </mat-select>
-                <mat-select *ngIf="element.studyName==='Everyday Cognition (E-Cog)'" [(value)]="selectedEcodMode">
-                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
-                  <mat-option value="participant">Onsite-Participant</mat-option>
-                  <mat-option value="email">Email-Participant</mat-option>
-                </mat-select>
-                <mat-select *ngIf="element.studyName==='Diet Screening'" [(value)]="selectedDietMode">
-                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
-                  <mat-option value="participant">Onsite-Participant</mat-option>
-                  <mat-option value="email">Email-Participant</mat-option>
-                </mat-select>-->
+
                 <mat-select [disabled]="element.status!='Submitted' && element.activeTimeline!='Thirdyear'" [(ngModel)]="element.access" (ngModelChange)="onDropdownValueChange(element)">
                       <mat-option *ngFor="let access of acccessMode" [value]="access.code">   {{ access.name }} </mat-option>
-<!--                  <mat-option value="coordinator">Onsite-Coordinator</mat-option>
-                  <mat-option value="participant">Onsite-Participant</mat-option>
-                  <mat-option value="email">Email-Participant</mat-option>-->
+
                 </mat-select>
               </mat-form-field>
             </span>
@@ -80,13 +175,29 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef> Activity </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
           <span class="mobile-label">Activity:</span>
-          <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Thirdyear' && !element.endedTimeline"><a href="javascript:void(0)" (click)="onTab(element)">Begin</a></span>
-          <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Thirdyear' && !element.endedTimeline"><a href="javascript:void(0)" (click)="onTab(element)">Continue</a></span>
-          <span *ngIf="element.status=='Submitted'"><a href="javascript:void(0)" (click)="onTab(element)">View</a></span>
+          <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Thirdyear' && !element.endedTimeline && element.access !='email'">
+            <a href="javascript:void(0)" (click)="onTab(element)">Begin</a>
+          </span>
+          <span *ngIf="element.status=='Not Started' && element.activeTimeline=='Thirdyear' && element.access =='email'">
+              <a href="javascript:void(0)" (click)="flyout=true;updateStudy(element)">Begin</a>
+            </span>
+          <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Thirdyear' && !element.endedTimeline &&  element.access!=='email' ">
+            <a href="javascript:void(0)" (click)="onTab(element)">Continue</a>
+          </span>
+          <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Thirdyear' && element.access=='email' ">
+              Continue
+            </span>
+          <span *ngIf="element.status=='Submitted'">
+            <a href="javascript:void(0)" (click)="onTab(element)">View</a>
+          </span>
           <span *ngIf="element.status!='Submitted' && element.activeTimeline!='Thirdyear'">Begin</span>
           <span *ngIf="element.status!='Submitted' && element.activeTimeline=='Thirdyear' && element.endedTimeline">Begin</span>
-          <span *ngIf="element.status=='Ready for Submission' && element.activeTimeline=='Thirdyear'"><a href="javascript:void(0)"
-                                                                                                        (click)="onSubmitClick(element)">Submit</a></span>
+          <span *ngIf="element.status=='Ready for Submission' && element.activeTimeline=='Thirdyear'">
+            <a href="javascript:void(0)"  (click)="onSubmitClick(element)">Submit</a>
+          </span>
+          <span *ngIf="element.status=='Send Email' && element.activeTimeline=='Baseline'">
+              <a href="javascript:void(0)" (click)="flyout=true;resendQuestionnaire(element)">Emailed</a>
+            </span>
         </mat-cell>
       </ng-container>
 

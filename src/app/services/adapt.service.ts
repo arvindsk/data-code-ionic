@@ -109,4 +109,15 @@ export class AdaptService {
     return this.httpClient.get<ParticipantStudy>(this.baseUri + 'api/adapt/collect-data/get-participant-study', {headers, params});;
   }
 
+  sendMail(participantStudy: ParticipantStudy): Observable<UpdateStatusModel> {
+    let headers = new HttpHeaders();
+
+    headers = headers.append('Content-Type', 'application/json');
+    const httpOptions = {headers};
+    return this.httpClient.post<UpdateStatusModel>(
+      this.baseUri + 'api/adapt/collect-data/send-email',
+      participantStudy,
+      httpOptions
+    );
+  }
 }

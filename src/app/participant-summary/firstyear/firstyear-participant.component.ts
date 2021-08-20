@@ -11,6 +11,7 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UpdateStatusModel} from "../../model/update-status.model";
 import {AuthService} from "../../services/auth.service";
 import {EmitService} from "../../services/emit.service";
+import {FormBuilder, FormGroup,Validators} from "@angular/forms";
 
 interface Access
 {
@@ -42,12 +43,16 @@ export class FirstyearParticipantComponent implements OnInit {
   public headerId;
   isMobile = false;
   acccessMode: Access[];
+  public flyout = false;
+  participantEmail:string;
+  registerForm: FormGroup;
+  submitted = false;
+  participantStudy:ParticipantStudy;
+  loadingData=false;
+  value = 0;
+  resendClicked=false;
+  editEmailbuttonClicked=false;
 
-  selectedVascularMode: string;
-  selectedSleepMode: string;
-  selectedEcodMode: string;
-  selectedDietMode: string;
-  selectedPhysicalMode: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -58,17 +63,14 @@ export class FirstyearParticipantComponent implements OnInit {
               private messageService: MessageService,
               private confirmationService: ConfirmationService,
               private authService: AuthService,
-              private _emitSvc: EmitService) {
+              private _emitSvc: EmitService,
+              private formBuilder: FormBuilder) {
     this.acccessMode = [
       {name: 'Onsite by Coordinator', code: 'coordinator'},
       {name: 'Onsite by Participant', code: 'participant'},
       {name: 'Email Participant', code: 'email'}
     ];
-    this.selectedVascularMode=this.acccessMode[0].code;
-    this.selectedSleepMode=this.acccessMode[0].code;
-    this.selectedEcodMode=this.acccessMode[0].code;
-    this.selectedDietMode=this.acccessMode[0].code;
-    this.selectedPhysicalMode=this.acccessMode[0].code;
+
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       if (result.matches) {
         this.isMobile = true;
@@ -80,9 +82,14 @@ export class FirstyearParticipantComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.registerForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+    });
     if (undefined !== this.dataStorageService.storage) {
       this.participant = this.dataStorageService.storage.participant;
+      this.emailControl?.setValue(this.participant.email);
     }
+
 
     this.columnHeader = [
       {field: 'studyName', header: 'Questionnaire'},
@@ -130,6 +137,7 @@ export class FirstyearParticipantComponent implements OnInit {
 
     this.adaptService.loadParticipantStudyList(this.participant).subscribe((data: ParticipantStudy[]) => {
       if (data) {
+        this.emailControl?.setValue(data[0].email);
         this.headerName = data[0].firstName;
         this.headerId = this.participant.participantId;
         this.tableValues = data;
@@ -258,7 +266,7 @@ export class FirstyearParticipantComponent implements OnInit {
     });
   }
 
-  private getDismissReason(reason: any): string {
+   getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -268,7 +276,65 @@ export class FirstyearParticipantComponent implements OnInit {
     }
   }
 
+  onSubmit() {
+    this.messageService.clear();
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+      return;
+    }
+    this.loadingData=true;
+    this.participantStudy.email=this.emailControl?.value;
+    this.adaptService.sendMail(this.participantStudy).subscribe((updateStatus:UpdateStatusModel)=>{
+      this.loadingData=false;
+      if('SUCCESS'===updateStatus.status){
+        this.flyout=false;
+        this.editEmailbuttonClicked=false;
+        this.resendClicked=false;
+        this.loadParticipantStudyList();
+        this.messageService.add({
+          key: 'baselineAccessMessage',
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Questionnaire submitted successfully'
+        });
+      }else {
+        this.editEmailbuttonClicked=false;
+        this.resendClicked=false;
+        this.messageService.add({
+          key: 'emailMessageError',
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Unable to send mail to the participant'
+        });
+      }
+    });
 
 
+  }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.registerForm.controls; }
+
+  get emailControl() {
+    return this.registerForm.get('email');
+  }
+  clearField(){
+    this.registerForm.get('email').reset();
+  }
+
+  updateStudy(element: ParticipantStudy) {
+    this.participantStudy = element;
+  }
+
+  resendQuestionnaire(element:ParticipantStudy) {
+    this.participantStudy = element;
+    this.resendClicked=true;
+  }
+
+  editEmailClicked() {
+    this.editEmailbuttonClicked=true;
+  }
 }
 

@@ -29,6 +29,7 @@
 }
 
 .heading {
+  text-align:center;
   padding-left: 30px;
   // color: #5D001E;
   color: var(--on-my-page-header);
@@ -74,7 +75,7 @@ table {
 }
 
 .aligncenter {
-  text-align:center;
+ // text-align:center;
   padding-top: 80px;
   padding-bottom: 20px;
   //padding-left: 75px;
@@ -124,12 +125,12 @@ ion-icon {
 }
 
 .mat-column-studyName {
-  flex: 0 0 25%;
+  flex: 0 0 27%;
   text-align: left;
 }
 
 .mat-column-access {
-  flex: 0 0 25%;
+  flex: 0 0 23%;
 }
 
 .mat-column-status {
@@ -153,4 +154,17 @@ ion-icon {
 .spinner__loading {
   display: flex;
   justify-content: center;
+}
+
+:host{
+  ::ng-deep{
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+      height: 0 !important;
+    }
+
+    .mat-select-value {
+      width: 89%;
+    }
+
+  }
 }

@@ -163,9 +163,11 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">
           <span class="mobile-label">Status:</span>
-          <span *ngIf="element.activeTimeline=='Thirdyear' && element.status!='Submitted' && element.endedTimeline; else printstatus;">Not Attempted</span>
+          <span *ngIf="element.status=='Email-In-Progress'">In-Progress</span>
+          <span *ngIf="element.activeTimeline=='Thirdyear' && element.status!='Submitted' && element.endedTimeline  &&  element.status !='Email-In-Progress'; else printstatus;">Not Attempted</span>
+
           <ng-template #printstatus>
-            {{element.status}}
+            <span *ngIf="element.status !=='Email-In-Progress'"> {{element.status}}</span>
           </ng-template>
         </mat-cell>
       </ng-container>
@@ -187,15 +189,24 @@
           <span *ngIf="element.status=='In-Progress' && element.activeTimeline=='Thirdyear' && element.access=='email' ">
               Continue
             </span>
-          <span *ngIf="element.status=='Submitted'">
-            <a href="javascript:void(0)" (click)="onTab(element)">View</a>
-          </span>
+          <span *ngIf="element.status=='Submitted' && element.access=='coordinator'">
+              <a href="javascript:void(0)" (click)="onTab(element)">View</a>
+            </span>
+          <span *ngIf="element.status=='Submitted' && element.access !='coordinator'">
+              View
+            </span>
           <span *ngIf="element.status!='Submitted' && element.activeTimeline!='Thirdyear'">Begin</span>
           <span *ngIf="element.status!='Submitted' && element.activeTimeline=='Thirdyear' && element.endedTimeline">Begin</span>
-          <span *ngIf="element.status=='Ready for Submission' && element.activeTimeline=='Thirdyear'">
-            <a href="javascript:void(0)"  (click)="onSubmitClick(element)">Submit</a>
-          </span>
-          <span *ngIf="element.status=='Send Email' && element.activeTimeline=='Baseline'">
+          <span *ngIf="element.status=='Ready for Submission' && element.activeTimeline=='Thirdyear' && element.access=='coordinator'" >
+              <a href="javascript:void(0)" (click)="onTab(element)">Submit</a>
+            </span>
+          <span *ngIf="element.status=='Ready for Submission' && element.activeTimeline=='Thirdyear' && element.access !=='coordinator'" >
+            Submit
+            </span>
+          <span *ngIf="element.status=='Email-In-Progress' && element.activeTimeline=='Thirdyear' && element.access=='email'">
+             <a href="javascript:void(0)" (click)="flyout=true;updateStudy(element)">Begin</a>
+            </span>
+          <span *ngIf="element.status=='Send Email' && element.activeTimeline=='Thirdyear' && element.status !=='In-Progress'">
               <a href="javascript:void(0)" (click)="flyout=true;resendQuestionnaire(element)">Emailed</a>
             </span>
         </mat-cell>

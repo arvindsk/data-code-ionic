@@ -82,6 +82,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): void {
+    localStorage.removeItem('participant');
     this.authService.logout();
     this.loggedIn = false;
     this.router.navigate(['/']);

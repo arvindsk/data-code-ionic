@@ -204,19 +204,22 @@ export class ThirdyearParticipantComponent implements OnInit {
       console.log(status);
         if (data.status === 'SUCCESS') {
           console.log('updated successfully');
-          this.messageService.add({
+          this.loadParticipantStudyList();
+/*          this.messageService.add({
             key: 'baselineAccessMessage',
             severity: 'success',
             summary: 'Success',
             detail: 'Access updated'
-          });
+          });*/
         }else {
-          this.messageService.add({
+          this.loadParticipantStudyList();
+          console.error('error while updating status');
+/*          this.messageService.add({
             key: 'baselineAccessMessage',
             severity: 'error',
             summary: 'Error',
             detail: 'Error occurred while updating access field'
-          });
+          });*/
         }
       });
   }
@@ -298,7 +301,7 @@ export class ThirdyearParticipantComponent implements OnInit {
           key: 'baselineAccessMessage',
           severity: 'success',
           summary: 'Success',
-          detail: 'Questionnaire submitted successfully'
+          detail: 'Mail sent successfully'
         });
       }else {
         this.editEmailbuttonClicked=false;

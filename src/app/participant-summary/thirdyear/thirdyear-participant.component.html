@@ -45,12 +45,12 @@
                 </div>
                 <hr>
                 <div class="row justify-content-between">
-                  <div class="col-4">
+                  <div class="col-3">
                     <button type="button" (click)="onSubmit()" class="btn btn-primary button-background">Send
                     </button>
 
                   </div>
-                  <div class="col-4">
+                  <div class="col-3">
                     <button type="button" (click)="flyout = false" class="btn btn-primary button-background">Cancel</button>
                   </div>
 
@@ -81,24 +81,24 @@
                 </div>
                 <hr>
                 <div class="row justify-content-between">
-                  <div *ngIf="resendClicked && editEmailbuttonClicked" class="col-4">
+                  <div *ngIf="resendClicked && editEmailbuttonClicked" class="col-3">
                     <button type="button" (click)="onSubmit()" class="btn btn-primary button-background">Send
                     </button>
 
                   </div>
-                  <div *ngIf="!resendClicked && !editEmailbuttonClicked" class="col-4">
+                  <div *ngIf="!resendClicked && !editEmailbuttonClicked" class="col-3">
                     <button type="button" (click)="onSubmit()" class="btn btn-primary button-background">Send
                     </button>
 
                   </div>
 
-                  <div *ngIf="resendClicked && !editEmailbuttonClicked" class="col-4">
+                  <div *ngIf="resendClicked && !editEmailbuttonClicked" class="col-3">
                     <button type="button" (click)="onSubmit()" class="btn btn-primary button-background">Yes
                     </button>
 
                   </div>
 
-                  <div class="col-4">
+                  <div class="col-3">
                     <button type="button" (click)="flyout = false;editEmailbuttonClicked=false;resendClicked=false" class="btn btn-primary button-background">Cancel</button>
                   </div>
 

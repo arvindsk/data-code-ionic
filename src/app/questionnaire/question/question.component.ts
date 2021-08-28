@@ -106,6 +106,7 @@ export class QuestionComponent implements OnInit {
       btn.innerHTML = '<ion-icon size="small" name="information-circle"></ion-icon>';
       btn.onmouseover = () => {
         console.log(options.question.popupdescription);
+        this.openDesc = options.question.popupdescription;
         this.modal.open(this.modalContent, {ariaLabelledBy: 'modal-basic-title', size: 'sm', centered: true})
           .result
           .then((result) => {

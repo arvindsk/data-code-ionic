@@ -16,7 +16,6 @@
   }
 }
 
-
 .custom-theme-settings {
   background: var(--background);
   color: var(--on-background);
@@ -63,6 +62,10 @@
 
 .mobile-label {
   display: none;
+}
+
+.mat-card-title-group {
+  display: contents;
 }
 
 @media(max-width: 600px) {

@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {QuestionnaireRoutingModule} from './questionnaire-routing.module';
 import {QuestionComponent} from './question/question.component';
@@ -13,10 +13,12 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
+import {QuestionnaireValidatorComponent} from "./questionnaire-validator/questionnaire-validator.component";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 
 @NgModule({
-  declarations: [QuestionComponent],
+  declarations: [QuestionComponent,QuestionnaireValidatorComponent],
   imports: [
     CommonModule,
     QuestionnaireRoutingModule,
@@ -30,8 +32,10 @@ import {ToastModule} from 'primeng/toast';
     ConfirmDialogModule,
     MessagesModule,
     MessageModule,
-    ToastModule
-  ]
+    ToastModule,
+    NgxSpinnerModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class QuestionnaireModule {
 }

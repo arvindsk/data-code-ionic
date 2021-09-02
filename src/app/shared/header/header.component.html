@@ -1,11 +1,15 @@
 <nav class="navbar navbar-expand-md navbar-light" aria-label="Fourth navbar example">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <a class="navbar-brand" href="#">
+
+      <a *ngIf="loggedIn" class="navbar-brand" href="#">
         <img src="/assets/adapt.png" alt="" width="130" height="65" class="d-inline-block align-text-top">
 
       </a>
+    <a *ngIf="!loggedIn" class="navbar-brand" href="javascript:void(0)">
+      <img src="/assets/adapt.png" alt="" width="130" height="65" class="d-inline-block align-text-top">
+
     </a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04"
             aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

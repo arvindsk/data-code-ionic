@@ -79,9 +79,9 @@ export class QuestionComponent implements OnInit {
     widgets.inputmask(Survey);
     //this.participantStudy = this.dataStorageService.storage.participantStudy;
 
-    this.getParticipantStudy().then(()=> {
-        this.navigationUrl = '/adapt/collect-data/participant/' + this.participantStudy.timeline.toLowerCase() + '?participantId=' + this.participantStudy.participantId;
-        this.adaptService.getQuestionnaire(this.participantStudy.studyId).subscribe((data: any) => {
+    this.getParticipantStudy().then(() => {
+      this.navigationUrl = '/adapt/collect-data/participant/' + this.participantStudy.timeline.toLowerCase() + '?participantId=' + this.participantStudy.participantId;
+      this.adaptService.getQuestionnaire(this.participantStudy.studyId).subscribe((data: any) => {
             this.json = data;
             this.loadQuestionnaire();
           },
@@ -221,11 +221,16 @@ export class QuestionComponent implements OnInit {
 
 
   backButtonClick() {
-    const navigationExtras: NavigationExtras = {
-      queryParams: {participantId: this.participantStudy.participantId}
-    };
-    const url = '/adapt/collect-data/participant/' + this.participantStudy.timeline.toLowerCase();
-    void this.router.navigate([url], navigationExtras);
+    if('email'===this.participantStudy.access){
+      void this.router.navigate(['thank-you']);
+    }else {
+      const navigationExtras: NavigationExtras = {
+        queryParams: {participantId: this.participantStudy.participantId}
+      };
+      const url = '/adapt/collect-data/participant/' + this.participantStudy.timeline.toLowerCase();
+      void this.router.navigate([url], navigationExtras);
+    }
+
   }
 
   onPreviewClick() {
@@ -324,7 +329,11 @@ export class QuestionComponent implements OnInit {
         acceptLabel: 'Yes',
         rejectLabel: 'No',
         accept: () => {
-          this.survey.completeLastPage();
+          if('email'===this.participantStudy.access){
+            void this.router.navigate(['thank-you']);
+          }else {
+            this.survey.completeLastPage();
+          }
         },
         reject: () => {
           this.onPreviewClick();
@@ -339,7 +348,11 @@ export class QuestionComponent implements OnInit {
         acceptLabel: 'Yes',
         rejectLabel: 'No',
         accept: () => {
-          this.survey.completeLastPage();
+          if('email'===this.participantStudy.access){
+            void this.router.navigate(['thank-you']);
+          }else {
+            this.survey.completeLastPage();
+          }
         },
         reject: () => {
           this.onPreviewClick();

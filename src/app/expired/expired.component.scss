@@ -1,0 +1,11 @@
+.aligncenter {
+  text-align:center;
+  padding-top: 80px;
+/*  padding-bottom: 20px;
+  width: 100%;*/
+  @media(max-width: 600px) {
+    padding-top: 80px;
+/*    padding-left: 10px;
+    padding-right: 5px;*/
+  }
+}

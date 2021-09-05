@@ -27,7 +27,7 @@ export class QuestionnaireValidatorComponent implements OnInit {
     this.getParticipantStudy().then(() => {
       setTimeout(() => {
         this.spinner.hide();
-        if ('Submitted' === this.participantStudy.status || this.participantStudy.timeline !== this.participantStudy.activeTimeline || this.participantStudy.endedTimeline) {
+        if ('Submitted' === this.participantStudy.status || 'Ready for Submission'=== this.participantStudy.status || this.participantStudy.timeline !== this.participantStudy.activeTimeline || this.participantStudy.endedTimeline) {
           void this.router.navigate(['expired']);
         } else {
           this.dataStorageService.storage = {

@@ -330,7 +330,9 @@ export class QuestionComponent implements OnInit {
         rejectLabel: 'No',
         accept: () => {
           if('email'===this.participantStudy.access){
-            void this.router.navigate(['thank-you']);
+            this.survey.navigateToUrl='/thank-you';
+            this.survey.completeLastPage();
+            //void this.router.navigate(['thank-you']);
           }else {
             this.survey.completeLastPage();
           }
@@ -349,7 +351,9 @@ export class QuestionComponent implements OnInit {
         rejectLabel: 'No',
         accept: () => {
           if('email'===this.participantStudy.access){
-            void this.router.navigate(['thank-you']);
+            this.survey.navigateToUrl='/thank-you';
+            this.survey.completeLastPage();
+            //void this.router.navigate(['thank-you']);
           }else {
             this.survey.completeLastPage();
           }

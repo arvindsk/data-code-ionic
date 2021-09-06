@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {Table} from "primeng/table";
 import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
@@ -25,7 +25,7 @@ interface Access
   styleUrls: ['./thirdyear-participant.component.scss'],
   providers: [ConfirmationService,MessageService],
 })
-export class ThirdyearParticipantComponent implements OnInit {
+export class ThirdyearParticipantComponent implements OnInit,OnDestroy {
   displayedColumns: string[] = ['studyName', 'status', 'view', 'completedDate'];
   @Input() activeIndex: -1;
   @Output() tabOpened: EventEmitter<any> = new EventEmitter();
@@ -81,7 +81,14 @@ export class ThirdyearParticipantComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.messageService.clear('baselineAccessMessage');
+    console.log('baseline ngdestoy called');
+        //throw new Error('Method not implemented.');
+    }
+
   ngOnInit(): void {
+    this.messageService.clear();
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     });

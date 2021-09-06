@@ -182,6 +182,22 @@ export class QuestionComponent implements OnInit {
     // window.localStorage.setItem(this.storageName, JSON.stringify(data));
 
   }
+  saveEmailCompletedSurveyData(result: any) {
+    const data = result.data;
+    data.pageNo = result.currentPageNo;
+
+    this.participantStudy.studyInformation = JSON.stringify(data);
+    this.participantStudy.status = 'completed';
+
+    this.adaptService.saveQuestionnaireAnswer(this.participantStudy).subscribe((resultData: boolean) => {
+      if (resultData) {
+        console.log('questionnaire saved successfully');
+      }
+    });
+
+    // window.localStorage.setItem(this.storageName, JSON.stringify(data));
+
+  }
 
   doOnCurrentPageChanged(survey) {
     // @ts-ignore
@@ -330,9 +346,11 @@ export class QuestionComponent implements OnInit {
         rejectLabel: 'No',
         accept: () => {
           if('email'===this.participantStudy.access){
-            this.survey.navigateToUrl='/thank-you';
-            this.survey.completeLastPage();
-            //void this.router.navigate(['thank-you']);
+           // this.survey.navigateToUrl='/thank-you';
+            //this.survey.completeLastPage();
+            //this.result.state='completed';
+            this.saveEmailCompletedSurveyData(this.survey);
+            void this.router.navigate(['thank-you']);
           }else {
             this.survey.completeLastPage();
           }
@@ -351,9 +369,11 @@ export class QuestionComponent implements OnInit {
         rejectLabel: 'No',
         accept: () => {
           if('email'===this.participantStudy.access){
-            this.survey.navigateToUrl='/thank-you';
-            this.survey.completeLastPage();
-            //void this.router.navigate(['thank-you']);
+            //this.survey.navigateToUrl='/thank-you';
+            //this.survey.completeLastPage();
+           // this.result.state='completed';
+            this.saveEmailCompletedSurveyData(this.survey);
+            void this.router.navigate(['thank-you']);
           }else {
             this.survey.completeLastPage();
           }

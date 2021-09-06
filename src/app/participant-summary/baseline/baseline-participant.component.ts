@@ -299,8 +299,8 @@ export class BaselineParticipantComponent implements OnInit {
         this.messageService.add({
           key: 'baselineAccessMessage',
           severity: 'success',
-          summary: 'Success',
-          detail: 'Mail sent successfully'
+          summary: 'Success -',
+          detail: 'Questionnaire has been emailed'
         });
       }else {
         this.editEmailbuttonClicked=false;

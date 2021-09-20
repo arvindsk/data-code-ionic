@@ -14,7 +14,8 @@ import {UpdateStatusModel} from "../model/update-status.model";
 })
 export class AdaptService {
 
-  baseUri = environment.baseUri;
+
+  public baseUri = (<any>window).config.baseUri;
 
   constructor(private httpClient: HttpClient) {
   }

@@ -1,4 +1,4 @@
-import {NgModule,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {APP_INITIALIZER,NgModule,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {RouteReuseStrategy} from '@angular/router';
 import {AdaptModule} from './adapt.module';
 import {BrowserModule} from '@angular/platform-browser';
@@ -25,7 +25,9 @@ import { lightTheme } from './theme/light-theme';
 import { darkTheme } from './theme/dark-theme';
 import {NonAuthGuard} from "./services/non-auth.guard";
 import { NgxSpinnerModule } from "ngx-spinner";
+import {AppInitService} from "./app-init.service";
 
+export const initApp = (appLoadService: AppInitService) => () => appLoadService.init();
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,7 +54,16 @@ import { NgxSpinnerModule } from "ngx-spinner";
       themes: [lightTheme, darkTheme],
       active: 'light'
     })],
-  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, EmitService, AuthService, DirectAccessGuard,NonAuthGuard],
+  providers: [{provide: RouteReuseStrategy,
+    useClass: IonicRouteStrategy}, EmitService, AuthService, DirectAccessGuard,NonAuthGuard,
+
+    AppInitService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      deps: [AppInitService],
+      multi: true
+    },],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

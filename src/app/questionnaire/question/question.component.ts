@@ -80,7 +80,7 @@ export class QuestionComponent implements OnInit {
     //this.participantStudy = this.dataStorageService.storage.participantStudy;
 
     this.getParticipantStudy().then(() => {
-      this.navigationUrl = '/adapt/collect-data/participant/' + this.participantStudy.timeline.toLowerCase() + '?participantId=' + this.participantStudy.participantId;
+      this.navigationUrl = 'adapt/collect-data/participant/' + this.participantStudy.timeline.toLowerCase() + '?participantId=' + this.participantStudy.participantId;
       this.adaptService.getQuestionnaire(this.participantStudy.studyId).subscribe((data: any) => {
             this.json = data;
             this.loadQuestionnaire();

@@ -147,7 +147,7 @@ export class BaselineParticipantComponent implements OnInit,OnDestroy {
       if (data) {
         this.emailControl?.setValue(data[0].email);
         this.headerName = data[0].firstName;
-        this.headerId = this.participant.participantId;
+        this.headerId = data[0].patientId;
         this.tableValues = data;
       }
     });

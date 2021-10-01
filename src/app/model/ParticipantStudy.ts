@@ -11,6 +11,7 @@ export class ParticipantStudy {
   endedTimeline: boolean;
   activeTimeline: string;
   firstName: string;
+  patientId: string
   access: string;
   quid: string;
   email: string;

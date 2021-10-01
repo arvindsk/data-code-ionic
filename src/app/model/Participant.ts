@@ -1,5 +1,6 @@
 export class Participant {
   participantId: number;
+  patientId: string;
   firstName: string;
   lastName: string;
   dob: string;

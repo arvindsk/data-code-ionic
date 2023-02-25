@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {FontAwesomeModule, FaIconLibrary} from '@fortawesome/angular-fontawesome';
 
 /**
  * STEPS for Icon Use:
@@ -82,77 +82,16 @@ import {faTwitter} from '@fortawesome/free-brands-svg-icons';
 // Add an icon to the library for convenient access in other components
 
 @NgModule({
-    imports: [FontAwesomeModule],
-    declarations: [],
-    exports: [FontAwesomeModule],
+  imports: [FontAwesomeModule],
+  declarations: [],
+  exports: [FontAwesomeModule],
 })
 export class FontAwesome {
-    constructor(library: FaIconLibrary) {
-        // 3-15-19 - danp - don't turn on dom.watch as it slows down the UI
-        // dom.watch();
+  constructor(library: FaIconLibrary) {
+    // 3-15-19 - danp - don't turn on dom.watch as it slows down the UI
+    // dom.watch();
 
-        library.addIcons(
-            faShip,
-            faFilter,
-            faChevronDown,
-            faChevronUp,
-            faCog,
-            faSyncAlt,
-            faAngleDown,
-            faFlag,
-            faInfoCircle,
-            faTasks,
-            faUserCircle,
-            faListAlt,
-            faFileAlt,
-            faIdBadge,
-            faGlobe,
-            faSignOutAlt,
-            faChevronRight,
-            faCube,
-            faSort,
-            faThList,
-            faSearch,
-            faCheck,
-            faTimes,
-            faDownload,
-            faUsers,
-            faChevronLeft,
-            faTimesCircle,
-            faExclamation,
-            faExclamationCircle,
-            faExclamationTriangle,
-            faAngleRight,
-            faAngleLeft,
-            faEnvelope,
-            faEnvelopeOpen,
-            faLock,
-            faLifeRing,
-            faQuestion,
-            faCaretDown,
-            faWrench,
-            faTruck,
-            faPaperclip,
-            faCamera,
-            faFile,
-            faQuestionCircle,
-            faExternalLinkAlt,
-            faBan,
-            faBell,
-            faBellSlash,
-            faBellSolid,
-            faClock,
-            faPlus,
-            faStar,
-            faStarSolid,
-            faTrashAlt,
-            faEllipsisH,
-            faCalendarAlt,
-            faPencilAlt,
-            faGripLines,
-            faStopwatch,
-            faShareAlt,
-            faFileExport,
-        );
-    }
+    // @ts-ignore
+    library.addIcons(faShip, faFilter, faChevronDown, faChevronUp, faCog, faSyncAlt, faAngleDown, faFlag, faInfoCircle, faTasks, faUserCircle, faListAlt, faFileAlt, faIdBadge, faGlobe, faSignOutAlt, faChevronRight, faCube, faSort, faThList, faSearch, faCheck, faTimes, faDownload, faUsers, faChevronLeft, faTimesCircle, faExclamation, faExclamationCircle, faExclamationTriangle, faAngleRight, faAngleLeft, faEnvelope, faEnvelopeOpen, faLock, faLifeRing, faQuestion, faCaretDown, faWrench, faTruck, faPaperclip, faCamera, faFile, faQuestionCircle, faExternalLinkAlt, faBan, faBell, faBellSlash, faBellSolid, faClock, faPlus, faStar, faStarSolid, faTrashAlt, faEllipsisH, faCalendarAlt, faPencilAlt, faGripLines, faStopwatch, faShareAlt, faFileExport);
+  }
 }

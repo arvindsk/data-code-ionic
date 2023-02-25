@@ -6,6 +6,11 @@ import 'select2/dist/css/select2.min.css';
 import * as Survey from 'survey-angular';
 import {ItemValue, Question} from 'survey-angular';
 import * as widgets from 'surveyjs-widgets';
+import { init as initdatetimePickerWidget } from '../../timepicker/jquery-datetimepicker_widget';
+
+import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
+import 'pc-bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min.js';
+
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'survey-angular/survey.css';
@@ -17,6 +22,7 @@ import {Observable} from 'rxjs';
 import {DataStorageService} from '../../services/data-storage.service';
 import {ConfirmationService, Message, MessageService} from 'primeng/api';
 import 'survey-angular/modern.css';
+import 'jquery-ui-dist/jquery-ui.css';
 
 Survey.JsonObject.metaData.addProperty('questionbase', 'popupdescription:text');
 Survey.JsonObject.metaData.addProperty('page', 'popupdescription:text');
@@ -61,6 +67,10 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
     widgets.select2(Survey);
     widgets.select2tagbox(Survey);
+    //widgets.bootstrapdatepicker(Survey);
+    widgets.jqueryuidatepicker(Survey);
+
+    initdatetimePickerWidget(Survey,$);
 
     const themeColors = Survey.StylesManager.ThemeColors.default;
     themeColors['$main-color'] = 'var(--my-qs-primary-dark)';
@@ -398,6 +408,7 @@ export class QuestionComponent implements OnInit {
       if (question.getType() !== 'image' && question.getType() !== 'html') {
 
         if (question.getType() === 'matrix') {
+          // @ts-ignore
           for (const row of question.rows) {
             const rowVal: ItemValue = row;
             console.log('rowval..', rowVal.value);
